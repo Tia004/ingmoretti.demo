@@ -1,616 +1,787 @@
 <!DOCTYPE html>
 <html class="light" lang="it">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Ing. Davide Moretti | Ingegneria Civile e Strutturale</title>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "primary": "#002145",
-              "secondary": "#115bbd",
-              "accent-blue": "#97D4E9",
-              "surface": "#f9f9f9",
-              "on-surface": "#1a1c1c",
-              "surface-container": "#eeeeee",
-              "outline-variant": "#c4c6cf",
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#002145",
+                        "secondary": "#115bbd",
+                        "accent-blue": "#97D4E9",
+                        "surface": "#f9f9f9",
+                        "on-surface": "#1a1c1c",
+                        "surface-container": "#eeeeee",
+                        "outline-variant": "#c4c6cf",
+                    },
+                    fontFamily: {
+                        "headline": ["Work Sans"],
+                        "body": ["Inter"],
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.5rem", "xl": "1rem", "2xl": "1.5rem", "full": "9999px" },
+                },
             },
-            fontFamily: {
-              "headline": ["Work Sans"],
-              "body": ["Inter"],
-            },
-            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.5rem", "xl": "1rem", "2xl": "1.5rem", "full": "9999px"},
-          },
-        },
-      }
+        }
     </script>
     <style>
-      .glass-effect {
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-      }
-      .dark-glass {
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        background: rgba(0, 33, 69, 0.85);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-      .grid-bg {
-        background-image: linear-gradient(rgba(0, 33, 69, 0.05) 1px, transparent 1px),
-                          linear-gradient(90deg, rgba(0, 33, 69, 0.05) 1px, transparent 1px);
-        background-size: 40px 40px;
-      }
-      .millimeter-bg {
-        background-image: linear-gradient(rgba(0, 33, 69, 0.1) 1px, transparent 1px),
-                          linear-gradient(90deg, rgba(0, 33, 69, 0.1) 1px, transparent 1px),
-                          linear-gradient(rgba(0, 33, 69, 0.03) 0.5px, transparent 0.5px),
-                          linear-gradient(90deg, rgba(0, 33, 69, 0.03) 0.5px, transparent 0.5px);
-        background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
-      }
-      .blue-glow {
-        box-shadow: 0 0 40px -10px rgba(151, 212, 233, 0.5);
-      }
-      @keyframes ticker {
-        0% { transform: translateX(100%); }
-        100% { transform: translateX(-100%); }
-      }
-      .animate-ticker {
-        animation: ticker 30s linear infinite;
-      }
-      .hero-overlay {
-        background: linear-gradient(to bottom, rgba(0, 33, 69, 0.7) 0%, rgba(0, 33, 69, 0.4) 50%, rgba(0, 33, 69, 0.9) 100%);
-      }
-      @media (max-width: 1023px) {
-        @keyframes bounce-subtle {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
+        .glass-effect {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .animate-bounce-subtle {
-          animation: bounce-subtle 3s ease-in-out infinite;
+
+        .dark-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 33, 69, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-      }
-      
-      /* Animated Hamburger */
-      .hamburger {
-        width: 32px;
-        height: 24px;
-        position: relative;
-        cursor: pointer;
-        transition: .5s ease-in-out;
-      }
-      .hamburger span {
-        display: block;
-        position: absolute;
-        height: 4px;
-        width: 100%;
-        background: white;
-        border-radius: 4px;
-        opacity: 1;
-        left: 0;
-        transform: rotate(0deg);
-        transition: .25s ease-in-out;
-      }
-      .hamburger span:nth-child(1) { top: 0px; }
-      .hamburger span:nth-child(2) { top: 10px; }
-      .hamburger span:nth-child(3) { top: 20px; }
 
-      .hamburger.open span:nth-child(1) {
-        top: 10px;
-        transform: rotate(135deg);
-      }
-      .hamburger.open span:nth-child(2) {
-        opacity: 0;
-        left: -40px;
-      }
-      .hamburger.open span:nth-child(3) {
-        top: 10px;
-        transform: rotate(-135deg);
-      }
-      #menu-toggle.open {
-        position: fixed;
-        top: 40px;
-        right: 40px;
-        z-index: 150;
-      }
+        .grid-bg {
+            background-image: linear-gradient(rgba(0, 33, 69, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 33, 69, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .millimeter-bg {
+            background-image: linear-gradient(rgba(0, 33, 69, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 33, 69, 0.1) 1px, transparent 1px),
+                linear-gradient(rgba(0, 33, 69, 0.03) 0.5px, transparent 0.5px),
+                linear-gradient(90deg, rgba(0, 33, 69, 0.03) 0.5px, transparent 0.5px);
+            background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+        }
+
+        .blue-glow {
+            box-shadow: 0 0 40px -10px rgba(151, 212, 233, 0.5);
+        }
+
+        @keyframes ticker {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .animate-ticker {
+            animation: ticker 30s linear infinite;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(0, 33, 69, 0.7) 0%, rgba(0, 33, 69, 0.4) 50%, rgba(0, 33, 69, 0.9) 100%);
+        }
+
+        @media (max-width: 1023px) {
+            @keyframes bounce-subtle {
+
+                0%,
+                100% {
+                    transform: translateY(0);
+                }
+
+                50% {
+                    transform: translateY(-10px);
+                }
+            }
+
+            .animate-bounce-subtle {
+                animation: bounce-subtle 3s ease-in-out infinite;
+            }
+        }
+
+        /* Animated Hamburger */
+        .hamburger {
+            width: 32px;
+            height: 24px;
+            position: relative;
+            cursor: pointer;
+            transition: .5s ease-in-out;
+        }
+
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 4px;
+            width: 100%;
+            background: white;
+            border-radius: 4px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+
+        .hamburger span:nth-child(1) {
+            top: 0px;
+        }
+
+        .hamburger span:nth-child(2) {
+            top: 10px;
+        }
+
+        .hamburger span:nth-child(3) {
+            top: 20px;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            top: 10px;
+            transform: rotate(135deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+            left: -40px;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            top: 10px;
+            transform: rotate(-135deg);
+        }
+
+        #menu-toggle {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 200;
+        }
+
+        #menu-toggle.open {
+            transform: translate(1.5rem, -1rem);
+        }
 
 
-      html, body {
 
-        overflow-x: hidden;
-        width: 100%;
-        scroll-behavior: smooth;
-      }
-      .overflow-hidden {
-        overflow-y: hidden !important;
-      }
-      #mobile-menu {
-        backdrop-filter: blur(0px);
-        -webkit-backdrop-filter: blur(0px);
-        transition: opacity 0.5s ease, backdrop-filter 0.5s ease, -webkit-backdrop-filter 0.5s ease;
-      }
-      #mobile-menu.active {
-        opacity: 1;
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-      }
+        html,
+        body {
 
+            overflow-x: hidden;
+            width: 100%;
+            scroll-behavior: smooth;
+        }
 
+        .overflow-hidden {
+            overflow-y: hidden !important;
+        }
+
+        #mobile-menu {
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            transition: opacity 0.5s ease, backdrop-filter 0.5s ease, -webkit-backdrop-filter 0.5s ease;
+        }
+
+        #mobile-menu.active {
+            opacity: 1;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
     </style>
 </head>
+
 <body class="bg-surface font-body text-on-surface selection:bg-accent-blue/30 overflow-x-hidden">
-<!-- Detached Floating Navigation Bar -->
-<div class="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[90%] max-w-7xl">
-    <nav class="glass-effect rounded-2xl px-8 py-4 flex justify-between items-center shadow-2xl border border-accent-blue/30 shadow-accent-blue/10">
+    <!-- Detached Floating Navigation Bar -->
+    <div class="fixed top-6 left-1/2 -translate-x-1/2 z-[150] w-[90%] max-w-7xl">
+        <nav
+            class="glass-effect rounded-2xl px-8 py-4 flex justify-between items-center shadow-2xl border border-accent-blue/30 shadow-accent-blue/10">
 
-        <div class="text-xl font-black tracking-tighter text-white font-headline flex items-center gap-2">
-            <span class="w-3 h-3 bg-secondary rounded-full"></span>
-            ING. DAVIDE MORETTI
-        </div>
-        <div class="hidden lg:flex items-center gap-10 font-headline font-bold text-[11px] tracking-widest uppercase">
-            <a class="text-white hover:text-accent-blue transition-colors" href="#servizi">Servizi</a>
-            <a class="text-white/70 hover:text-white transition-colors" href="#progetti">Portfolio</a>
-            <a class="text-white/70 hover:text-white transition-colors" href="#metodo">Metodo</a>
-            <a class="text-white/70 hover:text-white transition-colors" href="#contatti">Contatti</a>
-        </div>
-        <div class="flex items-center gap-4">
-            <button class="hidden lg:block bg-white text-primary px-7 py-2.5 rounded-xl font-headline font-bold text-[11px] uppercase tracking-widest hover:bg-accent-blue transition-colors shadow-lg" onclick="window.location.href='#contatti'">
-                Richiedi Consulto
-            </button>
-            <!-- Hamburger Menu Button -->
-            <button id="menu-toggle" class="lg:hidden p-2 relative z-[120] flex items-center justify-center">
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </button>
-        </div>
 
-    </nav>
-</div>
+            <div class="text-xl font-black tracking-tighter text-white font-headline flex items-center gap-2">
+                <span class="w-3 h-3 bg-secondary rounded-full"></span>
+                ING. DAVIDE MORETTI
+            </div>
+            <div
+                class="hidden lg:flex items-center gap-10 font-headline font-bold text-[11px] tracking-widest uppercase">
+                <a class="text-white hover:text-accent-blue transition-colors" href="#servizi">Servizi</a>
+                <a class="text-white/70 hover:text-white transition-colors" href="#progetti">Portfolio</a>
+                <a class="text-white/70 hover:text-white transition-colors" href="#metodo">Metodo</a>
+                <a class="text-white/70 hover:text-white transition-colors" href="#contatti">Contatti</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button
+                    class="hidden lg:block bg-white text-primary px-7 py-2.5 rounded-xl font-headline font-bold text-[11px] uppercase tracking-widest hover:bg-accent-blue transition-colors shadow-lg"
+                    onclick="window.location.href='#contatti'">
+                    Richiedi Consulto
+                </button>
+                <!-- Hamburger Menu Button -->
+                <button id="menu-toggle" class="lg:hidden p-2 relative z-[120] flex items-center justify-center">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+            </div>
 
-<!-- Mobile Navigation Overlay -->
-<div id="mobile-menu" class="fixed inset-0 z-[110] hidden bg-primary/40 opacity-0">
-    <div class="absolute right-0 top-0 h-full w-[80%] max-w-sm glass-effect border-l border-white/10 p-10 flex flex-col translate-x-full transition-transform duration-500 ease-out" id="menu-content">
-
-        <div class="flex justify-between items-center mb-16">
-            <div class="text-xl font-black tracking-tighter text-white font-headline">MENU</div>
-            <!-- Handled by the same toggle button in the navbar for "X" effect -->
-        </div>
-        <nav class="flex flex-col gap-8 font-headline font-bold text-2xl tracking-tight text-white">
-            <a class="hover:text-accent-blue transition-colors" href="#servizi" onclick="closeMenu()">Servizi</a>
-            <a class="hover:text-accent-blue transition-colors" href="#progetti" onclick="closeMenu()">Portfolio</a>
-            <a class="hover:text-accent-blue transition-colors" href="#metodo" onclick="closeMenu()">Metodo</a>
-            <a class="hover:text-accent-blue transition-colors" href="#contatti" onclick="closeMenu()">Contatti</a>
         </nav>
-        <div class="mt-auto">
-            <button class="w-full bg-white text-primary px-8 py-5 rounded-2xl font-headline font-black text-sm uppercase tracking-widest" onclick="window.location.href='#contatti'; closeMenu()">
-                Richiedi Consulto
-            </button>
-        </div>
-    </div>
-</div>
-
-
-<!-- Floating Mobile CTA -->
-<div id="floating-cta" class="fixed bottom-8 right-8 z-[90] lg:hidden animate-bounce-subtle transition-all duration-500">
-    <button class="dark-glass text-white px-6 py-4 rounded-full flex items-center gap-3 shadow-2xl border border-white/20 active:scale-95 transition-all" onclick="window.location.href='#contatti'">
-        <span id="cta-text" class="font-headline font-black text-xs uppercase tracking-widest">Consulto</span>
-        <span class="material-symbols-outlined text-2xl">chat</span>
-    </button>
-</div>
-
-
-
-<!-- Hero Section with Full-Screen Video Background -->
-<header class="relative min-h-screen flex flex-col justify-center overflow-hidden bg-primary">
-    <!-- Video Background Container -->
-    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <video 
-            autoplay 
-            muted 
-            loop 
-            playsinline 
-            webkit-playsinline
-            preload="auto"
-            class="w-full h-full object-cover scale-[1.2] origin-top"
-        >
-
-            <source src="assets/lavori - Davide Moretti (1080p, h264, youtube).mp4" type="video/mp4">
-        </video>
-        <!-- Dark Overlay -->
-        <div class="absolute inset-0 hero-overlay"></div>
     </div>
 
-    <div class="container mx-auto px-8 relative z-20 text-white">
-        <div class="max-w-4xl">
-            <div class="inline-flex items-center gap-3 mb-8 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-blue opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-blue"></span>
-                </span>
-                <span class="text-[10px] font-black uppercase tracking-widest text-white/90">In Corso: Progetto Milano Civolaos</span>
+    <!-- Mobile Navigation Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-[140] hidden bg-primary/40 opacity-0">
+        <div class="absolute right-0 top-0 h-full w-[80%] max-w-sm glass-effect border-l border-white/10 p-10 flex flex-col translate-x-full transition-transform duration-500 ease-out"
+            id="menu-content">
+
+
+            <div class="flex justify-between items-center mb-16">
+                <div class="text-xl font-black tracking-tighter text-white font-headline">MENU</div>
+                <!-- Handled by the same toggle button in the navbar for "X" effect -->
             </div>
-            <h1 class="text-7xl md:text-[10rem] font-headline font-black tracking-tighter leading-[0.8] mb-12">
-                Precisione<br/>Architettata.
-            </h1>
-            <p class="text-xl md:text-2xl text-white/80 max-w-2xl leading-relaxed mb-12 font-medium">
-                Sintetizziamo rigore fisico e visione avanguardista per definire le infrastrutture del futuro attraverso una consulenza tecnica specializzata e umana.
-            </p>
-            <div class="flex flex-wrap gap-6">
-                <button class="bg-white text-primary px-12 py-6 rounded-2xl font-headline font-black text-sm uppercase tracking-widest hover:bg-accent-blue transition-all shadow-2xl" onclick="window.location.href='#contatti'">
-                    Inizia Progetto
-                </button>
-                <button class="glass-effect text-white px-12 py-6 rounded-2xl font-headline font-black text-sm uppercase tracking-widest hover:bg-white/10 transition-all border border-white/30" onclick="window.location.href='#progetti'">
-                    Portfolio Progetti
+            <nav class="flex flex-col gap-8 font-headline font-bold text-2xl tracking-tight text-white">
+                <a class="hover:text-accent-blue transition-colors" href="#servizi" onclick="closeMenu()">Servizi</a>
+                <a class="hover:text-accent-blue transition-colors" href="#progetti" onclick="closeMenu()">Portfolio</a>
+                <a class="hover:text-accent-blue transition-colors" href="#metodo" onclick="closeMenu()">Metodo</a>
+                <a class="hover:text-accent-blue transition-colors" href="#contatti" onclick="closeMenu()">Contatti</a>
+            </nav>
+            <div class="mt-auto">
+                <button
+                    class="w-full bg-white text-primary px-8 py-5 rounded-2xl font-headline font-black text-sm uppercase tracking-widest"
+                    onclick="window.location.href='#contatti'; closeMenu()">
+                    Richiedi Consulto
                 </button>
             </div>
         </div>
     </div>
-    <!-- Scrolling Ticker Bottom -->
-    <div class="absolute bottom-12 w-full border-y border-white/10 py-3 overflow-hidden whitespace-nowrap z-10 glass-effect">
-        <div class="animate-ticker flex gap-20 items-center">
-            <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/50">Ingegneria Strutturale 2026</span>
-            <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/50">Recupero Edilizio Sismico</span>
-            <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/50">Modellazione FEM Avanzata</span>
-            <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/50">Sicurezza in Cantiere</span>
-            <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/50">Direzione Lavori Tecnica</span>
-        </div>
+
+
+    <!-- Floating Mobile CTA -->
+    <div id="floating-cta"
+        class="fixed bottom-8 right-8 z-[90] lg:hidden animate-bounce-subtle transition-all duration-500">
+        <button
+            class="dark-glass text-white px-6 py-4 rounded-full flex items-center gap-3 shadow-2xl border border-white/20 active:scale-95 transition-all"
+            onclick="window.location.href='#contatti'">
+            <span id="cta-text" class="font-headline font-black text-xs uppercase tracking-widest">Consulto</span>
+            <span class="material-symbols-outlined text-2xl">chat</span>
+        </button>
     </div>
-</header>
 
-<!-- Stats Section -->
-<section class="py-24 bg-primary relative overflow-hidden border-t border-white/10">
-    <div class="container mx-auto px-8 relative z-10">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
-            <div>
-                <div class="text-5xl md:text-7xl font-headline font-black text-white mb-2">+150</div>
-                <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Progetti Completati</div>
-            </div>
-            <div>
-                <div class="text-5xl md:text-7xl font-headline font-black text-white mb-2">20</div>
-                <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Anni di Esperienza</div>
-            </div>
-            <div>
-                <div class="text-5xl md:text-7xl font-headline font-black text-white mb-2">0</div>
-                <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Errori Strutturali</div>
-            </div>
-            <div>
-                <div class="text-5xl md:text-7xl font-headline font-black text-white mb-2">100%</div>
-                <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Rigore Tecnico</div>
-            </div>
+
+
+    <!-- Hero Section with Full-Screen Video Background -->
+    <header class="relative min-h-screen flex flex-col justify-center overflow-hidden bg-primary">
+        <!-- Video Background Container -->
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <video autoplay muted loop playsinline webkit-playsinline preload="auto"
+                class="w-full h-full object-cover scale-[1.2] origin-top">
+
+                <source src="assets/lavori - Davide Moretti (1080p, h264, youtube).mp4" type="video/mp4">
+            </video>
+            <!-- Dark Overlay -->
+            <div class="absolute inset-0 hero-overlay"></div>
         </div>
-    </div>
-</section>
 
-<!-- Processo Operativo Section -->
-<section class="py-32 bg-white relative" id="metodo">
-    <div class="container mx-auto px-8">
-        <div class="flex flex-col lg:flex-row gap-12 items-start justify-between">
-            <div class="max-w-xl glass-effect bg-white border border-primary/5 p-12 rounded-[2rem] shadow-xl">
-                <span class="inline-block px-3 py-1 rounded bg-secondary/10 text-secondary text-[10px] font-black uppercase tracking-widest mb-6">01 // Il Metodo Moretti</span>
-                <h3 class="text-5xl font-headline font-black text-primary tracking-tighter leading-tight mb-8">Processo Operativo Certificato</h3>
-                <p class="text-primary/70 text-lg mb-10 leading-relaxed">Ogni intervento segue un protocollo rigoroso di analisi, simulazione e verifica per garantire l'eccellenza strutturale e la conformità normativa.</p>
-            </div>
-            <div class="flex gap-4">
-                <div class="w-64 bg-primary p-8 rounded-3xl text-white">
-                    <div class="text-3xl font-black mb-4">02</div>
-                    <div class="text-[11px] font-bold uppercase tracking-widest mb-2">Analisi Gestione Computazionale</div>
+        <div class="container mx-auto px-8 relative z-20 text-white">
+            <div class="max-w-4xl">
+                <div
+                    class="inline-flex items-center gap-3 mb-8 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
+                    <span class="relative flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-blue opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-blue"></span>
+                    </span>
+                    <span class="text-[10px] font-black uppercase tracking-widest text-white/90">In Corso: Progetto
+                        Milano Civolaos</span>
                 </div>
-                <div class="w-64 bg-secondary p-8 rounded-3xl text-white">
-                    <div class="text-3xl font-black mb-4">03</div>
-                    <div class="text-[11px] font-bold uppercase tracking-widest mb-2">Esecuzione e Direzione Lavori</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Services Section -->
-<section class="py-32 bg-surface relative grid-bg" id="servizi">
-    <div class="container mx-auto px-8">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
-            <div class="max-w-2xl">
-                <h2 class="text-[10px] font-black text-secondary uppercase tracking-[0.5em] mb-4">Competenze Core</h2>
-                <h3 class="text-5xl md:text-7xl font-headline font-black text-primary tracking-tighter">Ingegneria di Frontiera</h3>
-            </div>
-            <p class="text-primary/50 font-medium max-w-sm text-right">Specializzazioni tecniche per interventi strutturali complessi e miglioramento sismico.</p>
-        </div>
-        <div class="grid md:grid-cols-6 lg:grid-cols-12 gap-6">
-            <div class="md:col-span-6 lg:col-span-8 group relative bg-primary rounded-[2.5rem] p-12 md:p-20 overflow-hidden flex flex-col justify-end min-h-[550px] shadow-2xl">
-                <div class="absolute top-12 left-12 w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-white backdrop-blur-md">
-                    <span class="material-symbols-outlined text-4xl">foundation</span>
-                </div>
-                <div class="relative z-10">
-                    <span class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-white/50 text-[10px] font-black uppercase tracking-widest mb-6">Ingegneria Civile</span>
-                    <h4 class="text-4xl md:text-6xl font-headline font-black text-white mb-8 leading-tight">Progettazione Strutturale <br/>BIM Livello 3</h4>
-                    <p class="text-white/70 text-xl mb-12 max-w-2xl">Implementazione modelli parametrici avanzati per l'ottimizzazione dell'efficienza strutturale durante l'intero ciclo vita dell'opera.</p>
-                    <button class="flex items-center gap-4 text-white font-black text-xs uppercase tracking-[0.2em] group-hover:gap-8 transition-all" onclick="window.location.href='#contatti'">
-                        Scopri il processo <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                    </button>
-
-                </div>
-            </div>
-            <div class="md:col-span-6 lg:col-span-4 group bg-white rounded-[2.5rem] p-12 hover:shadow-2xl transition-all border border-primary/5 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-start justify-between mb-10">
-                        <div class="w-16 h-16 bg-accent-blue/10 rounded-2xl flex items-center justify-center text-primary">
-                            <span class="material-symbols-outlined text-3xl">vibration</span>
-                        </div>
-                        <span class="text-[10px] font-black text-secondary uppercase tracking-widest">Sismica 4.0</span>
-                    </div>
-                    <h4 class="text-3xl font-headline font-black text-primary mb-6">Adeguamento Sismico</h4>
-                    <p class="text-primary/60 text-lg leading-relaxed mb-10">Analisi dinamiche lineari e non lineari per edifici esistenti in cemento armato, muratura o legno.</p>
-                </div>
-                <ul class="space-y-4">
-                    <li class="flex items-center gap-3 text-sm font-bold text-primary uppercase tracking-tight">
-                        <span class="w-2 h-2 rounded-full bg-secondary"></span> Vulnerabilità Sismica
-                    </li>
-                    <li class="flex items-center gap-3 text-sm font-bold text-primary uppercase tracking-tight">
-                        <span class="w-2 h-2 rounded-full bg-secondary"></span> Rinforzi Strutturali
-                    </li>
-                </ul>
-            </div>
-            <div class="md:col-span-3 lg:col-span-3 group bg-white rounded-3xl p-10 hover:bg-primary hover:text-white transition-all border border-primary/5">
-                <span class="material-symbols-outlined text-secondary text-3xl mb-8">engineering</span>
-                <h4 class="text-2xl font-headline font-black mb-4">Green Structures</h4>
-                <p class="text-sm opacity-70 leading-relaxed mb-6">Progettazione sostenibile con materiali a basso impatto e certificati.</p>
-            </div>
-            <div class="md:col-span-3 lg:col-span-3 group bg-white rounded-3xl p-10 hover:bg-primary hover:text-white transition-all border border-primary/5">
-                <span class="material-symbols-outlined text-secondary text-3xl mb-8">rule</span>
-                <h4 class="text-2xl font-headline font-black mb-4">Audit Tecnico</h4>
-                <p class="text-sm opacity-70 leading-relaxed mb-6">Verifiche di conformità e perizie tecniche per due-diligence immobiliari.</p>
-            </div>
-            <div class="md:col-span-6 lg:col-span-6 group bg-white rounded-3xl p-10 flex items-center justify-between border border-primary/5 hover:shadow-xl transition-all">
-                <div class="max-w-sm">
-                    <h4 class="text-2xl font-headline font-black text-primary mb-4">Consulenza Direzione Lavori</h4>
-                    <p class="text-sm text-primary/60">Supervisione specialistica per grandi cantieri e opere pubbliche complesse.</p>
-                </div>
-                <div class="w-16 h-16 rounded-full border border-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
-                    <span class="material-symbols-outlined">analytics</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Progetti Iconici Section -->
-<section class="py-32 bg-primary relative overflow-hidden" id="progetti">
-    <div class="absolute inset-0 opacity-5">
-        <svg height="100%" width="100%"><pattern height="60" id="dark-grid" patternunits="userSpaceOnUse" width="60"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" stroke-width="0.3"></path></pattern><rect fill="url(#dark-grid)" height="100%" width="100%"></rect></svg>
-    </div>
-    <div class="container mx-auto px-8 relative z-10">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-            <div>
-                <h2 class="text-5xl md:text-7xl font-headline font-black text-white tracking-tighter">I nostri progetti</h2>
-                <p class="text-white/40 mt-4 max-w-md">Una selezione di opere che hanno ridefinito i limiti dell'ingegneria contemporanea nel 2025-2026.</p>
-            </div>
-            <button class="bg-white/10 hover:bg-white text-white hover:text-primary px-8 py-4 rounded-xl font-headline font-black text-xs uppercase tracking-widest transition-all">
-                Archivio Completo
-            </button>
-        </div>
-        <div class="grid lg:grid-cols-12 gap-10">
-            <!-- Large Featured Project Card -->
-            <div class="lg:col-span-7 group relative aspect-[4/3] rounded-[3rem] overflow-hidden">
-                <img alt="Nexus Apex Heights" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq_-QjJ46M-GBR_49b3jgsOccBaD5wK8-AI7Zqu6uVqmq9PA9wQpobc2dmZ2wF5MhEsoD2pTgc6MDmH7mlqX2wD1EW2uQrBe4nv-CQJTHcXG7pjNwrFzQ_p5Y8lSQ0Xu5QxCrc4wHuh9GJZUnp3xURWQhsRxRUi-0Xl0YZEUaoGnYEgFUMbh1HFp_9nMMvK3YPnXGJqdeY5fiXx2Zmn7IGIj3PrT0WaHMj5osCEIKL28zJFq5yP_zP6ZgGshjyp5sdydKljndMuERf"/>
-                <div class="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/20 to-transparent"></div>
-                <div class="absolute bottom-12 left-12 right-12">
-                    <div class="text-[10px] font-black text-accent-blue uppercase tracking-widest mb-3">Residenziale // Milano</div>
-                    <h4 class="text-4xl font-headline font-black text-white mb-2">NEXUS APEX HEIGHTS</h4>
-                    <div class="flex items-center gap-4 text-white/50 text-[10px] font-bold uppercase">
-                        <span>45 Livelli</span>
-                        <span class="w-1 h-1 bg-white/20 rounded-full"></span>
-                        <span>Struttura Acciaio-C.A.</span>
-                    </div>
-                </div>
-            </div>
-            <!-- Secondary Projects Stack -->
-            <div class="lg:col-span-5 flex flex-col gap-8">
-                <div class="group relative flex-1 bg-white/5 rounded-[2.5rem] overflow-hidden border border-white/10 flex flex-col">
-                    <div class="h-48 overflow-hidden">
-                        <img alt="Hub Logistico Verona" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq_-QjJ46M-GBR_49b3jgsOccBaD5wK8-AI7Zqu6uVqmq9PA9wQpobc2dmZ2wF5MhEsoD2pTgc6MDmH7mlqX2wD1EW2uQrBe4nv-CQJTHcXG7pjNwrFzQ_p5Y8lSQ0Xu5QxCrc4wHuh9GJZUnp3xURWQhsRxRUi-0Xl0YZEUaoGnYEgFUMbh1HFp_9nMMvK3YPnXGJqdeY5fiXx2Zmn7IGIj3PrT0WaHMj5osCEIKL28zJFq5yP_zP6ZgGshjyp5sdydKljndMuERf"/>
-                    </div>
-                    <div class="p-8">
-                        <h5 class="text-xl font-headline font-bold text-white mb-2">HUB LOGISTICO VERONA</h5>
-                        <p class="text-white/40 text-xs uppercase tracking-widest mb-6">Infrastruttura Industriale</p>
-                        <button class="text-accent-blue text-[10px] font-black uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all" onclick="window.location.href='#contatti'">
-                            Dettagli <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                        </button>
-
-                    </div>
-                </div>
-                <div class="group relative flex-1 bg-white/5 rounded-[2.5rem] overflow-hidden border border-white/10 flex flex-col">
-                    <div class="h-48 overflow-hidden">
-                        <img alt="Sere Tech Solutions" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq_-QjJ46M-GBR_49b3jgsOccBaD5wK8-AI7Zqu6uVqmq9PA9wQpobc2dmZ2wF5MhEsoD2pTgc6MDmH7mlqX2wD1EW2uQrBe4nv-CQJTHcXG7pjNwrFzQ_p5Y8lSQ0Xu5QxCrc4wHuh9GJZUnp3xURWQhsRxRUi-0Xl0YZEUaoGnYEgFUMbh1HFp_9nMMvK3YPnXGJqdeY5fiXx2Zmn7IGIj3PrT0WaHMj5osCEIKL28zJFq5yP_zP6ZgGshjyp5sdydKljndMuERf"/>
-                    </div>
-                    <div class="p-8">
-                        <h5 class="text-xl font-headline font-bold text-white mb-2">SERE TECH SOLUTIONS</h5>
-                        <p class="text-white/40 text-xs uppercase tracking-widest mb-6">Ingegneria d'Interni</p>
-                        <button class="text-accent-blue text-[10px] font-black uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all" onclick="window.location.href='#contatti'">
-                            Dettagli <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                        </button>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Profile Section -->
-<section class="py-32 bg-white millimeter-bg">
-    <div class="container mx-auto px-8">
-        <div class="grid lg:grid-cols-2 gap-20 items-center">
-            <div class="relative">
-                <div class="absolute -top-10 -left-10 w-60 h-60 bg-accent-blue/10 rounded-full blur-[100px]"></div>
-                <div class="relative z-10 rounded-[3rem] overflow-hidden aspect-[4/5] blue-glow border-8 border-white shadow-2xl">
-                    <img alt="Ing. Davide Moretti" class="w-full h-full object-cover" src="assets/ingmoretti.webp"/>
-                </div>
-                <div class="absolute -bottom-8 -right-8 glass-effect p-10 rounded-3xl shadow-2xl border border-primary/10 bg-white/80">
-
-                    <div class="text-5xl font-black text-primary mb-1">1800/A</div>
-                    <div class="text-[10px] font-black uppercase tracking-widest text-secondary">Ordine Ingegneri Mantova</div>
-                </div>
-            </div>
-            <div>
-                <h2 class="text-[10px] font-black text-secondary uppercase tracking-[0.5em] mb-4">Il Titolare</h2>
-                <h3 class="text-5xl md:text-7xl font-headline font-black text-primary tracking-tighter mb-10 leading-[0.9]">Ing. Davide Moretti</h3>
-                <div class="space-y-6 text-primary/70 text-lg font-medium leading-relaxed">
-                    <p>Laureato con lode in Ingegneria Civile presso l'Università degli Studi di Trento, Davide Moretti opera a Gonzaga (MN) specializzandosi nella sintesi tra rigore strutturale e architettura funzionale.</p>
-                    <p class="text-primary italic font-black text-2xl border-l-4 border-secondary pl-6">"L'ingegneria non è solo calcolo; è l'arte tecnica di rendere l'impossibile strutturalmente solido."</p>
-                    <p>Focus primario sul recupero edilizio e sul miglioramento sismico, fornendo consulenze tecniche e perizie per privati, aziende ed enti pubblici.</p>
-                </div>
-                <div class="mt-12 flex flex-wrap gap-8">
-                    <a class="group flex items-center gap-4 bg-primary text-white border border-primary/10 hover:bg-secondary px-8 py-4 rounded-2xl transition-all shadow-xl" href="mailto:ing.davide.moretti@gmail.com">
-                        <span class="material-symbols-outlined">mail</span>
-                        <div class="text-left">
-                            <span class="block text-[10px] font-black uppercase tracking-widest opacity-60">Scrivimi direttamente</span>
-                            <span class="block font-bold">Email Professionale</span>
-                        </div>
-                    </a>
-                    <a class="group flex items-center gap-4 bg-primary/5 hover:bg-primary hover:text-white px-8 py-4 rounded-2xl transition-all" href="https://www.linkedin.com" target="_blank">
-                        <span class="material-symbols-outlined text-secondary group-hover:text-white">share</span>
-                        <span class="text-[10px] font-black uppercase tracking-widest">LinkedIn</span>
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Contact Form Section -->
-<section class="py-32 bg-white relative grid-bg" id="contatti">
-    <div class="container mx-auto px-8 max-w-7xl">
-        <div class="grid lg:grid-cols-12 gap-16 items-start">
-            <div class="lg:col-span-5">
-                <h2 class="text-[10px] font-black text-secondary uppercase tracking-[0.5em] mb-4">Contatti</h2>
-                <h3 class="text-5xl md:text-7xl font-headline font-black text-primary tracking-tighter mb-8 leading-none">Hai un progetto ambizioso?</h3>
-                <p class="text-primary/60 text-xl mb-12 font-medium">
-                    Compila il form per richiedere una consulenza tecnica specializzata. Analizzeremo la fattibilità della tua visione con rigore ingegneristico.
+                <h1 class="text-7xl md:text-[10rem] font-headline font-black tracking-tighter leading-[0.8] mb-12">
+                    Precisione<br />Architettata.
+                </h1>
+                <p class="text-xl md:text-2xl text-white/80 max-w-2xl leading-relaxed mb-12 font-medium">
+                    Sintetizziamo rigore fisico e visione avanguardista per definire le infrastrutture del futuro
+                    attraverso una consulenza tecnica specializzata e umana.
                 </p>
-                <div class="space-y-8">
-                    <div class="flex items-center gap-6">
-                        <div class="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary">
-                            <span class="material-symbols-outlined text-2xl">mail</span>
-                        </div>
-                        <div>
-                            <div class="text-[10px] font-black uppercase text-primary/40 mb-1">Email</div>
-                            <div class="font-bold text-primary text-lg">ing.davide.moretti@gmail.com</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-6">
-                        <div class="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary">
-                            <span class="material-symbols-outlined text-2xl">phone</span>
-                        </div>
-                        <div>
-                            <div class="text-[10px] font-black uppercase text-primary/40 mb-1">Telefono</div>
-                            <div class="font-bold text-primary text-lg">+39 346 617 65 39</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-6">
-                        <div class="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary">
-                            <span class="material-symbols-outlined text-2xl">location_on</span>
-                        </div>
-                        <div>
-                            <div class="text-[10px] font-black uppercase text-primary/40 mb-1">Sede</div>
-                            <div class="font-bold text-primary text-lg">Via Principe Santo 5/B, Gonzaga (MN)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="lg:col-span-7 bg-surface p-12 rounded-[3rem] border border-primary/5 shadow-2xl">
-                <form class="space-y-8" onsubmit="event.preventDefault(); alert('Grazie per averci contattato!');">
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <label class="block text-[11px] font-black uppercase tracking-widest text-primary/60 mb-3">Nome Completo</label>
-                            <input class="w-full bg-white border border-primary/10 rounded-2xl px-6 py-5 text-sm focus:ring-2 focus:ring-secondary outline-none transition-all" placeholder="Inserisci il tuo nome" type="text" required/>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-black uppercase tracking-widest text-primary/60 mb-3">Email</label>
-                            <input class="w-full bg-white border border-primary/10 rounded-2xl px-6 py-5 text-sm focus:ring-2 focus:ring-secondary outline-none transition-all" placeholder="nome@esempio.it" type="email" required/>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-black uppercase tracking-widest text-primary/60 mb-3">Oggetto</label>
-                        <input class="w-full bg-white border border-primary/10 rounded-2xl px-6 py-5 text-sm focus:ring-2 focus:ring-secondary outline-none transition-all" placeholder="Qual è l'argomento?" type="text" required/>
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-black uppercase tracking-widest text-primary/60 mb-3">Messaggio</label>
-                        <textarea class="w-full bg-white border border-primary/10 rounded-2xl px-6 py-5 text-sm focus:ring-2 focus:ring-secondary outline-none resize-none transition-all" placeholder="Descrivi brevemente il tuo progetto..." rows="6" required></textarea>
-                    </div>
-                    <button class="w-full bg-primary text-white font-headline font-black text-sm uppercase tracking-widest py-7 rounded-2xl hover:bg-secondary transition-all shadow-xl shadow-primary/20" type="submit">
-                        Invia Richiesta di Consulto
+                <div class="flex flex-wrap gap-6">
+                    <button
+                        class="bg-white text-primary px-12 py-6 rounded-2xl font-headline font-black text-sm uppercase tracking-widest hover:bg-accent-blue transition-all shadow-2xl"
+                        onclick="window.location.href='#contatti'">
+                        Inizia Progetto
                     </button>
-                </form>
+                    <button
+                        class="glass-effect text-white px-12 py-6 rounded-2xl font-headline font-black text-sm uppercase tracking-widest hover:bg-white/10 transition-all border border-white/30"
+                        onclick="window.location.href='#progetti'">
+                        Portfolio Progetti
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+        <!-- Scrolling Ticker Bottom -->
+        <div
+            class="absolute bottom-12 w-full border-y border-white/10 py-3 overflow-hidden whitespace-nowrap z-10 glass-effect">
+            <div class="animate-ticker flex gap-20 items-center">
+                <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/50">Ingegneria Strutturale
+                    2026</span>
+                <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/50">Recupero Edilizio
+                    Sismico</span>
+                <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/50">Modellazione FEM
+                    Avanzata</span>
+                <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/50">Sicurezza in
+                    Cantiere</span>
+                <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/50">Direzione Lavori
+                    Tecnica</span>
+            </div>
+        </div>
+    </header>
 
-<!-- Footer -->
-<footer class="bg-white pt-32 pb-16 border-t border-primary/5">
-    <div class="container mx-auto px-8 max-w-7xl">
-        <div class="flex flex-col lg:flex-row justify-between items-start gap-20 mb-24">
-            <div class="max-w-md">
-                <div class="text-3xl font-black text-primary font-headline tracking-tighter mb-8">ING. DAVIDE MORETTI</div>
-                <p class="text-primary/50 text-base leading-relaxed mb-10">Specialista in integrità strutturale e miglioramento sismico. Precisione ingegneristica al servizio del patrimonio costruito attraverso tecnologie d'avanguardia.</p>
-                <div class="flex gap-6">
-                    <a class="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary/40 hover:text-primary hover:bg-primary/10 transition-all" href="https://linkedin.com">
-                        <svg class="w-5 h-5 fill-current" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
-                    </a>
-                    <a class="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary/40 hover:text-primary hover:bg-primary/10 transition-all" href="https://instagram.com">
-                        <svg class="w-5 h-5 fill-current" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
-                    </a>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-20">
+    <!-- Stats Section -->
+    <section class="py-24 bg-primary relative overflow-hidden border-t border-white/10">
+        <div class="container mx-auto px-8 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
                 <div>
-                    <h6 class="text-[11px] font-black uppercase tracking-widest text-secondary mb-10">Studio</h6>
-                    <ul class="space-y-5 text-sm font-bold text-primary/60">
-                        <li><a class="hover:text-primary transition-colors" href="#servizi">Servizi Tecnici</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#progetti">Progetti</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#metodo">Metodo Operativo</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#contatti">Contatti</a></li>
-                    </ul>
+                    <div class="text-5xl md:text-7xl font-headline font-black text-white mb-2">+150</div>
+                    <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Progetti
+                        Completati</div>
                 </div>
                 <div>
-                    <h6 class="text-[11px] font-black uppercase tracking-widest text-secondary mb-10">Info Legali</h6>
-                    <ul class="space-y-5 text-sm font-bold text-primary/60">
-                        <li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Termini e Condizioni</a></li>
-                    </ul>
+                    <div class="text-5xl md:text-7xl font-headline font-black text-white mb-2">20</div>
+                    <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Anni di Esperienza
+                    </div>
                 </div>
-                <div class="col-span-2 md:col-span-1">
-                    <h6 class="text-[11px] font-black uppercase tracking-widest text-secondary mb-10">Sede Principale</h6>
-                    <address class="not-italic text-sm font-bold text-primary/60 space-y-3">
-                        <p class="text-primary font-black">Gonzaga (MN), Italia</p>
-                        <p>Via Principe Santo 5/B</p>
-                        <p>46023 Gonzaga (MN)</p>
-                        <p class="pt-6 text-primary text-lg">+39 346 617 65 39</p>
-                    </address>
+                <div>
+                    <div class="text-5xl md:text-7xl font-headline font-black text-white mb-2">0</div>
+                    <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Errori Strutturali
+                    </div>
+                </div>
+                <div>
+                    <div class="text-5xl md:text-7xl font-headline font-black text-white mb-2">100%</div>
+                    <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Rigore Tecnico
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="border-t border-primary/5 pt-16 flex flex-col md:flex-row justify-between items-center gap-12">
-            <div class="text-[11px] font-black text-primary/30 uppercase tracking-[0.2em]">
-                © 2026 Ing. Davide Moretti. P.IVA 01234567890. Iscrizione Albo MN n. 1800/A.
-            </div>
-            <div class="font-headline font-black text-7xl md:text-9xl text-primary/5 tracking-tighter select-none pointer-events-none">
-                INGEGNERIA
+    </section>
+
+    <!-- Processo Operativo Section -->
+    <section class="py-32 bg-white relative" id="metodo">
+        <div class="container mx-auto px-8">
+            <div class="flex flex-col lg:flex-row gap-12 items-start justify-between">
+                <div class="max-w-xl glass-effect bg-white border border-primary/5 p-12 rounded-[2rem] shadow-xl">
+                    <span
+                        class="inline-block px-3 py-1 rounded bg-secondary/10 text-secondary text-[10px] font-black uppercase tracking-widest mb-6">01
+                        // Il Metodo Moretti</span>
+                    <h3 class="text-5xl font-headline font-black text-primary tracking-tighter leading-tight mb-8">
+                        Processo Operativo Certificato</h3>
+                    <p class="text-primary/70 text-lg mb-10 leading-relaxed">Ogni intervento segue un protocollo
+                        rigoroso di analisi, simulazione e verifica per garantire l'eccellenza strutturale e la
+                        conformità normativa.</p>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-64 bg-primary p-8 rounded-3xl text-white">
+                        <div class="text-3xl font-black mb-4">02</div>
+                        <div class="text-[11px] font-bold uppercase tracking-widest mb-2">Analisi Gestione
+                            Computazionale</div>
+                    </div>
+                    <div class="w-64 bg-secondary p-8 rounded-3xl text-white">
+                        <div class="text-3xl font-black mb-4">03</div>
+                        <div class="text-[11px] font-bold uppercase tracking-widest mb-2">Esecuzione e Direzione Lavori
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-32 bg-surface relative grid-bg" id="servizi">
+        <div class="container mx-auto px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
+                <div class="max-w-2xl">
+                    <h2 class="text-[10px] font-black text-secondary uppercase tracking-[0.5em] mb-4">Competenze Core
+                    </h2>
+                    <h3 class="text-5xl md:text-7xl font-headline font-black text-primary tracking-tighter">Ingegneria
+                        di Frontiera</h3>
+                </div>
+                <p class="text-primary/50 font-medium max-w-sm text-right">Specializzazioni tecniche per interventi
+                    strutturali complessi e miglioramento sismico.</p>
+            </div>
+            <div class="grid md:grid-cols-6 lg:grid-cols-12 gap-6">
+                <div
+                    class="md:col-span-6 lg:col-span-8 group relative bg-primary rounded-[2.5rem] p-12 md:p-20 overflow-hidden flex flex-col justify-end min-h-[550px] shadow-2xl">
+                    <div
+                        class="absolute top-12 left-12 w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-white backdrop-blur-md">
+                        <span class="material-symbols-outlined text-4xl">foundation</span>
+                    </div>
+                    <div class="relative z-10">
+                        <span
+                            class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-white/50 text-[10px] font-black uppercase tracking-widest mb-6">Ingegneria
+                            Civile</span>
+                        <h4 class="text-4xl md:text-6xl font-headline font-black text-white mb-8 leading-tight">
+                            Progettazione Strutturale <br />BIM Livello 3</h4>
+                        <p class="text-white/70 text-xl mb-12 max-w-2xl">Implementazione modelli parametrici avanzati
+                            per l'ottimizzazione dell'efficienza strutturale durante l'intero ciclo vita dell'opera.</p>
+                        <button
+                            class="flex items-center gap-4 text-white font-black text-xs uppercase tracking-[0.2em] group-hover:gap-8 transition-all"
+                            onclick="window.location.href='#contatti'">
+                            Scopri il processo <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </button>
+
+                    </div>
+                </div>
+                <div
+                    class="md:col-span-6 lg:col-span-4 group bg-white rounded-[2.5rem] p-12 hover:shadow-2xl transition-all border border-primary/5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-start justify-between mb-10">
+                            <div
+                                class="w-16 h-16 bg-accent-blue/10 rounded-2xl flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined text-3xl">vibration</span>
+                            </div>
+                            <span class="text-[10px] font-black text-secondary uppercase tracking-widest">Sismica
+                                4.0</span>
+                        </div>
+                        <h4 class="text-3xl font-headline font-black text-primary mb-6">Adeguamento Sismico</h4>
+                        <p class="text-primary/60 text-lg leading-relaxed mb-10">Analisi dinamiche lineari e non lineari
+                            per edifici esistenti in cemento armato, muratura o legno.</p>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 text-sm font-bold text-primary uppercase tracking-tight">
+                            <span class="w-2 h-2 rounded-full bg-secondary"></span> Vulnerabilità Sismica
+                        </li>
+                        <li class="flex items-center gap-3 text-sm font-bold text-primary uppercase tracking-tight">
+                            <span class="w-2 h-2 rounded-full bg-secondary"></span> Rinforzi Strutturali
+                        </li>
+                    </ul>
+                </div>
+                <div
+                    class="md:col-span-3 lg:col-span-3 group bg-white rounded-3xl p-10 hover:bg-primary hover:text-white transition-all border border-primary/5">
+                    <span class="material-symbols-outlined text-secondary text-3xl mb-8">engineering</span>
+                    <h4 class="text-2xl font-headline font-black mb-4">Green Structures</h4>
+                    <p class="text-sm opacity-70 leading-relaxed mb-6">Progettazione sostenibile con materiali a basso
+                        impatto e certificati.</p>
+                </div>
+                <div
+                    class="md:col-span-3 lg:col-span-3 group bg-white rounded-3xl p-10 hover:bg-primary hover:text-white transition-all border border-primary/5">
+                    <span class="material-symbols-outlined text-secondary text-3xl mb-8">rule</span>
+                    <h4 class="text-2xl font-headline font-black mb-4">Audit Tecnico</h4>
+                    <p class="text-sm opacity-70 leading-relaxed mb-6">Verifiche di conformità e perizie tecniche per
+                        due-diligence immobiliari.</p>
+                </div>
+                <div
+                    class="md:col-span-6 lg:col-span-6 group bg-white rounded-3xl p-10 flex items-center justify-between border border-primary/5 hover:shadow-xl transition-all">
+                    <div class="max-w-sm">
+                        <h4 class="text-2xl font-headline font-black text-primary mb-4">Consulenza Direzione Lavori</h4>
+                        <p class="text-sm text-primary/60">Supervisione specialistica per grandi cantieri e opere
+                            pubbliche complesse.</p>
+                    </div>
+                    <div
+                        class="w-16 h-16 rounded-full border border-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+                        <span class="material-symbols-outlined">analytics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progetti Iconici Section -->
+    <section class="py-32 bg-primary relative overflow-hidden" id="progetti">
+        <div class="absolute inset-0 opacity-5">
+            <svg height="100%" width="100%">
+                <pattern height="60" id="dark-grid" patternunits="userSpaceOnUse" width="60">
+                    <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" stroke-width="0.3"></path>
+                </pattern>
+                <rect fill="url(#dark-grid)" height="100%" width="100%"></rect>
+            </svg>
+        </div>
+        <div class="container mx-auto px-8 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                <div>
+                    <h2 class="text-5xl md:text-7xl font-headline font-black text-white tracking-tighter">I nostri
+                        progetti</h2>
+                    <p class="text-white/40 mt-4 max-w-md">Una selezione di opere che hanno ridefinito i limiti
+                        dell'ingegneria contemporanea nel 2025-2026.</p>
+                </div>
+                <button
+                    class="bg-white/10 hover:bg-white text-white hover:text-primary px-8 py-4 rounded-xl font-headline font-black text-xs uppercase tracking-widest transition-all">
+                    Archivio Completo
+                </button>
+            </div>
+            <div class="grid lg:grid-cols-12 gap-10">
+                <!-- Large Featured Project Card -->
+                <div class="lg:col-span-7 group relative aspect-[4/3] rounded-[3rem] overflow-hidden">
+                    <img alt="Nexus Apex Heights"
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq_-QjJ46M-GBR_49b3jgsOccBaD5wK8-AI7Zqu6uVqmq9PA9wQpobc2dmZ2wF5MhEsoD2pTgc6MDmH7mlqX2wD1EW2uQrBe4nv-CQJTHcXG7pjNwrFzQ_p5Y8lSQ0Xu5QxCrc4wHuh9GJZUnp3xURWQhsRxRUi-0Xl0YZEUaoGnYEgFUMbh1HFp_9nMMvK3YPnXGJqdeY5fiXx2Zmn7IGIj3PrT0WaHMj5osCEIKL28zJFq5yP_zP6ZgGshjyp5sdydKljndMuERf" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/20 to-transparent"></div>
+                    <div class="absolute bottom-12 left-12 right-12">
+                        <div class="text-[10px] font-black text-accent-blue uppercase tracking-widest mb-3">Residenziale
+                            // Milano</div>
+                        <h4 class="text-4xl font-headline font-black text-white mb-2">NEXUS APEX HEIGHTS</h4>
+                        <div class="flex items-center gap-4 text-white/50 text-[10px] font-bold uppercase">
+                            <span>45 Livelli</span>
+                            <span class="w-1 h-1 bg-white/20 rounded-full"></span>
+                            <span>Struttura Acciaio-C.A.</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Secondary Projects Stack -->
+                <div class="lg:col-span-5 flex flex-col gap-8">
+                    <div
+                        class="group relative flex-1 bg-white/5 rounded-[2.5rem] overflow-hidden border border-white/10 flex flex-col">
+                        <div class="h-48 overflow-hidden">
+                            <img alt="Hub Logistico Verona"
+                                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq_-QjJ46M-GBR_49b3jgsOccBaD5wK8-AI7Zqu6uVqmq9PA9wQpobc2dmZ2wF5MhEsoD2pTgc6MDmH7mlqX2wD1EW2uQrBe4nv-CQJTHcXG7pjNwrFzQ_p5Y8lSQ0Xu5QxCrc4wHuh9GJZUnp3xURWQhsRxRUi-0Xl0YZEUaoGnYEgFUMbh1HFp_9nMMvK3YPnXGJqdeY5fiXx2Zmn7IGIj3PrT0WaHMj5osCEIKL28zJFq5yP_zP6ZgGshjyp5sdydKljndMuERf" />
+                        </div>
+                        <div class="p-8">
+                            <h5 class="text-xl font-headline font-bold text-white mb-2">HUB LOGISTICO VERONA</h5>
+                            <p class="text-white/40 text-xs uppercase tracking-widest mb-6">Infrastruttura Industriale
+                            </p>
+                            <button
+                                class="text-accent-blue text-[10px] font-black uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all"
+                                onclick="window.location.href='#contatti'">
+                                Dettagli <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </button>
+
+                        </div>
+                    </div>
+                    <div
+                        class="group relative flex-1 bg-white/5 rounded-[2.5rem] overflow-hidden border border-white/10 flex flex-col">
+                        <div class="h-48 overflow-hidden">
+                            <img alt="Sere Tech Solutions"
+                                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq_-QjJ46M-GBR_49b3jgsOccBaD5wK8-AI7Zqu6uVqmq9PA9wQpobc2dmZ2wF5MhEsoD2pTgc6MDmH7mlqX2wD1EW2uQrBe4nv-CQJTHcXG7pjNwrFzQ_p5Y8lSQ0Xu5QxCrc4wHuh9GJZUnp3xURWQhsRxRUi-0Xl0YZEUaoGnYEgFUMbh1HFp_9nMMvK3YPnXGJqdeY5fiXx2Zmn7IGIj3PrT0WaHMj5osCEIKL28zJFq5yP_zP6ZgGshjyp5sdydKljndMuERf" />
+                        </div>
+                        <div class="p-8">
+                            <h5 class="text-xl font-headline font-bold text-white mb-2">SERE TECH SOLUTIONS</h5>
+                            <p class="text-white/40 text-xs uppercase tracking-widest mb-6">Ingegneria d'Interni</p>
+                            <button
+                                class="text-accent-blue text-[10px] font-black uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all"
+                                onclick="window.location.href='#contatti'">
+                                Dettagli <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section class="py-32 bg-white millimeter-bg">
+        <div class="container mx-auto px-8">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div class="relative">
+                    <div class="absolute -top-10 -left-10 w-60 h-60 bg-accent-blue/10 rounded-full blur-[100px]"></div>
+                    <div
+                        class="relative z-10 rounded-[3rem] overflow-hidden aspect-[4/5] blue-glow border-8 border-white shadow-2xl">
+                        <img alt="Ing. Davide Moretti" class="w-full h-full object-cover"
+                            src="assets/ingmoretti.webp" />
+                    </div>
+                    <div
+                        class="absolute -bottom-8 -right-8 glass-effect p-10 rounded-3xl shadow-2xl border border-primary/10 bg-white/80">
+
+                        <div class="text-5xl font-black text-primary mb-1">1800/A</div>
+                        <div class="text-[10px] font-black uppercase tracking-widest text-secondary">Ordine Ingegneri
+                            Mantova</div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-[10px] font-black text-secondary uppercase tracking-[0.5em] mb-4">Il Titolare</h2>
+                    <h3
+                        class="text-5xl md:text-7xl font-headline font-black text-primary tracking-tighter mb-10 leading-[0.9]">
+                        Ing. Davide Moretti</h3>
+                    <div class="space-y-6 text-primary/70 text-lg font-medium leading-relaxed">
+                        <p>Laureato con lode in Ingegneria Civile presso l'Università degli Studi di Trento, Davide
+                            Moretti opera a Gonzaga (MN) specializzandosi nella sintesi tra rigore strutturale e
+                            architettura funzionale.</p>
+                        <p class="text-primary italic font-black text-2xl border-l-4 border-secondary pl-6">
+                            "L'ingegneria non è solo calcolo; è l'arte tecnica di rendere l'impossibile strutturalmente
+                            solido."</p>
+                        <p>Focus primario sul recupero edilizio e sul miglioramento sismico, fornendo consulenze
+                            tecniche e perizie per privati, aziende ed enti pubblici.</p>
+                    </div>
+                    <div class="mt-12 flex flex-wrap gap-8">
+                        <a class="group flex items-center gap-4 bg-primary text-white border border-primary/10 hover:bg-secondary px-8 py-4 rounded-2xl transition-all shadow-xl"
+                            href="mailto:ing.davide.moretti@gmail.com">
+                            <span class="material-symbols-outlined">mail</span>
+                            <div class="text-left">
+                                <span class="block text-[10px] font-black uppercase tracking-widest opacity-60">Scrivimi
+                                    direttamente</span>
+                                <span class="block font-bold">Email Professionale</span>
+                            </div>
+                        </a>
+                        <a class="group flex items-center gap-4 bg-primary/5 hover:bg-primary hover:text-white px-8 py-4 rounded-2xl transition-all"
+                            href="https://www.linkedin.com" target="_blank">
+                            <span class="material-symbols-outlined text-secondary group-hover:text-white">share</span>
+                            <span class="text-[10px] font-black uppercase tracking-widest">LinkedIn</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="py-32 bg-white relative grid-bg" id="contatti">
+        <div class="container mx-auto px-8 max-w-7xl">
+            <div class="grid lg:grid-cols-12 gap-16 items-start">
+                <div class="lg:col-span-5">
+                    <h2 class="text-[10px] font-black text-secondary uppercase tracking-[0.5em] mb-4">Contatti</h2>
+                    <h3
+                        class="text-5xl md:text-7xl font-headline font-black text-primary tracking-tighter mb-8 leading-none">
+                        Hai un progetto ambizioso?</h3>
+                    <p class="text-primary/60 text-xl mb-12 font-medium">
+                        Compila il form per richiedere una consulenza tecnica specializzata. Analizzeremo la fattibilità
+                        della tua visione con rigore ingegneristico.
+                    </p>
+                    <div class="space-y-8">
+                        <div class="flex items-center gap-6">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined text-2xl">mail</span>
+                            </div>
+                            <div>
+                                <div class="text-[10px] font-black uppercase text-primary/40 mb-1">Email</div>
+                                <div class="font-bold text-primary text-lg">ing.davide.moretti@gmail.com</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined text-2xl">phone</span>
+                            </div>
+                            <div>
+                                <div class="text-[10px] font-black uppercase text-primary/40 mb-1">Telefono</div>
+                                <div class="font-bold text-primary text-lg">+39 346 617 65 39</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined text-2xl">location_on</span>
+                            </div>
+                            <div>
+                                <div class="text-[10px] font-black uppercase text-primary/40 mb-1">Sede</div>
+                                <div class="font-bold text-primary text-lg">Via Principe Santo 5/B, Gonzaga (MN)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-7 bg-surface p-12 rounded-[3rem] border border-primary/5 shadow-2xl">
+                    <form class="space-y-8" onsubmit="event.preventDefault(); alert('Grazie per averci contattato!');">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <label
+                                    class="block text-[11px] font-black uppercase tracking-widest text-primary/60 mb-3">Nome
+                                    Completo</label>
+                                <input
+                                    class="w-full bg-white border border-primary/10 rounded-2xl px-6 py-5 text-sm focus:ring-2 focus:ring-secondary outline-none transition-all"
+                                    placeholder="Inserisci il tuo nome" type="text" required />
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-[11px] font-black uppercase tracking-widest text-primary/60 mb-3">Email</label>
+                                <input
+                                    class="w-full bg-white border border-primary/10 rounded-2xl px-6 py-5 text-sm focus:ring-2 focus:ring-secondary outline-none transition-all"
+                                    placeholder="nome@esempio.it" type="email" required />
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                class="block text-[11px] font-black uppercase tracking-widest text-primary/60 mb-3">Oggetto</label>
+                            <input
+                                class="w-full bg-white border border-primary/10 rounded-2xl px-6 py-5 text-sm focus:ring-2 focus:ring-secondary outline-none transition-all"
+                                placeholder="Qual è l'argomento?" type="text" required />
+                        </div>
+                        <div>
+                            <label
+                                class="block text-[11px] font-black uppercase tracking-widest text-primary/60 mb-3">Messaggio</label>
+                            <textarea
+                                class="w-full bg-white border border-primary/10 rounded-2xl px-6 py-5 text-sm focus:ring-2 focus:ring-secondary outline-none resize-none transition-all"
+                                placeholder="Descrivi brevemente il tuo progetto..." rows="6" required></textarea>
+                        </div>
+                        <button
+                            class="w-full bg-primary text-white font-headline font-black text-sm uppercase tracking-widest py-7 rounded-2xl hover:bg-secondary transition-all shadow-xl shadow-primary/20"
+                            type="submit">
+                            Invia Richiesta di Consulto
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white pt-32 pb-16 border-t border-primary/5">
+        <div class="container mx-auto px-8 max-w-7xl">
+            <div class="flex flex-col lg:flex-row justify-between items-start gap-20 mb-24">
+                <div class="max-w-md">
+                    <div class="text-3xl font-black text-primary font-headline tracking-tighter mb-8">ING. DAVIDE
+                        MORETTI</div>
+                    <p class="text-primary/50 text-base leading-relaxed mb-10">Specialista in integrità strutturale e
+                        miglioramento sismico. Precisione ingegneristica al servizio del patrimonio costruito attraverso
+                        tecnologie d'avanguardia.</p>
+                    <div class="flex gap-6">
+                        <a class="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary/40 hover:text-primary hover:bg-primary/10 transition-all"
+                            href="https://linkedin.com">
+                            <svg class="w-5 h-5 fill-current" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a class="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary/40 hover:text-primary hover:bg-primary/10 transition-all"
+                            href="https://instagram.com">
+                            <svg class="w-5 h-5 fill-current" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-20">
+                    <div>
+                        <h6 class="text-[11px] font-black uppercase tracking-widest text-secondary mb-10">Studio</h6>
+                        <ul class="space-y-5 text-sm font-bold text-primary/60">
+                            <li><a class="hover:text-primary transition-colors" href="#servizi">Servizi Tecnici</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#progetti">Progetti</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#metodo">Metodo Operativo</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#contatti">Contatti</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h6 class="text-[11px] font-black uppercase tracking-widest text-secondary mb-10">Info Legali
+                        </h6>
+                        <ul class="space-y-5 text-sm font-bold text-primary/60">
+                            <li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Termini e Condizioni</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-span-2 md:col-span-1">
+                        <h6 class="text-[11px] font-black uppercase tracking-widest text-secondary mb-10">Sede
+                            Principale</h6>
+                        <address class="not-italic text-sm font-bold text-primary/60 space-y-3">
+                            <p class="text-primary font-black">Gonzaga (MN), Italia</p>
+                            <p>Via Principe Santo 5/B</p>
+                            <p>46023 Gonzaga (MN)</p>
+                            <p class="pt-6 text-primary text-lg">+39 346 617 65 39</p>
+                        </address>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-primary/5 pt-16 flex flex-col md:flex-row justify-between items-center gap-12">
+                <div class="text-[11px] font-black text-primary/30 uppercase tracking-[0.2em]">
+                    © 2026 Ing. Davide Moretti. P.IVA 01234567890. Iscrizione Albo MN n. 1800/A.
+                </div>
+                <div
+                    class="font-headline font-black text-7xl md:text-9xl text-primary/5 tracking-tighter select-none pointer-events-none">
+                    INGEGNERIA
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
         const menuToggle = document.getElementById('menu-toggle');
         const hamburger = document.querySelector('.hamburger');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -668,7 +839,7 @@
             } else {
                 ctaText.classList.remove('hidden');
             }
-            
+
             if (window.scrollY > 300 && window.scrollY > lastScrollY) {
                 floatingCta.classList.add('translate-y-24', 'opacity-0');
             } else {
@@ -680,5 +851,5 @@
 
 
 </body>
-</html>
 
+</html>
