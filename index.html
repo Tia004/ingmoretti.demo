@@ -68,9 +68,19 @@
       .hero-overlay {
         background: linear-gradient(to bottom, rgba(0, 33, 69, 0.7) 0%, rgba(0, 33, 69, 0.4) 50%, rgba(0, 33, 69, 0.9) 100%);
       }
+      @media (max-width: 1023px) {
+        @keyframes bounce-subtle {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        .animate-bounce-subtle {
+          animation: bounce-subtle 3s ease-in-out infinite;
+        }
+      }
       html {
         scroll-behavior: smooth;
       }
+
     </style>
 </head>
 <body class="bg-surface font-body text-on-surface selection:bg-accent-blue/30 overflow-x-hidden">
@@ -87,11 +97,49 @@
             <a class="text-white/70 hover:text-white transition-colors" href="#metodo">Metodo</a>
             <a class="text-white/70 hover:text-white transition-colors" href="#contatti">Contatti</a>
         </div>
-        <button class="bg-white text-primary px-7 py-2.5 rounded-xl font-headline font-bold text-[11px] uppercase tracking-widest hover:bg-accent-blue transition-colors shadow-lg" onclick="window.location.href='#contatti'">
-            Richiedi Consulto
-        </button>
+        <div class="flex items-center gap-4">
+            <button class="hidden lg:block bg-white text-primary px-7 py-2.5 rounded-xl font-headline font-bold text-[11px] uppercase tracking-widest hover:bg-accent-blue transition-colors shadow-lg" onclick="window.location.href='#contatti'">
+                Richiedi Consulto
+            </button>
+            <!-- Hamburger Menu Button -->
+            <button id="menu-toggle" class="lg:hidden text-white p-2 glass-effect rounded-xl">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
     </nav>
 </div>
+
+<!-- Mobile Navigation Overlay -->
+<div id="mobile-menu" class="fixed inset-0 z-[110] hidden opacity-0 transition-opacity duration-300">
+    <div class="absolute inset-0 bg-primary/40 backdrop-blur-xl" id="menu-backdrop"></div>
+    <div class="absolute right-0 top-0 h-full w-[80%] max-w-sm glass-effect border-l border-white/10 p-10 flex flex-col translate-x-full transition-transform duration-300" id="menu-content">
+        <div class="flex justify-between items-center mb-16">
+            <div class="text-xl font-black tracking-tighter text-white font-headline">MENU</div>
+            <button id="menu-close" class="text-white p-2">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <nav class="flex flex-col gap-8 font-headline font-bold text-2xl tracking-tight text-white">
+            <a class="hover:text-accent-blue transition-colors" href="#servizi" onclick="closeMenu()">Servizi</a>
+            <a class="hover:text-accent-blue transition-colors" href="#progetti" onclick="closeMenu()">Portfolio</a>
+            <a class="hover:text-accent-blue transition-colors" href="#metodo" onclick="closeMenu()">Metodo</a>
+            <a class="hover:text-accent-blue transition-colors" href="#contatti" onclick="closeMenu()">Contatti</a>
+        </nav>
+        <div class="mt-auto">
+            <button class="w-full bg-white text-primary px-8 py-5 rounded-2xl font-headline font-black text-sm uppercase tracking-widest" onclick="window.location.href='#contatti'; closeMenu()">
+                Richiedi Consulto
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Floating Mobile CTA -->
+<div class="fixed bottom-8 right-8 z-[90] lg:hidden animate-bounce-subtle">
+    <button class="dark-glass text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl border border-white/20 active:scale-95 transition-transform" onclick="window.location.href='#contatti'">
+        <span class="material-symbols-outlined text-3xl">chat</span>
+    </button>
+</div>
+
 
 <!-- Hero Section with Full-Screen Video Background -->
 <header class="relative min-h-screen flex flex-col justify-center overflow-hidden bg-primary">
@@ -348,16 +396,20 @@
                     <p class="text-primary italic font-black text-2xl border-l-4 border-secondary pl-6">"L'ingegneria non è solo calcolo; è l'arte tecnica di rendere l'impossibile strutturalmente solido."</p>
                     <p>Focus primario sul recupero edilizio e sul miglioramento sismico, fornendo consulenze tecniche e perizie per privati, aziende ed enti pubblici.</p>
                 </div>
-                <div class="mt-12 flex gap-8">
-                    <a class="group flex items-center gap-4 bg-primary/5 hover:bg-primary hover:text-white px-8 py-4 rounded-2xl transition-all" href="#">
-                        <span class="material-symbols-outlined">description</span>
-                        <span class="text-[10px] font-black uppercase tracking-widest">Download CV</span>
+                <div class="mt-12 flex flex-wrap gap-8">
+                    <a class="group flex items-center gap-4 bg-primary text-white border border-primary/10 hover:bg-secondary px-8 py-4 rounded-2xl transition-all shadow-xl" href="mailto:ing.davide.moretti@gmail.com">
+                        <span class="material-symbols-outlined">mail</span>
+                        <div class="text-left">
+                            <span class="block text-[10px] font-black uppercase tracking-widest opacity-60">Scrivimi direttamente</span>
+                            <span class="block font-bold">Email Professionale</span>
+                        </div>
                     </a>
                     <a class="group flex items-center gap-4 bg-primary/5 hover:bg-primary hover:text-white px-8 py-4 rounded-2xl transition-all" href="https://www.linkedin.com" target="_blank">
-                        <span class="material-symbols-outlined">share</span>
+                        <span class="material-symbols-outlined text-secondary group-hover:text-white">share</span>
                         <span class="text-[10px] font-black uppercase tracking-widest">LinkedIn</span>
                     </a>
                 </div>
+
             </div>
         </div>
     </div>
@@ -487,5 +539,35 @@
         </div>
     </div>
 </footer>
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuContent = document.getElementById('menu-content');
+        const menuBackdrop = document.getElementById('menu-backdrop');
+
+        function openMenu() {
+            mobileMenu.classList.remove('hidden');
+            setTimeout(() => {
+                mobileMenu.classList.remove('opacity-0');
+                menuContent.classList.remove('translate-x-full');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.add('opacity-0');
+            menuContent.classList.add('translate-x-full');
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+            }, 300);
+            document.body.style.overflow = '';
+        }
+
+        menuToggle.addEventListener('click', openMenu);
+        menuClose.addEventListener('click', closeMenu);
+        menuBackdrop.addEventListener('click', closeMenu);
+    </script>
 </body>
 </html>
+
