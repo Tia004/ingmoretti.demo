@@ -207,9 +207,9 @@
             -webkit-backdrop-filter: blur(16px);
         }
 
-        /* Floating CTA Animation */
+        /* Floating CTA Animation (Slower 0.8s) */
         #floating-cta-button {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             width: auto;
             min-width: 4.5rem;
             height: 4.5rem;
@@ -219,9 +219,9 @@
         }
 
         #cta-text {
-            max-width: 200px;
+            max-width: 15ch; /* More precise width based on characters */
             opacity: 1;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             overflow: hidden;
             display: inline-block;
@@ -238,8 +238,12 @@
             max-width: 0;
             opacity: 0;
             margin: 0;
+            padding: 0;
             pointer-events: none;
+            visibility: hidden; /* Added to prevent any rendering glitch */
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.8s;
         }
+
 
 
     </style>
@@ -907,11 +911,12 @@
 
         window.addEventListener('scroll', () => {
             // Shrink logic
-            if (window.scrollY > 100) {
+            if (window.scrollY > 120) {
                 floatingCtaButton.classList.add('shrunk');
             } else {
                 floatingCtaButton.classList.remove('shrunk');
             }
+
             
             // Hide logic: only hide when reaching the contact section
             const contactRect = contactSection.getBoundingClientRect();
