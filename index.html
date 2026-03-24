@@ -162,14 +162,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 4rem; /* h-16 */
-            width: 4rem; /* w-16 */
+            height: 4rem;
+            /* h-16 */
+            width: 4rem;
+            /* w-16 */
         }
 
         #menu-toggle.open {
             top: 2rem;
             right: 2rem;
-            background: rgba(0, 33, 69, 0.85); /* Darker blue accent for X */
+            background: rgba(0, 33, 69, 0.85);
+            /* Darker blue accent for X */
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-radius: 1rem;
@@ -281,10 +284,6 @@
             padding: 0;
             pointer-events: none;
         }
-
-
-
-
     </style>
 </head>
 
@@ -293,52 +292,196 @@
     <style>
         #loading-screen {
             background-color: #1e3a8a;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(96, 165, 250, 0.2) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(96, 165, 250, 0.2) 1px, transparent 1px);
             background-size: 30px 30px;
         }
 
         @keyframes dots {
-            0% { content: ''; }
-            33% { content: '.'; }
-            66% { content: '..'; }
-            100% { content: '...'; }
+            0% {
+                content: '';
+            }
+
+            33% {
+                content: '.';
+            }
+
+            66% {
+                content: '..';
+            }
+
+            100% {
+                content: '...';
+            }
         }
+
         .dots::after {
             content: '';
             animation: dots 1.5s steps(4, end) infinite;
         }
 
         @keyframes progress {
-            0% { width: 0%; }
-            100% { width: 100%; }
+            0% {
+                width: 0%;
+            }
+
+            100% {
+                width: 100%;
+            }
         }
+
         .loading-progress-bar {
             width: 0%;
             animation: progress 2.5s linear forwards;
         }
-    </style>
 
-    <div id="loading-screen" class="fixed inset-0 z-[10000] flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out">
-        <div class="w-64 h-64 mb-8">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%" fill="none">
-                <defs>
-                    <style>
-                        .block { fill: #1e3a8a; stroke: #f8fafc; stroke-width: 2; stroke-linejoin: round; }
-                        .guide { stroke: #60a5fa; stroke-width: 1; stroke-dasharray: 2, 2; }
-                        .text-blueprint { fill: #60a5fa; font-family: 'Courier New', Courier, monospace; font-size: 6px; letter-spacing: 0.5px; }
-                        .b1 { animation: b1-anim 4.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
-                        .b2 { animation: b2-anim 4.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
-                        .b3 { animation: b3-anim 4.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
-                        .b4 { animation: b4-anim 4.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
-                        .b5 { animation: b5-anim 4.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
-                        @keyframes b1-anim { 0%, 5% { transform: translateY(-80px); opacity: 0; } 15%, 85% { transform: translateY(0); opacity: 1; } 90%, 100%{ transform: translateY(0); opacity: 0; } }
-                        @keyframes b2-anim { 0%, 15% { transform: translateY(-80px); opacity: 0; } 25%, 85% { transform: translateY(0); opacity: 1; } 90%, 100%{ transform: translateY(0); opacity: 0; } }
-                        @keyframes b3-anim { 0%, 25% { transform: translateY(-80px); opacity: 0; } 35%, 85% { transform: translateY(0); opacity: 1; } 90%, 100%{ transform: translateY(0); opacity: 0; } }
-                        @keyframes b4-anim { 0%, 35% { transform: translateY(-80px); opacity: 0; } 45%, 85% { transform: translateY(0); opacity: 1; } 90%, 100%{ transform: translateY(0); opacity: 0; } }
-                        @keyframes b5-anim { 0%, 45% { transform: translateY(-80px); opacity: 0; } 55%, 85% { transform: translateY(0); opacity: 1; } 90%, 100%{ transform: translateY(0); opacity: 0; } }
-                        #menu-toggle.lg\:hidden {
+        .block {
+            fill: #1e3a8a;
+            stroke: #f8fafc;
+            stroke-width: 2;
+            stroke-linejoin: round;
+        }
+
+        .guide {
+            stroke: #60a5fa;
+            stroke-width: 1;
+            stroke-dasharray: 2, 2;
+        }
+
+        .text-blueprint {
+            fill: #60a5fa;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .b1 {
+            animation: b1-anim 4.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
+
+        .b2 {
+            animation: b2-anim 4.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
+
+        .b3 {
+            animation: b3-anim 4.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
+
+        .b4 {
+            animation: b4-anim 4.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
+
+        .b5 {
+            animation: b5-anim 4.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
+
+        @keyframes b1-anim {
+
+            0%,
+            5% {
+                transform: translateY(-80px);
+                opacity: 0;
+            }
+
+            15%,
+            85% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            90%,
+            100% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes b2-anim {
+
+            0%,
+            15% {
+                transform: translateY(-80px);
+                opacity: 0;
+            }
+
+            25%,
+            85% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            90%,
+            100% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes b3-anim {
+
+            0%,
+            25% {
+                transform: translateY(-80px);
+                opacity: 0;
+            }
+
+            35%,
+            85% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            90%,
+            100% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes b4-anim {
+
+            0%,
+            35% {
+                transform: translateY(-80px);
+                opacity: 0;
+            }
+
+            45%,
+            85% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            90%,
+            100% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes b5-anim {
+
+            0%,
+            45% {
+                transform: translateY(-80px);
+                opacity: 0;
+            }
+
+            55%,
+            85% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            90%,
+            100% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+        }
+
+        #menu-toggle.lg\:hidden {
             display: none !important;
         }
 
@@ -346,19 +489,53 @@
             #menu-toggle {
                 display: none !important;
             }
+
             .lg\:hidden {
                 display: none !important;
             }
         }
     </style>
 
+    <div id="loading-screen"
+        class="fixed inset-0 z-[10000] flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out">
+        <div class="w-64 h-64 mb-8">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%" fill="none">
+                <defs>
                 </defs>
                 <g transform="translate(0, 10)">
-                    <g class="b1"><rect class="block" x="20" y="150" width="160" height="15" /><line class="guide" x1="25" y1="157.5" x2="175" y2="157.5" /><text class="text-blueprint" x="100" y="175" text-anchor="middle">1200mm SLAB</text></g>
-                    <g class="b2"><rect class="block" x="35" y="70" width="15" height="80" /><rect class="block" x="150" y="70" width="15" height="80" /><line class="guide" x1="42.5" y1="75" x2="42.5" y2="145" /><line class="guide" x1="157.5" y1="75" x2="157.5" y2="145" /></g>
-                    <g class="b3"><rect class="block" x="50" y="100" width="100" height="10" /><path class="block" d="M 85 150 L 85 110 L 115 110 L 115 150" fill="none" /><rect class="block" x="125" y="120" width="15" height="15" /><line class="guide" x1="125" y1="127.5" x2="140" y2="127.5" /><line class="guide" x1="132.5" y1="120" x2="132.5" y2="135" /><circle cx="110" cy="130" r="1.5" fill="#f8fafc" /></g>
-                    <g class="b4"><polygon class="block" points="25,70 100,20 100,70" /><polygon class="block" points="175,70 100,20 100,70" /><line x1="25" y1="70" x2="100" y2="20" stroke="#f8fafc" stroke-width="3" stroke-linecap="round"/><line x1="175" y1="70" x2="100" y2="20" stroke="#f8fafc" stroke-width="3" stroke-linecap="round"/><line class="guide" x1="100" y1="20" x2="100" y2="70" /></g>
-                    <g class="b5"><rect class="block" x="135" y="15" width="12" height="35" /><path class="guide" d="M 141 10 L 141 0 M 137 5 L 137 -2 M 145 5 L 145 -2" /><text class="text-blueprint" x="100" y="10" text-anchor="middle">ASSEMBLY SEC. 04</text></g>
+                    <g class="b1">
+                        <rect class="block" x="20" y="150" width="160" height="15" />
+                        <line class="guide" x1="25" y1="157.5" x2="175" y2="157.5" /><text class="text-blueprint"
+                            x="100" y="175" text-anchor="middle">1200mm SLAB</text>
+                    </g>
+                    <g class="b2">
+                        <rect class="block" x="35" y="70" width="15" height="80" />
+                        <rect class="block" x="150" y="70" width="15" height="80" />
+                        <line class="guide" x1="42.5" y1="75" x2="42.5" y2="145" />
+                        <line class="guide" x1="157.5" y1="75" x2="157.5" y2="145" />
+                    </g>
+                    <g class="b3">
+                        <rect class="block" x="50" y="100" width="100" height="10" />
+                        <path class="block" d="M 85 150 L 85 110 L 115 110 L 115 150" fill="none" />
+                        <rect class="block" x="125" y="120" width="15" height="15" />
+                        <line class="guide" x1="125" y1="127.5" x2="140" y2="127.5" />
+                        <line class="guide" x1="132.5" y1="120" x2="132.5" y2="135" />
+                        <circle cx="110" cy="130" r="1.5" fill="#f8fafc" />
+                    </g>
+                    <g class="b4">
+                        <polygon class="block" points="25,70 100,20 100,70" />
+                        <polygon class="block" points="175,70 100,20 100,70" />
+                        <line x1="25" y1="70" x2="100" y2="20" stroke="#f8fafc" stroke-width="3"
+                            stroke-linecap="round" />
+                        <line x1="175" y1="70" x2="100" y2="20" stroke="#f8fafc" stroke-width="3"
+                            stroke-linecap="round" />
+                        <line class="guide" x1="100" y1="20" x2="100" y2="70" />
+                    </g>
+                    <g class="b5">
+                        <rect class="block" x="135" y="15" width="12" height="35" />
+                        <path class="guide" d="M 141 10 L 141 0 M 137 5 L 137 -2 M 145 5 L 145 -2" /><text
+                            class="text-blueprint" x="100" y="10" text-anchor="middle">ASSEMBLY SEC. 04</text>
+                    </g>
                 </g>
             </svg>
         </div>
@@ -376,9 +553,11 @@
     <!-- Desktop Floating Navigation Bar -->
     <div class="hidden lg:block fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[90%] max-w-7xl">
         <nav
-            class="glass-effect bg-primary/20 rounded-2xl px-8 py-4 flex justify-between items-center shadow-2xl border border-accent-blue/30 shadow-accent-blue/10">
+            class="glass-effect bg-primary/60 rounded-2xl px-8 py-4 flex justify-between items-center shadow-2xl border border-accent-blue/60 shadow-accent-blue/10">
 
-            <div onclick="window.location.href='/'" class="cursor-pointer text-xl font-black tracking-tighter text-white font-headline flex items-center gap-2">
+
+            <div onclick="window.location.href='/'"
+                class="cursor-pointer text-xl font-black tracking-tighter text-white font-headline flex items-center gap-2">
                 <span class="w-3 h-3 bg-secondary rounded-full"></span>
                 ING. DAVIDE MORETTI
             </div>
@@ -400,17 +579,21 @@
         </nav>
     </div>
 
-    <div onclick="window.location.href='/'"
-        class="lg:hidden cursor-pointer fixed top-6 left-8 z-[100]">
-        <div class="glass-effect bg-primary/20 rounded-xl px-6 h-16 border border-accent-blue/30 shadow-accent-blue/10 flex items-center gap-3">
+    <div onclick="window.location.href='/'" class="lg:hidden cursor-pointer fixed top-6 left-8 z-[100]">
+        <div
+            class="glass-effect bg-primary/60 rounded-xl px-6 h-16 border border-accent-blue/60 shadow-accent-blue/10 flex items-center gap-3">
+
             <span class="w-3 h-3 bg-secondary rounded-full"></span>
-            <span class="text-sm font-black tracking-tighter text-white font-headline uppercase leading-none">Ing. Davide Moretti</span>
+            <span class="text-sm font-black tracking-tighter text-white font-headline uppercase leading-none">Ing.
+                Davide Moretti</span>
         </div>
     </div>
 
 
     <!-- Hamburger Menu Button Container -->
-    <button id="menu-toggle" class="lg:hidden glass-effect bg-primary/20 rounded-xl h-16 w-16 border border-accent-blue/30 shadow-accent-blue/10 flex items-center justify-center fixed top-6 right-8 z-[100]">
+    <button id="menu-toggle"
+        class="lg:hidden glass-effect bg-primary/60 rounded-xl h-16 w-16 border border-accent-blue/60 shadow-accent-blue/10 flex items-center justify-center fixed top-6 right-8 z-[100]">
+
 
         <div class="hamburger">
             <span></span>
@@ -453,8 +636,7 @@
     <!-- Floating Mobile CTA -->
     <div id="floating-cta"
         class="fixed bottom-8 right-8 z-[90] lg:hidden animate-bounce-subtle transition-all duration-500">
-        <button
-            id="floating-cta-button"
+        <button id="floating-cta-button"
             class="dark-glass text-white px-8 py-5 rounded-full flex items-center gap-3 shadow-2xl border border-white/20 active:scale-95"
             onclick="window.location.href='#contatti'">
             <span id="cta-text" class="font-headline font-black text-xs uppercase tracking-widest">Consulto</span>
@@ -1067,7 +1249,7 @@
             if (!isTicking) {
                 window.requestAnimationFrame(() => {
                     const scrollY = window.scrollY;
-                    
+
                     // Shrink logic with display:none safety
                     if (scrollY > 120) {
                         if (!floatingCtaButton.classList.contains('shrunk')) {
@@ -1084,7 +1266,7 @@
                             });
                         }
                     }
-                    
+
                     // Hide logic
                     const contactRect = contactSection.getBoundingClientRect();
                     if (contactRect.top < window.innerHeight - 100) {
@@ -1092,7 +1274,7 @@
                     } else {
                         floatingCta.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
                     }
-                    
+
                     isTicking = false;
                 });
                 isTicking = true;
