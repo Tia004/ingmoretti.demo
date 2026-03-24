@@ -87,7 +87,7 @@
             <a class="text-white/70 hover:text-white transition-colors" href="#metodo">Metodo</a>
             <a class="text-white/70 hover:text-white transition-colors" href="#contatti">Contatti</a>
         </div>
-        <button class="bg-white text-primary px-7 py-2.5 rounded-xl font-headline font-bold text-[11px] uppercase tracking-widest hover:bg-accent-blue transition-colors shadow-lg">
+        <button class="bg-white text-primary px-7 py-2.5 rounded-xl font-headline font-bold text-[11px] uppercase tracking-widest hover:bg-accent-blue transition-colors shadow-lg" onclick="window.location.href='#contatti'">
             Richiedi Consulto
         </button>
     </nav>
@@ -97,11 +97,21 @@
 <header class="relative min-h-screen flex flex-col justify-center overflow-hidden bg-primary">
     <!-- Video Background Container -->
     <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <iframe allow="autoplay; encrypted-media" allowfullscreen="" class="w-full h-full scale-[1.5]" frameborder="0" src="https://www.youtube.com/embed/ce6f624b-3cf8-4fe2-843f-eae6f5cfb897?autoplay=1&amp;mute=1&amp;controls=0&amp;loop=1&amp;playlist=ce6f624b-3cf8-4fe2-843f-eae6f5cfb897">
-        </iframe>
+        <video 
+            autoplay 
+            muted 
+            loop 
+            playsinline 
+            webkit-playsinline
+            preload="auto"
+            class="w-full h-full object-cover scale-[1.1]"
+        >
+            <source src="assets/lavori - Davide Moretti (1080p, h264, youtube).mp4" type="video/mp4">
+        </video>
         <!-- Dark Overlay -->
         <div class="absolute inset-0 hero-overlay"></div>
     </div>
+
     <div class="container mx-auto px-8 relative z-20 text-white">
         <div class="max-w-4xl">
             <div class="inline-flex items-center gap-3 mb-8 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
@@ -271,7 +281,7 @@
         <div class="grid lg:grid-cols-12 gap-10">
             <!-- Large Featured Project Card -->
             <div class="lg:col-span-7 group relative aspect-[4/3] rounded-[3rem] overflow-hidden">
-                <img alt="Nexus Apex Heights" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000"/>
+                <img alt="Nexus Apex Heights" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq_-QjJ46M-GBR_49b3jgsOccBaD5wK8-AI7Zqu6uVqmq9PA9wQpobc2dmZ2wF5MhEsoD2pTgc6MDmH7mlqX2wD1EW2uQrBe4nv-CQJTHcXG7pjNwrFzQ_p5Y8lSQ0Xu5QxCrc4wHuh9GJZUnp3xURWQhsRxRUi-0Xl0YZEUaoGnYEgFUMbh1HFp_9nMMvK3YPnXGJqdeY5fiXx2Zmn7IGIj3PrT0WaHMj5osCEIKL28zJFq5yP_zP6ZgGshjyp5sdydKljndMuERf"/>
                 <div class="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/20 to-transparent"></div>
                 <div class="absolute bottom-12 left-12 right-12">
                     <div class="text-[10px] font-black text-accent-blue uppercase tracking-widest mb-3">Residenziale // Milano</div>
@@ -287,24 +297,24 @@
             <div class="lg:col-span-5 flex flex-col gap-8">
                 <div class="group relative flex-1 bg-white/5 rounded-[2.5rem] overflow-hidden border border-white/10 flex flex-col">
                     <div class="h-48 overflow-hidden">
-                        <img alt="Hub Logistico Verona" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000"/>
+                        <img alt="Hub Logistico Verona" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq_-QjJ46M-GBR_49b3jgsOccBaD5wK8-AI7Zqu6uVqmq9PA9wQpobc2dmZ2wF5MhEsoD2pTgc6MDmH7mlqX2wD1EW2uQrBe4nv-CQJTHcXG7pjNwrFzQ_p5Y8lSQ0Xu5QxCrc4wHuh9GJZUnp3xURWQhsRxRUi-0Xl0YZEUaoGnYEgFUMbh1HFp_9nMMvK3YPnXGJqdeY5fiXx2Zmn7IGIj3PrT0WaHMj5osCEIKL28zJFq5yP_zP6ZgGshjyp5sdydKljndMuERf"/>
                     </div>
                     <div class="p-8">
                         <h5 class="text-xl font-headline font-bold text-white mb-2">HUB LOGISTICO VERONA</h5>
                         <p class="text-white/40 text-xs uppercase tracking-widest mb-6">Infrastruttura Industriale</p>
-                        <button class="text-accent-blue text-[10px] font-black uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all">
+                        <button class="text-accent-blue text-[10px] font-black uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all" onclick="window.location.href='#progetti'">
                             Dettagli <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </button>
                     </div>
                 </div>
                 <div class="group relative flex-1 bg-white/5 rounded-[2.5rem] overflow-hidden border border-white/10 flex flex-col">
                     <div class="h-48 overflow-hidden">
-                        <img alt="Sere Tech Solutions" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1000"/>
+                        <img alt="Sere Tech Solutions" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq_-QjJ46M-GBR_49b3jgsOccBaD5wK8-AI7Zqu6uVqmq9PA9wQpobc2dmZ2wF5MhEsoD2pTgc6MDmH7mlqX2wD1EW2uQrBe4nv-CQJTHcXG7pjNwrFzQ_p5Y8lSQ0Xu5QxCrc4wHuh9GJZUnp3xURWQhsRxRUi-0Xl0YZEUaoGnYEgFUMbh1HFp_9nMMvK3YPnXGJqdeY5fiXx2Zmn7IGIj3PrT0WaHMj5osCEIKL28zJFq5yP_zP6ZgGshjyp5sdydKljndMuERf"/>
                     </div>
                     <div class="p-8">
                         <h5 class="text-xl font-headline font-bold text-white mb-2">SERE TECH SOLUTIONS</h5>
                         <p class="text-white/40 text-xs uppercase tracking-widest mb-6">Ingegneria d'Interni</p>
-                        <button class="text-accent-blue text-[10px] font-black uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all">
+                        <button class="text-accent-blue text-[10px] font-black uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all" onclick="window.location.href='#progetti'">
                             Dettagli <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </button>
                     </div>
@@ -321,9 +331,10 @@
             <div class="relative">
                 <div class="absolute -top-10 -left-10 w-60 h-60 bg-accent-blue/10 rounded-full blur-[100px]"></div>
                 <div class="relative z-10 rounded-[3rem] overflow-hidden aspect-[4/5] blue-glow border-8 border-white shadow-2xl">
-                    <img alt="Ing. Davide Moretti" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1000"/>
+                    <img alt="Ing. Davide Moretti" class="w-full h-full object-cover" src="assets/ingmoretti.webp"/>
                 </div>
                 <div class="absolute -bottom-8 -right-8 glass-effect p-10 rounded-3xl shadow-2xl border border-primary/10 bg-white/80">
+
                     <div class="text-5xl font-black text-primary mb-1">1800/A</div>
                     <div class="text-[10px] font-black uppercase tracking-widest text-secondary">Ordine Ingegneri Mantova</div>
                 </div>
