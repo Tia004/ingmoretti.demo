@@ -238,7 +238,9 @@
             max-width: 0;
             opacity: 0;
             margin: 0;
+            pointer-events: none;
         }
+
 
     </style>
 </head>
@@ -901,21 +903,27 @@
         let lastScrollY = window.scrollY;
         const floatingCta = document.getElementById('floating-cta');
         const floatingCtaButton = document.getElementById('floating-cta-button');
+        const contactSection = document.getElementById('contatti');
 
         window.addEventListener('scroll', () => {
+            // Shrink logic
             if (window.scrollY > 100) {
                 floatingCtaButton.classList.add('shrunk');
             } else {
                 floatingCtaButton.classList.remove('shrunk');
             }
             
-            if (window.scrollY > 300 && window.scrollY > lastScrollY) {
-                floatingCta.classList.add('translate-y-32', 'opacity-0');
+            // Hide logic: only hide when reaching the contact section
+            const contactRect = contactSection.getBoundingClientRect();
+            if (contactRect.top < window.innerHeight - 100) {
+                floatingCta.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
             } else {
-                floatingCta.classList.remove('translate-y-32', 'opacity-0');
+                floatingCta.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
             }
+            
             lastScrollY = window.scrollY;
         });
+
 
     </script>
 
