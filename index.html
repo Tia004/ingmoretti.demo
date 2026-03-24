@@ -206,6 +206,40 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
         }
+
+        /* Floating CTA Animation */
+        #floating-cta-button {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: auto;
+            min-width: 4.5rem;
+            height: 4.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cta-text {
+            max-width: 200px;
+            opacity: 1;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        #floating-cta-button.shrunk {
+            padding-left: 0;
+            padding-right: 0;
+            gap: 0;
+            width: 4.5rem;
+        }
+
+        #floating-cta-button.shrunk #cta-text {
+            max-width: 0;
+            opacity: 0;
+            margin: 0;
+        }
+
     </style>
 </head>
 
@@ -287,12 +321,14 @@
     <div id="floating-cta"
         class="fixed bottom-8 right-8 z-[90] lg:hidden animate-bounce-subtle transition-all duration-500">
         <button
-            class="dark-glass text-white px-6 py-4 rounded-full flex items-center gap-3 shadow-2xl border border-white/20 active:scale-95 transition-all"
+            id="floating-cta-button"
+            class="dark-glass text-white px-8 py-5 rounded-full flex items-center gap-3 shadow-2xl border border-white/20 active:scale-95"
             onclick="window.location.href='#contatti'">
             <span id="cta-text" class="font-headline font-black text-xs uppercase tracking-widest">Consulto</span>
             <span class="material-symbols-outlined text-2xl">chat</span>
         </button>
     </div>
+
 
 
 
@@ -864,22 +900,23 @@
         // Floating CTA Scroll Logic
         let lastScrollY = window.scrollY;
         const floatingCta = document.getElementById('floating-cta');
-        const ctaText = document.getElementById('cta-text');
+        const floatingCtaButton = document.getElementById('floating-cta-button');
 
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
-                ctaText.classList.add('hidden');
+                floatingCtaButton.classList.add('shrunk');
             } else {
-                ctaText.classList.remove('hidden');
+                floatingCtaButton.classList.remove('shrunk');
             }
-
+            
             if (window.scrollY > 300 && window.scrollY > lastScrollY) {
-                floatingCta.classList.add('translate-y-24', 'opacity-0');
+                floatingCta.classList.add('translate-y-32', 'opacity-0');
             } else {
-                floatingCta.classList.remove('translate-y-24', 'opacity-0');
+                floatingCta.classList.remove('translate-y-32', 'opacity-0');
             }
             lastScrollY = window.scrollY;
         });
+
     </script>
 
 
