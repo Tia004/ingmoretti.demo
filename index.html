@@ -298,7 +298,28 @@
                 linear-gradient(90deg, rgba(96, 165, 250, 0.2) 1px, transparent 1px);
             background-size: 30px 30px;
         }
+
+        @keyframes dots {
+            0% { content: ''; }
+            33% { content: '.'; }
+            66% { content: '..'; }
+            100% { content: '...'; }
+        }
+        .dots::after {
+            content: '';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        .loading-progress-bar {
+            width: 0%;
+            animation: progress 2.5s linear forwards;
+        }
     </style>
+
     <div id="loading-screen" class="fixed inset-0 z-[10000] flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out">
         <div class="w-64 h-64 mb-8">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%" fill="none">
@@ -328,9 +349,14 @@
                 </g>
             </svg>
         </div>
-        <div class="text-white font-headline font-bold text-xs tracking-[0.3em] uppercase animate-pulse">
-            Caricamento in corso
+        <div class="text-white font-headline font-bold text-xs tracking-[0.3em] uppercase flex items-center gap-1">
+            Caricamento in corso<span class="dots"></span>
         </div>
+        <!-- Loading Bar -->
+        <div class="w-48 h-1 bg-white/10 rounded-full mt-6 overflow-hidden border border-white/5">
+            <div class="loading-progress-bar h-full bg-accent-blue shadow-[0_0_15px_rgba(147,212,233,0.5)]"></div>
+        </div>
+
     </div>
 
 
@@ -370,7 +396,8 @@
 
 
     <!-- Hamburger Menu Button Container -->
-    <button id="menu-toggle" class="lg:hidden glass-effect bg-primary/20 rounded-xl h-16 w-16 border border-accent-blue/30 shadow-accent-blue/10 flex items-center justify-center">
+    <button id="menu-toggle" class="lg:hidden glass-effect bg-primary/20 rounded-xl h-16 w-16 border border-accent-blue/30 shadow-accent-blue/10 flex items-center justify-center fixed top-6 right-8 z-[100]">
+
         <div class="hamburger">
             <span></span>
             <span></span>
