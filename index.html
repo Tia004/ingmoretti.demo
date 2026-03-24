@@ -154,13 +154,32 @@
         }
 
         #menu-toggle {
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: fixed;
+            top: 2.25rem;
+            left: calc(50% + 45% - 4rem); /* Matches 90% width navbar right end */
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 200;
         }
 
-        #menu-toggle.open {
-            transform: translate(1.5rem, -1rem);
+        @media (max-width: 640px) {
+            #menu-toggle {
+                left: auto;
+                right: 8%;
+            }
         }
+
+        #menu-toggle.open {
+            top: 2rem;
+            right: 2rem;
+            left: auto; /* Allow right to take over */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 0.75rem;
+        }
+
+
 
 
 
@@ -192,7 +211,8 @@
 
 <body class="bg-surface font-body text-on-surface selection:bg-accent-blue/30 overflow-x-hidden">
     <!-- Detached Floating Navigation Bar -->
-    <div class="fixed top-6 left-1/2 -translate-x-1/2 z-[150] w-[90%] max-w-7xl">
+    <div class="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[90%] max-w-7xl">
+
         <nav
             class="glass-effect rounded-2xl px-8 py-4 flex justify-between items-center shadow-2xl border border-accent-blue/30 shadow-accent-blue/10">
 
@@ -214,18 +234,15 @@
                     onclick="window.location.href='#contatti'">
                     Richiedi Consulto
                 </button>
-                <!-- Hamburger Menu Button -->
-                <button id="menu-toggle" class="lg:hidden p-2 relative z-[120] flex items-center justify-center">
-                    <div class="hamburger">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </button>
+                <!-- Placeholder for toggle to maintain layout -->
+                <div class="lg:hidden w-12 h-12"></div>
             </div>
 
-        </nav>
-    </div>
+
+    </nav>
+</div>
+
+
 
     <!-- Mobile Navigation Overlay -->
     <div id="mobile-menu" class="fixed inset-0 z-[140] hidden bg-primary/40 opacity-0">
@@ -781,7 +798,17 @@
             </div>
         </div>
     </footer>
+    <!-- Hamburger Menu Button (Root Level for Z-Index) -->
+    <button id="menu-toggle" class="lg:hidden p-2 flex items-center justify-center">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </button>
+
     <script>
+
         const menuToggle = document.getElementById('menu-toggle');
         const hamburger = document.querySelector('.hamburger');
         const mobileMenu = document.getElementById('mobile-menu');
