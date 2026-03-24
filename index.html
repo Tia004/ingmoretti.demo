@@ -207,7 +207,11 @@
             -webkit-backdrop-filter: blur(16px);
         }
 
-        /* Floating CTA Animation (Slower 0.8s) */
+        /* Floating CTA Animation (Slower 0.8s) & Optimization */
+        #floating-cta {
+            will-change: transform, opacity;
+        }
+
         #floating-cta-button {
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             width: auto;
@@ -216,15 +220,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            will-change: width, padding;
         }
 
         #cta-text {
-            max-width: 15ch; /* More precise width based on characters */
+            max-width: 15ch;
             opacity: 1;
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             overflow: hidden;
             display: inline-block;
+            will-change: max-width, opacity;
+        }
+
+        #cta-text.d-none {
+            display: none;
         }
 
         #floating-cta-button.shrunk {
@@ -240,9 +250,8 @@
             margin: 0;
             padding: 0;
             pointer-events: none;
-            visibility: hidden; /* Added to prevent any rendering glitch */
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.8s;
         }
+
 
 
 
@@ -903,31 +912,49 @@
             if (e.target === mobileMenu) closeMenu();
         });
 
-        // Floating CTA Scroll Logic
-        let lastScrollY = window.scrollY;
+        // Floating CTA Scroll Logic (Optimized Performance)
         const floatingCta = document.getElementById('floating-cta');
         const floatingCtaButton = document.getElementById('floating-cta-button');
+        const ctaText = document.getElementById('cta-text');
         const contactSection = document.getElementById('contatti');
+        let isTicking = false;
 
         window.addEventListener('scroll', () => {
-            // Shrink logic
-            if (window.scrollY > 120) {
-                floatingCtaButton.classList.add('shrunk');
-            } else {
-                floatingCtaButton.classList.remove('shrunk');
+            if (!isTicking) {
+                window.requestAnimationFrame(() => {
+                    const scrollY = window.scrollY;
+                    
+                    // Shrink logic with display:none safety
+                    if (scrollY > 120) {
+                        if (!floatingCtaButton.classList.contains('shrunk')) {
+                            floatingCtaButton.classList.add('shrunk');
+                            setTimeout(() => {
+                                if (window.scrollY > 120) ctaText.classList.add('d-none');
+                            }, 800);
+                        }
+                    } else {
+                        if (floatingCtaButton.classList.contains('shrunk')) {
+                            ctaText.classList.remove('d-none');
+                            requestAnimationFrame(() => {
+                                floatingCtaButton.classList.remove('shrunk');
+                            });
+                        }
+                    }
+                    
+                    // Hide logic
+                    const contactRect = contactSection.getBoundingClientRect();
+                    if (contactRect.top < window.innerHeight - 100) {
+                        floatingCta.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
+                    } else {
+                        floatingCta.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
+                    }
+                    
+                    isTicking = false;
+                });
+                isTicking = true;
             }
-
-            
-            // Hide logic: only hide when reaching the contact section
-            const contactRect = contactSection.getBoundingClientRect();
-            if (contactRect.top < window.innerHeight - 100) {
-                floatingCta.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
-            } else {
-                floatingCta.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
-            }
-            
-            lastScrollY = window.scrollY;
         });
+
 
 
     </script>
