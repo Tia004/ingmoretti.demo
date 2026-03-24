@@ -341,8 +341,9 @@
 
         .loading-progress-bar {
             width: 0%;
-            animation: progress 2.5s linear forwards;
+            transition: width 0.4s ease-out;
         }
+
 
 
         .block {
@@ -365,100 +366,42 @@
             letter-spacing: 0.5px;
         }
 
-        .b1 {
-            animation: b1-anim 3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-
-        .b2 {
-            animation: b2-anim 3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-
-        .b3 {
-            animation: b3-anim 3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-
-        .b4 {
-            animation: b4-anim 3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-
-        .b5 {
-            animation: b5-anim 3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
+        .b1 { animation: b1-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+        .b2 { animation: b2-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+        .b3 { animation: b3-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+        .b4 { animation: b4-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+        .b5 { animation: b5-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
 
         @keyframes b1-anim {
-
-            0%,
-            5% {
-                transform: translateY(-80px);
-                opacity: 0;
-            }
-
-            20%,
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            0%, 5% { transform: translateY(-80px); opacity: 0; }
+            20%, 95% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0; }
         }
 
         @keyframes b2-anim {
-
-            0%,
-            20% {
-                transform: translateY(-80px);
-                opacity: 0;
-            }
-
-            35%,
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            0%, 20% { transform: translateY(-80px); opacity: 0; }
+            35%, 95% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0; }
         }
 
         @keyframes b3-anim {
-
-            0%,
-            35% {
-                transform: translateY(-80px);
-                opacity: 0;
-            }
-
-            50%,
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            0%, 35% { transform: translateY(-80px); opacity: 0; }
+            50%, 95% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0; }
         }
 
         @keyframes b4-anim {
-
-            0%,
-            50% {
-                transform: translateY(-80px);
-                opacity: 0;
-            }
-
-            65%,
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            0%, 50% { transform: translateY(-80px); opacity: 0; }
+            65%, 95% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0; }
         }
 
         @keyframes b5-anim {
-
-            0%,
-            65% {
-                transform: translateY(-80px);
-                opacity: 0;
-            }
-
-            80%,
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            0%, 65% { transform: translateY(-80px); opacity: 0; }
+            80%, 95% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0; }
         }
+
 
 
         /* Mobile: Force show hamburger */
@@ -1148,9 +1091,23 @@
     <script>
 
 
-        // Loading Screen Management (Min 2.5s duration)
+        // Loading Screen Management with Real Progress Simulation
         const startTime = Date.now();
+        const progressBar = document.querySelector('.loading-progress-bar');
+        let currentProgress = 0;
+        
+        const progressInterval = setInterval(() => {
+            if (currentProgress < 92) {
+                currentProgress += Math.random() * 4;
+                if (currentProgress > 92) currentProgress = 92;
+                if (progressBar) progressBar.style.width = currentProgress + '%';
+            }
+        }, 180);
+
         window.addEventListener('load', () => {
+            clearInterval(progressInterval);
+            if (progressBar) progressBar.style.width = '100%';
+            
             const loader = document.getElementById('loading-screen');
             if (loader) {
                 const currentTime = Date.now();
@@ -1171,6 +1128,7 @@
                 }
             }
         });
+
 
 
         const menuToggle = document.getElementById('menu-toggle');
