@@ -366,40 +366,124 @@
             letter-spacing: 0.5px;
         }
 
-        .b1 { animation: b1-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
-        .b2 { animation: b2-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
-        .b3 { animation: b3-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
-        .b4 { animation: b4-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
-        .b5 { animation: b5-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+        .b1 {
+            animation: b1-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
+
+        .b2 {
+            animation: b2-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
+
+        .b3 {
+            animation: b3-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
+
+        .b4 {
+            animation: b4-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
+
+        .b5 {
+            animation: b5-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
 
         @keyframes b1-anim {
-            0%, 5% { transform: translateY(-80px); opacity: 0; }
-            20%, 95% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(0); opacity: 0; }
+
+            0%,
+            5% {
+                transform: translateY(-80px);
+                opacity: 0;
+            }
+
+            20%,
+            95% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 0;
+            }
         }
 
         @keyframes b2-anim {
-            0%, 20% { transform: translateY(-80px); opacity: 0; }
-            35%, 95% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(0); opacity: 0; }
+
+            0%,
+            20% {
+                transform: translateY(-80px);
+                opacity: 0;
+            }
+
+            35%,
+            95% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 0;
+            }
         }
 
         @keyframes b3-anim {
-            0%, 35% { transform: translateY(-80px); opacity: 0; }
-            50%, 95% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(0); opacity: 0; }
+
+            0%,
+            35% {
+                transform: translateY(-80px);
+                opacity: 0;
+            }
+
+            50%,
+            95% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 0;
+            }
         }
 
         @keyframes b4-anim {
-            0%, 50% { transform: translateY(-80px); opacity: 0; }
-            65%, 95% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(0); opacity: 0; }
+
+            0%,
+            50% {
+                transform: translateY(-80px);
+                opacity: 0;
+            }
+
+            65%,
+            95% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 0;
+            }
         }
 
         @keyframes b5-anim {
-            0%, 65% { transform: translateY(-80px); opacity: 0; }
-            80%, 95% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(0); opacity: 0; }
+
+            0%,
+            65% {
+                transform: translateY(-80px);
+                opacity: 0;
+            }
+
+            80%,
+            95% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 0;
+            }
         }
 
 
@@ -433,11 +517,25 @@
             transform: translateY(0);
         }
 
-        .delay-100 { transition-delay: 100ms; }
-        .delay-200 { transition-delay: 200ms; }
-        .delay-300 { transition-delay: 300ms; }
-        .delay-400 { transition-delay: 400ms; }
-        .delay-500 { transition-delay: 500ms; }
+        .delay-100 {
+            transition-delay: 100ms;
+        }
+
+        .delay-200 {
+            transition-delay: 200ms;
+        }
+
+        .delay-300 {
+            transition-delay: 300ms;
+        }
+
+        .delay-400 {
+            transition-delay: 400ms;
+        }
+
+        .delay-500 {
+            transition-delay: 500ms;
+        }
     </style>
 
     <div id="loading-screen"
@@ -508,9 +606,9 @@
 
             <div
                 class="hidden lg:flex items-center gap-10 font-headline font-bold text-[11px] tracking-widest uppercase">
-                <a class="text-white hover:text-accent-blue transition-colors" href="#servizi">Servizi</a>
-                <a class="text-white/70 hover:text-white transition-colors" href="#progetti">Portfolio</a>
+                <a class="text-white/70 hover:text-white transition-colors" href="#servizi">Servizi</a>
                 <a class="text-white/70 hover:text-white transition-colors" href="#metodo">Metodo</a>
+                <a class="text-white/70 hover:text-white transition-colors" href="#progetti">Progetti</a>
                 <a class="text-white/70 hover:text-white transition-colors" href="#contatti">Contatti</a>
             </div>
             <div class="flex items-center gap-4">
@@ -527,7 +625,9 @@
         <div
             class="bg-primary/40 backdrop-blur-xl rounded-xl px-4 h-16 border border-accent-blue/20 shadow-2xl flex items-center gap-2">
             <span class="w-2.5 h-2.5 bg-secondary rounded-full"></span>
-            <span class="text-[10px] sm:text-sm font-black tracking-tighter text-white font-headline uppercase leading-none">Ing. Davide Moretti</span>
+            <span
+                class="text-[10px] sm:text-sm font-black tracking-tighter text-white font-headline uppercase leading-none">Ing.
+                Davide Moretti</span>
         </div>
     </div>
 
@@ -610,7 +710,8 @@
                     <span class="text-[10px] font-black uppercase tracking-widest text-white/90">In Corso: Progetto
                         Placeholder</span>
                 </div>
-                <h1 class="text-5xl md:text-8xl lg:text-[10rem] font-headline font-black tracking-tighter leading-[0.9] lg:leading-[0.8] mb-6 md:mb-12">
+                <h1
+                    class="text-5xl md:text-8xl lg:text-[10rem] font-headline font-black tracking-tighter leading-[0.9] lg:leading-[0.8] mb-6 md:mb-12">
                     Precisione<br />Architettata.
                 </h1>
                 <p class="text-xl md:text-2xl text-white/80 max-w-2xl leading-relaxed mb-8 md:mb-12 font-medium">
@@ -655,19 +756,23 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
                 <div>
                     <div class="text-4xl md:text-7xl font-headline font-black text-white mb-2">+150</div>
-                    <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Progetti Completati</div>
+                    <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Progetti
+                        Completati</div>
                 </div>
                 <div>
                     <div class="text-4xl md:text-7xl font-headline font-black text-white mb-2">20</div>
-                    <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Anni di Esperienza</div>
+                    <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Anni di Esperienza
+                    </div>
                 </div>
                 <div>
                     <div class="text-4xl md:text-7xl font-headline font-black text-white mb-2">0</div>
-                    <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Errori Strutturali</div>
+                    <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Errori Strutturali
+                    </div>
                 </div>
                 <div>
                     <div class="text-4xl md:text-7xl font-headline font-black text-white mb-2">100%</div>
-                    <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Rigore Tecnico</div>
+                    <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Rigore Tecnico
+                    </div>
                 </div>
             </div>
         </div>
@@ -677,11 +782,13 @@
     <section class="py-32 bg-white relative" id="metodo">
         <div class="container mx-auto px-8">
             <div class="flex flex-col lg:flex-row gap-12 items-start justify-between">
-                <div class="max-w-xl glass-effect bg-white border border-primary/5 p-12 rounded-[2rem] shadow-xl reveal">
+                <div
+                    class="max-w-xl glass-effect bg-white border border-primary/5 p-12 rounded-[2rem] shadow-xl reveal">
                     <span
                         class="inline-block px-3 py-1 rounded bg-secondary/10 text-secondary text-[10px] font-black uppercase tracking-widest mb-6">01
                         // Il Metodo Moretti</span>
-                    <h3 class="text-4xl md:text-5xl font-headline font-black text-primary tracking-tighter leading-tight mb-8">
+                    <h3
+                        class="text-4xl md:text-5xl font-headline font-black text-primary tracking-tighter leading-tight mb-8">
                         Processo Operativo Certificato</h3>
                     <p class="text-primary/70 text-lg mb-10 leading-relaxed">Ogni intervento segue un protocollo
                         rigoroso di analisi, simulazione e verifica per garantire l'eccellenza strutturale e la
@@ -710,7 +817,8 @@
                 <div class="max-w-2xl">
                     <h2 class="text-[10px] font-black text-secondary uppercase tracking-[0.5em] mb-4">Competenze Core
                     </h2>
-                    <h3 class="text-4xl md:text-7xl font-headline font-black text-primary tracking-tighter">Ingegneria di Frontiera</h3>
+                    <h3 class="text-4xl md:text-7xl font-headline font-black text-primary tracking-tighter">Ingegneria
+                        di Frontiera</h3>
                 </div>
                 <p class="text-primary/50 font-medium max-w-sm text-right">Specializzazioni tecniche per interventi
                     strutturali complessi e miglioramento sismico.</p>
@@ -766,14 +874,16 @@
                     class="md:col-span-3 lg:col-span-3 group bg-white rounded-3xl p-10 hover:shadow-2xl transition-all border border-primary/5 reveal delay-100">
                     <span class="material-symbols-outlined text-secondary text-3xl mb-8">engineering</span>
                     <h4 class="text-2xl font-headline font-black text-primary mb-4">Green Structures</h4>
-                    <p class="text-sm text-primary/70 leading-relaxed mb-6">Progettazione sostenibile con materiali a basso
+                    <p class="text-sm text-primary/70 leading-relaxed mb-6">Progettazione sostenibile con materiali a
+                        basso
                         impatto e certificati.</p>
                 </div>
                 <div
                     class="md:col-span-3 lg:col-span-3 group bg-white rounded-3xl p-10 hover:shadow-2xl transition-all border border-primary/5 reveal delay-300">
                     <span class="material-symbols-outlined text-secondary text-3xl mb-8">rule</span>
                     <h4 class="text-2xl font-headline font-black text-primary mb-4">Audit Tecnico</h4>
-                    <p class="text-sm text-primary/70 leading-relaxed mb-6">Verifiche di conformità e perizie tecniche per
+                    <p class="text-sm text-primary/70 leading-relaxed mb-6">Verifiche di conformità e perizie tecniche
+                        per
                         due-diligence immobiliari.</p>
                 </div>
                 <div
@@ -825,7 +935,8 @@
                     <div class="absolute bottom-12 left-12 right-12">
                         <div class="text-[10px] font-black text-accent-blue uppercase tracking-widest mb-3">Residenziale
                             // Progetto Placeholder</div>
-                        <h4 class="text-2xl md:text-4xl font-headline font-black text-white mb-2">PROGETTO PLACEHOLDER</h4>
+                        <h4 class="text-2xl md:text-4xl font-headline font-black text-white mb-2">PROGETTO PLACEHOLDER
+                        </h4>
                         <div class="flex items-center gap-4 text-white/50 text-[10px] font-bold uppercase">
                             <span>45 Livelli</span>
                             <span class="w-1 h-1 bg-white/20 rounded-full"></span>
@@ -954,7 +1065,8 @@
                             </div>
                             <div>
                                 <div class="text-[10px] font-black uppercase text-primary/40 mb-1">Email</div>
-                                <div class="font-bold text-primary text-base md:text-lg break-all">ing.davide.moretti@gmail.com</div>
+                                <div class="font-bold text-primary text-base md:text-lg break-all">
+                                    ing.davide.moretti@gmail.com</div>
                             </div>
                         </div>
                         <div class="flex items-center gap-6">
@@ -979,7 +1091,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="lg:col-span-7 bg-surface p-12 rounded-[3rem] border border-primary/5 shadow-2xl reveal delay-300">
+                <div
+                    class="lg:col-span-7 bg-surface p-12 rounded-[3rem] border border-primary/5 shadow-2xl reveal delay-300">
                     <form class="space-y-8" onsubmit="event.preventDefault(); alert('Grazie per averci contattato!');">
                         <div class="grid md:grid-cols-2 gap-8">
                             <div>
@@ -1107,7 +1220,7 @@
         const startTime = Date.now();
         const progressBar = document.querySelector('.loading-progress-bar');
         let currentProgress = 0;
-        
+
         const progressInterval = setInterval(() => {
             if (currentProgress < 92) {
                 currentProgress += Math.random() * 4;
@@ -1119,7 +1232,7 @@
         window.addEventListener('load', () => {
             clearInterval(progressInterval);
             if (progressBar) progressBar.style.width = '100%';
-            
+
             const loader = document.getElementById('loading-screen');
             if (loader) {
                 const currentTime = Date.now();
