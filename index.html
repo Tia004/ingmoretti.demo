@@ -248,6 +248,34 @@
             -webkit-backdrop-filter: blur(16px);
         }
 
+        @keyframes gridMove {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 50px 50px;
+            }
+        }
+
+        .moving-grid {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .moving-grid::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(197, 160, 89, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(197, 160, 89, 0.08) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
         /* Floating CTA Animation (Slower 0.8s) & Optimization */
         #floating-cta {
             will-change: transform, opacity;
@@ -609,6 +637,7 @@
                 <a class="text-white/70 hover:text-white transition-colors" href="#metodo">Metodo</a>
                 <a class="text-white/70 hover:text-white transition-colors" href="#servizi">Servizi</a>
                 <a class="text-white/70 hover:text-white transition-colors" href="#progetti">Progetti</a>
+                <a class="text-white/70 hover:text-white transition-colors" href="#chi-sono">Chi sono</a>
                 <a class="text-white/70 hover:text-white transition-colors" href="#contatti">Contatti</a>
             </div>
             <div class="flex items-center gap-4">
@@ -657,6 +686,7 @@
             <nav class="flex flex-col gap-8 font-headline font-bold text-2xl tracking-tight text-white">
                 <a class="hover:text-accent-blue transition-colors" href="#servizi" onclick="closeMenu()">Servizi</a>
                 <a class="hover:text-accent-blue transition-colors" href="#progetti" onclick="closeMenu()">Portfolio</a>
+                <a class="hover:text-accent-blue transition-colors" href="#chi-sono" onclick="closeMenu()">Chi sono</a>
                 <a class="hover:text-accent-blue transition-colors" href="#metodo" onclick="closeMenu()">Metodo</a>
                 <a class="hover:text-accent-blue transition-colors" href="#contatti" onclick="closeMenu()">Contatti</a>
             </nav>
@@ -779,31 +809,49 @@
     </section>
 
     <!-- Processo Operativo Section -->
-    <section class="py-32 bg-white relative" id="metodo">
-        <div class="container mx-auto px-8">
-            <div class="flex flex-col lg:flex-row gap-12 items-start justify-between">
+    <section class="py-32 bg-white relative moving-grid" id="metodo">
+        <div class="container mx-auto px-8 relative z-10">
+            <div class="grid lg:grid-cols-3 gap-8 items-stretch">
+                <!-- Step 01 -->
                 <div
-                    class="max-w-xl glass-effect bg-white border border-primary/5 p-12 rounded-[2rem] shadow-xl reveal">
-                    <span
-                        class="inline-block px-3 py-1 rounded bg-secondary/10 text-secondary text-[10px] font-black uppercase tracking-widest mb-6">01
-                        // Il Metodo Moretti</span>
-                    <h3
-                        class="text-4xl md:text-5xl font-headline font-black text-primary tracking-tighter leading-tight mb-8">
-                        Processo Operativo Certificato</h3>
-                    <p class="text-primary/70 text-lg mb-10 leading-relaxed">Ogni intervento segue un protocollo
-                        rigoroso di analisi, simulazione e verifica per garantire l'eccellenza strutturale e la
-                        conformità normativa.</p>
-                </div>
-                <div class="flex flex-wrap gap-4 justify-center md:justify-start reveal delay-200">
-                    <div class="w-full md:w-64 bg-primary p-8 rounded-3xl text-white">
-                        <div class="text-3xl font-black mb-4">02</div>
-                        <div class="text-[11px] font-bold uppercase tracking-widest mb-2">Analisi Gestione
-                            Computazionale</div>
+                    class="glass-effect bg-white border border-primary/5 p-12 rounded-[2.5rem] shadow-xl reveal flex flex-col justify-between">
+                    <div>
+                        <span
+                            class="inline-block px-3 py-1 rounded bg-secondary/10 text-secondary text-[10px] font-black uppercase tracking-widest mb-6">01
+                            // Il Metodo Moretti</span>
+                        <h3
+                            class="text-3xl md:text-4xl font-headline font-black text-primary tracking-tighter leading-tight mb-8">
+                            Processo Operativo Certificato</h3>
+                        <p class="text-primary/70 text-lg leading-relaxed mb-6">Un protocollo rigoroso di analisi, simulazione
+                            e verifica per l'eccellenza strutturale e normativa.</p>
                     </div>
-                    <div class="w-full md:w-64 bg-secondary p-8 rounded-3xl text-white">
-                        <div class="text-3xl font-black mb-4">03</div>
-                        <div class="text-[11px] font-bold uppercase tracking-widest mb-2">Esecuzione e Direzione Lavori
-                        </div>
+                </div>
+
+                <!-- Step 02 -->
+                <div
+                    class="bg-primary p-12 rounded-[2.5rem] text-white shadow-2xl reveal delay-200 flex flex-col justify-between group hover:translate-y-[-10px] transition-transform duration-500">
+                    <div class="text-5xl font-black mb-10 opacity-20 group-hover:opacity-40 transition-opacity">02</div>
+                    <div>
+                        <div class="text-[10px] font-black uppercase tracking-widest mb-4 text-accent-blue">Analisi e
+                            Sviluppo</div>
+                        <h4 class="text-2xl md:text-3xl font-headline font-black mb-4">Analisi Gestione Computazionale
+                        </h4>
+                        <p class="text-white/60 text-lg leading-relaxed">Modellazione FEM avanzata per l'ottimizzazione
+                            strutturale e calcolo delle sollecitazioni critiche.</p>
+                    </div>
+                </div>
+
+                <!-- Step 03 -->
+                <div
+                    class="bg-secondary p-12 rounded-[2.5rem] text-white shadow-2xl reveal delay-400 flex flex-col justify-between group hover:translate-y-[-10px] transition-transform duration-500">
+                    <div class="text-5xl font-black mb-10 opacity-20 group-hover:opacity-40 transition-opacity">03</div>
+                    <div>
+                        <div class="text-[10px] font-black uppercase tracking-widest mb-4 text-white/50">Cantiere e
+                            Verifica</div>
+                        <h4 class="text-2xl md:text-3xl font-headline font-black mb-4">Esecuzione e Direzione Lavori
+                        </h4>
+                        <p class="text-white/80 text-lg leading-relaxed">Supervisione tecnica costante in cantiere per
+                            garantire la massima fedeltà al progetto esecutivo.</p>
                     </div>
                 </div>
             </div>
@@ -811,8 +859,8 @@
     </section>
 
     <!-- Services Section -->
-    <section class="py-32 bg-surface relative grid-bg" id="servizi">
-        <div class="container mx-auto px-8">
+    <section class="py-32 bg-white relative moving-grid" id="servizi">
+        <div class="container mx-auto px-8 relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
                 <div class="max-w-2xl">
                     <h2 class="text-[10px] font-black text-secondary uppercase tracking-[0.5em] mb-4">Competenze Core
@@ -989,10 +1037,10 @@
     </section>
 
     <!-- Profile Section -->
-    <section class="py-32 bg-white millimeter-bg">
-        <div class="container mx-auto px-8">
+    <section id="chi-sono" class="py-32 bg-white relative moving-grid">
+        <div class="container mx-auto px-8 relative z-10">
             <div class="grid lg:grid-cols-2 gap-20 items-center">
-                <div class="relative">
+                <div class="relative reveal">
                     <div class="absolute -top-10 -left-10 w-60 h-60 bg-accent-blue/10 rounded-full blur-[100px]"></div>
                     <div
                         class="relative z-10 rounded-[3rem] overflow-hidden aspect-[4/5] blue-glow border-8 border-white shadow-2xl">
@@ -1007,7 +1055,7 @@
                             Mantova</div>
                     </div>
                 </div>
-                <div>
+                <div class="reveal delay-300">
                     <h2 class="text-[10px] font-black text-secondary uppercase tracking-[0.5em] mb-4">Il Titolare</h2>
                     <h3
                         class="text-4xl md:text-7xl font-headline font-black text-primary tracking-tighter mb-10 leading-[0.9]">
@@ -1045,7 +1093,7 @@
     </section>
 
     <!-- Contact Form Section -->
-    <section class="py-32 bg-white relative grid-bg" id="contatti">
+    <section class="py-32 bg-white relative moving-grid" id="contatti">
         <div class="container mx-auto px-8 max-w-7xl">
             <div class="grid lg:grid-cols-12 gap-16 items-start">
                 <div class="lg:col-span-5 reveal">
