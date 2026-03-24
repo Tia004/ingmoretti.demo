@@ -77,9 +77,25 @@
           animation: bounce-subtle 3s ease-in-out infinite;
         }
       }
-      html {
+      html, body {
+        overflow-x: hidden;
+        width: 100%;
         scroll-behavior: smooth;
       }
+      .overflow-hidden {
+        overflow-y: hidden !important;
+      }
+      #mobile-menu {
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+        transition: opacity 0.5s ease, backdrop-filter 0.5s ease, -webkit-backdrop-filter 0.5s ease;
+      }
+      #mobile-menu.active {
+        opacity: 1;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+
 
     </style>
 </head>
@@ -102,22 +118,21 @@
                 Richiedi Consulto
             </button>
             <!-- Hamburger Menu Button -->
-            <button id="menu-toggle" class="lg:hidden text-white p-2 glass-effect rounded-xl">
-                <span class="material-symbols-outlined">menu</span>
+            <button id="menu-toggle" class="lg:hidden text-white p-2 relative z-[120] flex items-center justify-center">
+                <span class="material-symbols-outlined text-4xl">menu</span>
             </button>
+
         </div>
     </nav>
 </div>
 
 <!-- Mobile Navigation Overlay -->
-<div id="mobile-menu" class="fixed inset-0 z-[110] hidden opacity-0 transition-opacity duration-300">
-    <div class="absolute inset-0 bg-primary/40 backdrop-blur-xl" id="menu-backdrop"></div>
-    <div class="absolute right-0 top-0 h-full w-[80%] max-w-sm glass-effect border-l border-white/10 p-10 flex flex-col translate-x-full transition-transform duration-300" id="menu-content">
+<div id="mobile-menu" class="fixed inset-0 z-[110] hidden bg-primary/40 opacity-0">
+    <div class="absolute right-0 top-0 h-full w-[80%] max-w-sm glass-effect border-l border-white/10 p-10 flex flex-col translate-x-full transition-transform duration-500 ease-out" id="menu-content">
+
         <div class="flex justify-between items-center mb-16">
             <div class="text-xl font-black tracking-tighter text-white font-headline">MENU</div>
-            <button id="menu-close" class="text-white p-2">
-                <span class="material-symbols-outlined">close</span>
-            </button>
+            <!-- Handled by the same toggle button in the navbar for "X" effect -->
         </div>
         <nav class="flex flex-col gap-8 font-headline font-bold text-2xl tracking-tight text-white">
             <a class="hover:text-accent-blue transition-colors" href="#servizi" onclick="closeMenu()">Servizi</a>
@@ -132,6 +147,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Floating Mobile CTA -->
 <div class="fixed bottom-8 right-8 z-[90] lg:hidden animate-bounce-subtle">
@@ -541,33 +557,49 @@
 </footer>
     <script>
         const menuToggle = document.getElementById('menu-toggle');
-        const menuClose = document.getElementById('menu-close');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuContent = document.getElementById('menu-content');
-        const menuBackdrop = document.getElementById('menu-backdrop');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            if (!isMenuOpen) {
+                openMenu();
+            } else {
+                closeMenu();
+            }
+        }
 
         function openMenu() {
+            isMenuOpen = true;
             mobileMenu.classList.remove('hidden');
+            menuToggle.querySelector('span').innerText = 'close';
             setTimeout(() => {
+                mobileMenu.classList.add('active');
                 mobileMenu.classList.remove('opacity-0');
                 menuContent.classList.remove('translate-x-full');
             }, 10);
-            document.body.style.overflow = 'hidden';
+            document.body.classList.add('overflow-hidden');
         }
 
         function closeMenu() {
+            isMenuOpen = false;
+            mobileMenu.classList.remove('active');
             mobileMenu.classList.add('opacity-0');
             menuContent.classList.add('translate-x-full');
+            menuToggle.querySelector('span').innerText = 'menu';
             setTimeout(() => {
                 mobileMenu.classList.add('hidden');
-            }, 300);
-            document.body.style.overflow = '';
+            }, 500);
+            document.body.classList.remove('overflow-hidden');
         }
 
-        menuToggle.addEventListener('click', openMenu);
-        menuClose.addEventListener('click', closeMenu);
-        menuBackdrop.addEventListener('click', closeMenu);
+
+        menuToggle.addEventListener('click', toggleMenu);
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) closeMenu();
+        });
     </script>
+
 </body>
 </html>
 
