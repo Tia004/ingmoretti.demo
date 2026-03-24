@@ -943,16 +943,30 @@
     <script>
 
 
-        // Loading Screen Management
+        // Loading Screen Management (Min 2.5s duration)
+        const startTime = Date.now();
         window.addEventListener('load', () => {
             const loader = document.getElementById('loading-screen');
             if (loader) {
-                loader.classList.add('opacity-0', 'pointer-events-none');
-                setTimeout(() => {
-                    loader.remove();
-                }, 700);
+                const currentTime = Date.now();
+                const elapsedTime = currentTime - startTime;
+                const minDuration = 2500; // 2.5 seconds
+
+                const hideLoader = () => {
+                    loader.style.transition = 'opacity 1s ease-in-out, transform 1s ease-in-out';
+                    loader.classList.add('opacity-0', 'pointer-events-none');
+                    loader.style.transform = 'translateY(-20px)';
+                    setTimeout(() => loader.remove(), 1000);
+                };
+
+                if (elapsedTime < minDuration) {
+                    setTimeout(hideLoader, minDuration - elapsedTime);
+                } else {
+                    hideLoader();
+                }
             }
         });
+
 
         const menuToggle = document.getElementById('menu-toggle');
 
