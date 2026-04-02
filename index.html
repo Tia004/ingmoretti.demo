@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="it" class="scroll-smooth">
+<html lang="it" class="scroll-smooth no-scroll">
 
 <head>
     <meta charset="utf-8" />
@@ -263,7 +262,7 @@
     </style>
 </head>
 
-<body class="bg-surface font-body text-on-surface selection:bg-black selection:text-white antialiased">
+<body class="bg-surface font-body text-on-surface selection:bg-black selection:text-white antialiased no-scroll">
 
     <!-- Portfolio Modal -->
     <div id="portfolio-modal" class="fixed inset-0 z-[10000] bg-white hidden flex-col h-screen overflow-hidden transition-all duration-500">
@@ -330,7 +329,7 @@
 
     <!-- Intelligent Loading Screen -->
     <div id="loading-screen"
-        class="fixed inset-0 z-[10000] bg-surface flex flex-col items-center justify-center transition-opacity duration-1000 ease-in-out">
+        class="fixed inset-0 z-[50000] bg-surface flex flex-col items-center justify-center transition-opacity duration-1000 ease-in-out">
         <div class="relative flex items-center justify-center w-32 h-32 mb-8">
             <svg class="animate-spin absolute inset-0 w-full h-full text-secondary rounded-full"
                 style="animation-duration: 4s;" viewBox="0 0 100 100">
@@ -353,7 +352,7 @@
     </div>
 
     <!-- Apple-style Navbar -->
-    <nav class="fixed top-0 w-full z-[10000] bg-white/80 backdrop-blur-xl border-b border-black/5 transition-all duration-500"
+    <nav class="fixed top-0 w-full z-[10000] bg-white/80 backdrop-blur-xl border-b border-black/5 opacity-0 pointer-events-none transition-all duration-500"
         id="main-nav">
         <div class="flex justify-between items-center max-w-6xl mx-auto px-6 h-auto py-2 md:py-2.5">
             <a href="/" onclick="window.location.reload(); return false;"
@@ -1162,10 +1161,11 @@
                     clearInterval(interval);
                     setTimeout(() => {
                         document.getElementById('loading-screen').classList.add('opacity-0');
+                        document.getElementById('main-nav').classList.remove('opacity-0', 'pointer-events-none');
                         setTimeout(() => {
                             document.getElementById('loading-screen').style.display = 'none';
-                            document.body.classList.remove('overflow-hidden');
-                            document.documentElement.classList.remove('overflow-hidden');
+                            document.body.classList.remove('no-scroll');
+                            document.documentElement.classList.remove('no-scroll');
                         }, 1000);
                         initGSAP();
                     }, 500);
