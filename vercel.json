@@ -1,0 +1,24 @@
+{
+  "redirects": [
+    {
+      "source": "/chi-sono",
+      "destination": "/#lo-studio",
+      "permanent": true
+    },
+    {
+      "source": "/servizi",
+      "destination": "/#servizi",
+      "permanent": true
+    },
+    {
+      "source": "/contatti",
+      "destination": "/#contatti",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}

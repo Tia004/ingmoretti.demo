@@ -1,1406 +1,1294 @@
 <!DOCTYPE html>
-<html class="light" lang="it">
+<html lang="it" class="scroll-smooth">
 
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Ing. Davide Moretti | Ingegneria Civile e Strutturale</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ing. Davide Moretti — Progettazione Strutturale e Architettonica</title>
+    <meta name="description"
+        content="Ing. Davide Moretti: esperto in progettazione strutturale, architettonica e consulenza tecnica a Gonzaga (MN). Miglioramento sismico, pratiche edilizie, direzione lavori." />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
-    <link rel="shortcut icon" href="favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
-    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Work+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Material Symbols & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@200..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- GSAP & Plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#002145",
-                        "secondary": "#115bbd",
-                        "accent-blue": "#97D4E9",
-                        "surface": "#f9f9f9",
-                        "on-surface": "#1a1c1c",
-                        "surface-container": "#eeeeee",
-                        "outline-variant": "#c4c6cf",
+                        "primary-container": "#000000",
+                        "secondary": "#60a5fa",
+                        "surface": "#f5f5f7", /* Apple-like light gray */
+                        "surface-container-low": "#ffffff",
+                        "on-surface": "#1d1d1f", /* Apple-like dark text */
+                        "on-surface-variant": "#86868b", /* Apple-like secondary text */
+                        "outline-variant": "#d2d2d7",
                     },
                     fontFamily: {
-                        "headline": ["Work Sans"],
-                        "body": ["Inter"],
+                        "headline": ["Inter", "sans-serif"], /* Changed to Inter for true Apple feel */
+                        "body": ["Inter", "sans-serif"],
                     },
-                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.5rem", "xl": "1rem", "2xl": "1.5rem", "full": "9999px" },
                 },
             },
         }
     </script>
     <style>
-        .glass-effect {
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
         }
 
-        .dark-glass {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(0, 33, 69, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* Essential resets for strict sharp edges */
+        * {
+            border-radius: 0 !important;
         }
 
-        .grid-bg {
-            background-image: linear-gradient(rgba(0, 33, 69, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 33, 69, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
+        /* Only valid exception is standard circles like the loading spinner and hamburger lines */
+        .rounded-full,
+        circle {
+            border-radius: 9999px !important;
         }
 
-        .millimeter-bg {
-            background-image: linear-gradient(rgba(0, 33, 69, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 33, 69, 0.1) 1px, transparent 1px),
-                linear-gradient(rgba(0, 33, 69, 0.03) 0.5px, transparent 0.5px),
-                linear-gradient(90deg, rgba(0, 33, 69, 0.03) 0.5px, transparent 0.5px);
-            background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+        body.modal-open {
+            overflow: hidden !important;
         }
 
-        .blue-glow {
-            box-shadow: 0 0 40px -10px rgba(151, 212, 233, 0.5);
+        .blueprint-grid {
+            background-image: linear-gradient(to right, #d2d2d7 1px, transparent 1px), linear-gradient(to bottom, #d2d2d7 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
         }
 
-        @keyframes ticker {
-            0% {
-                transform: translateX(100%);
-            }
-
-            100% {
-                transform: translateX(-100%);
-            }
+        .stacked-section {
+            will-change: transform;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
-        .animate-ticker {
-            animation: ticker 30s linear infinite;
+        .video-overlay {
+            background: linear-gradient(135deg, rgba(0, 31, 66, 0.65) 0%, rgba(17, 91, 189, 0.25) 100%);
+            backdrop-filter: blur(2px);
         }
 
-        .hero-overlay {
-            background: linear-gradient(to bottom, rgba(0, 33, 69, 0.7) 0%, rgba(0, 33, 69, 0.4) 50%, rgba(0, 33, 69, 0.9) 100%);
+        #main-nav a:hover:not(.bg-black) {
+            color: #60a5fa !important;
         }
 
-        @media (max-width: 1023px) {
-            @keyframes bounce-subtle {
-
-                0%,
-                100% {
-                    transform: translateY(0);
-                }
-
-                50% {
-                    transform: translateY(-10px);
-                }
-            }
-
-            .animate-bounce-subtle {
-                animation: bounce-subtle 3s ease-in-out infinite;
-            }
+        .btn-contact-hover:hover {
+            background-color: #60a5fa !important;
+            color: white !important;
         }
 
-        /* Animated Hamburger */
-        .hamburger {
-            width: 32px;
-            height: 24px;
+        .hover-glow {
+            transition: box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hover-glow:hover {
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .stacked-section {
             position: relative;
-            cursor: pointer;
-            transition: .5s ease-in-out;
+            z-index: 1;
+            background-color: #f5f5f7;
+        }
+
+        body.no-scroll, html.no-scroll {
+            overflow: hidden !important;
+            touch-action: none !important;
+            height: 100% !important;
+        }
+        
+        .nav-menu-open #main-logo-link {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        /* Apple-style smooth scrollbar with dark blue accents */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #60a5fa;
+            border: 2px solid #1e1e1e;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #003f91;
+        }
+
+        /* Hamburger Animation (Matched to Vercel site) */
+        .hamburger {
+            width: 24px;
+            height: 16px;
+            position: relative;
+            transform: rotate(0deg);
+            transition: .5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .hamburger span {
             display: block;
             position: absolute;
-            height: 4px;
+            height: 2px;
             width: 100%;
-            background: white;
-            border-radius: 4px;
+            background: #1d1d1f;
+            border-radius: 9px;
             opacity: 1;
             left: 0;
             transform: rotate(0deg);
             transition: .25s ease-in-out;
         }
 
-        .hamburger span:nth-child(1) {
-            top: 0px;
-        }
+        .hamburger span:nth-child(1) { top: 0px; }
+        .hamburger span:nth-child(2) { top: 7px; }
+        .hamburger span:nth-child(3) { top: 14px; }
 
-        .hamburger span:nth-child(2) {
-            top: 10px;
-        }
-
-        .hamburger span:nth-child(3) {
-            top: 20px;
-        }
-
-        .hamburger.open span:nth-child(1) {
-            top: 10px;
+        .hamburger.is-open span:nth-child(1) {
+            top: 7px;
             transform: rotate(135deg);
         }
 
-        .hamburger.open span:nth-child(2) {
+        .hamburger.is-open span:nth-child(2) {
             opacity: 0;
-            left: -40px;
+            left: -60px;
         }
 
-        .hamburger.open span:nth-child(3) {
-            top: 10px;
+        .hamburger.is-open span:nth-child(3) {
+            top: 7px;
             transform: rotate(-135deg);
         }
 
-        #menu-toggle {
+        /* Shift the whole X slightly to the right and scale up when open */
+        .hamburger.is-open {
+            transform: translateX(4px) scale(1.1);
+        }
+
+        .hamburger.is-open span { background-color: #ffffff; }
+
+        /* Fullscreen Mobile Menu Overlay */
+        #mobile-menu-overlay {
             position: fixed;
-            top: 1.5rem;
-            right: 2rem;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 200;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 4rem;
-            /* h-16 */
-            width: 4rem;
-            /* w-16 */
-        }
-
-        #menu-toggle.open {
-            top: 2rem;
-            right: 2rem;
-            background: rgba(0, 33, 69, 0.85);
-            /* Darker blue accent for X */
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 1rem;
-            padding: 0.75rem;
-            transform: scale(1.1);
-        }
-
-
-
-
-
-
-
-        html {
-            scroll-behavior: smooth;
-            scrollbar-width: thin;
-            scrollbar-color: #115bbd rgba(0, 33, 69, 0.05);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 33, 69, 0.03);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom,
-                    rgba(151, 212, 233, 0.3),
-                    rgba(17, 91, 189, 0.5));
-            border-radius: 10px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom,
-                    rgba(151, 212, 233, 0.5),
-                    rgba(17, 91, 189, 0.7));
-        }
-
-        html,
-        body {
-            overflow-x: hidden;
-            width: 100%;
-        }
-
-
-        .overflow-hidden {
-            overflow-y: hidden !important;
-        }
-
-        #mobile-menu {
-            backdrop-filter: blur(0px);
-            -webkit-backdrop-filter: blur(0px);
-            transition: opacity 0.5s ease, backdrop-filter 0.5s ease, -webkit-backdrop-filter 0.5s ease;
-        }
-
-        #mobile-menu.active {
-            opacity: 1;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-        }
-
-        @keyframes gridMove {
-            0% {
-                background-position: 0 0;
-            }
-
-            100% {
-                background-position: 50px 50px;
-            }
-        }
-
-        .moving-grid {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .moving-grid::before {
-            content: "";
-            position: absolute;
             inset: 0;
-            background-image:
-                linear-gradient(rgba(197, 160, 89, 0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(197, 160, 89, 0.08) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Floating CTA Animation (Slower 0.8s) & Optimization */
-        #floating-cta {
-            will-change: transform, opacity;
-        }
-
-        #floating-cta-button {
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            width: auto;
-            min-width: 4.5rem;
-            height: 4.5rem;
+            z-index: 9999;
+            background: linear-gradient(135deg, rgba(0, 20, 60, 0.97) 0%, rgba(0, 40, 100, 0.95) 100%);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
             justify-content: center;
-            will-change: width, padding;
-        }
-
-        #cta-text {
-            max-width: 15ch;
-            opacity: 1;
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-            overflow: hidden;
-            display: inline-block;
-            will-change: max-width, opacity;
-        }
-
-        #cta-text.d-none {
-            display: none;
-        }
-
-        #floating-cta-button.shrunk {
-            padding-left: 0;
-            padding-right: 0;
-            gap: 0;
-            width: 4.5rem;
-        }
-
-        #floating-cta-button.shrunk #cta-text {
-            max-width: 0;
+            padding: 2rem 2.5rem;
             opacity: 0;
-            margin: 0;
-            padding: 0;
             pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #mobile-menu-overlay.is-visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        #mobile-menu-overlay .menu-label {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.35em;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+        }
+        #mobile-menu-overlay .menu-link {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            line-height: 1.1;
+            display: block;
+            margin-bottom: 0.15rem;
+            padding: 0.5rem 0;
+            transition: color 0.2s ease, transform 0.2s ease;
+            transform-origin: left;
+        }
+        #mobile-menu-overlay .menu-link:hover {
+            color: #60a5fa;
+            transform: translateX(6px);
+        }
+        #mobile-menu-overlay .menu-cta {
+            margin-top: 3rem;
+            background: rgba(255,255,255,0.95);
+            color: #001f3f;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            padding: 1.1rem 2.5rem;
+            border-radius: 999px !important;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        #mobile-menu-overlay .menu-cta:hover {
+            background: #60a5fa;
+            color: white;
         }
     </style>
 </head>
 
-<body class="bg-surface font-body text-on-surface selection:bg-accent-blue/30 overflow-x-hidden">
-    <!-- Blueprint Loading Screen -->
-    <style>
-        #loading-screen {
-            background-color: #1e3a8a;
-            background-image:
-                linear-gradient(rgba(96, 165, 250, 0.2) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(96, 165, 250, 0.2) 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
+<body class="bg-surface font-body text-on-surface selection:bg-black selection:text-white antialiased">
 
-        @keyframes dots {
-            0% {
-                content: '';
-            }
+    <!-- Portfolio Modal -->
+    <div id="portfolio-modal" class="fixed inset-0 z-[10000] bg-white hidden flex-col h-screen overflow-hidden transition-all duration-500">
+        <div class="h-16 border-b border-black/10 flex items-center justify-between px-6 shrink-0 bg-white">
+            <div class="font-headline text-[10px] uppercase tracking-widest font-bold text-[#86868b]" id="modal-category">Categoria</div>
+            <button onclick="closePortfolioModal()" class="text-black hover:text-red-600 transition-colors flex items-center gap-2 focus:outline-none">
+                <span class="text-[10px] tracking-widest uppercase font-bold">Chiudi</span>
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+        <div class="flex-grow overflow-y-auto">
+            <div class="max-w-7xl mx-auto px-6 py-20">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                    <div class="space-y-12">
+                        <img id="modal-main-img" src="" class="w-full aspect-[4/3] object-cover" />
+                    </div>
+                    <div class="space-y-12">
+                        <h2 id="modal-title" class="font-headline text-5xl md:text-7xl font-bold leading-tight text-[#001f3f]">Titolo Progetto</h2>
+                        <div id="modal-desc" class="font-body text-lg leading-relaxed text-[#1d1d1f] space-y-4">
+                            <!-- Descrizione -->
+                        </div>
+                        <div class="pt-12 border-t border-black/10">
+                            <button onclick="closePortfolioModal()" class="bg-[#001f3f] text-white px-10 py-4 font-bold uppercase tracking-widest hover:bg-[#60a5fa] transition-colors">Torna ai Progetti</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            33% {
-                content: '.';
-            }
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="fixed inset-0 z-[20000] bg-black/40 backdrop-blur-xl hidden items-center justify-center p-6 transition-all duration-500">
+        <div class="bg-white max-w-2xl w-full p-12 relative shadow-2xl">
+            <button onclick="closeContactModal()" class="absolute top-6 right-6 text-black hover:text-[#60a5fa] focus:outline-none">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <h3 class="font-headline font-bold text-3xl mb-8 text-[#001f3f]">Richiedi Informazioni</h3>
+            <form class="space-y-6" onsubmit="event.preventDefault()">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input type="text" placeholder="Nome completo" class="border-b border-black/10 py-3 focus:ring-0 focus:border-[#60a5fa] outline-none text-black" />
+                    <input type="email" placeholder="Email" class="border-b border-black/10 py-3 focus:ring-0 focus:border-[#60a5fa] outline-none text-black" />
+                </div>
+                <textarea placeholder="Il tuo messaggio..." rows="4" class="w-full border-b border-black/10 py-3 focus:ring-0 focus:border-[#60a5fa] outline-none text-black resize-none"></textarea>
+                <button type="submit" class="w-full bg-[#001f3f] text-white py-4 font-bold uppercase tracking-widest hover:bg-[#60a5fa] transition-colors">Invia Messaggio</button>
+            </form>
+        </div>
+    </div>
 
-            66% {
-                content: '..';
-            }
+    <!-- Legal Modal -->
+    <div id="legal-modal" class="fixed inset-0 z-[40000] bg-white hidden flex-col h-screen overflow-hidden transition-all duration-500">
+        <div class="h-20 border-b border-black/5 flex items-center justify-between px-8 shrink-0 bg-white sticky top-0 z-30">
+            <h3 id="legal-modal-title" class="font-headline font-bold text-xs uppercase tracking-[0.3em] text-[#86868b]">Documento Legale</h3>
+            <button onclick="closeLegalModal()" class="text-black hover:text-[#60a5fa] transition-colors p-2 focus:outline-none flex items-center gap-2">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-[#86868b]">Chiudi</span>
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+        </div>
+        <div class="flex-grow overflow-y-auto w-full bg-white">
+            <div class="max-w-4xl mx-auto px-8 py-24" id="legal-modal-content">
+                <!-- Data injected via JS -->
+            </div>
+        </div>
+    </div>
 
-            100% {
-                content: '...';
-            }
-        }
-
-        .dots::after {
-            content: '';
-            animation: dots 1.5s steps(4, end) infinite;
-        }
-
-        @keyframes progress {
-            0% {
-                width: 0%;
-            }
-
-            100% {
-                width: 100%;
-            }
-        }
-
-        .loading-progress-bar {
-            width: 0%;
-            transition: width 0.4s ease-out;
-        }
-
-
-
-        .block {
-            fill: #1e3a8a;
-            stroke: #f8fafc;
-            stroke-width: 2;
-            stroke-linejoin: round;
-        }
-
-        .guide {
-            stroke: #60a5fa;
-            stroke-width: 1;
-            stroke-dasharray: 2, 2;
-        }
-
-        .text-blueprint {
-            fill: #60a5fa;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 6px;
-            letter-spacing: 0.5px;
-        }
-
-        .b1 {
-            animation: b1-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
-        }
-
-        .b2 {
-            animation: b2-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
-        }
-
-        .b3 {
-            animation: b3-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
-        }
-
-        .b4 {
-            animation: b4-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
-        }
-
-        .b5 {
-            animation: b5-anim 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
-        }
-
-        @keyframes b1-anim {
-
-            0%,
-            5% {
-                transform: translateY(-80px);
-                opacity: 0;
-            }
-
-            20%,
-            95% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(0);
-                opacity: 0;
-            }
-        }
-
-        @keyframes b2-anim {
-
-            0%,
-            20% {
-                transform: translateY(-80px);
-                opacity: 0;
-            }
-
-            35%,
-            95% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(0);
-                opacity: 0;
-            }
-        }
-
-        @keyframes b3-anim {
-
-            0%,
-            35% {
-                transform: translateY(-80px);
-                opacity: 0;
-            }
-
-            50%,
-            95% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(0);
-                opacity: 0;
-            }
-        }
-
-        @keyframes b4-anim {
-
-            0%,
-            50% {
-                transform: translateY(-80px);
-                opacity: 0;
-            }
-
-            65%,
-            95% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(0);
-                opacity: 0;
-            }
-        }
-
-        @keyframes b5-anim {
-
-            0%,
-            65% {
-                transform: translateY(-80px);
-                opacity: 0;
-            }
-
-            80%,
-            95% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(0);
-                opacity: 0;
-            }
-        }
-
-
-
-        /* Mobile: Force show hamburger */
-        @media (max-width: 1023.98px) {
-            #menu-toggle {
-                display: flex !important;
-            }
-        }
-
-        /* Desktop: Force hide mobile-only elements */
-        @media (min-width: 1024px) {
-
-            #menu-toggle,
-            .lg\:hidden {
-                display: none !important;
-            }
-        }
-
-        /* Reveal Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform, opacity;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .delay-100 {
-            transition-delay: 100ms;
-        }
-
-        .delay-200 {
-            transition-delay: 200ms;
-        }
-
-        .delay-300 {
-            transition-delay: 300ms;
-        }
-
-        .delay-400 {
-            transition-delay: 400ms;
-        }
-
-        .delay-500 {
-            transition-delay: 500ms;
-        }
-    </style>
-
+    <!-- Intelligent Loading Screen -->
     <div id="loading-screen"
-        class="fixed inset-0 z-[10000] flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out">
-        <div class="w-64 h-64 mb-8">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%" fill="none">
-                <defs>
-                </defs>
-                <g transform="translate(0, 10)">
-                    <g class="b1">
-                        <rect class="block" x="20" y="150" width="160" height="15" />
-                        <line class="guide" x1="25" y1="157.5" x2="175" y2="157.5" /><text class="text-blueprint"
-                            x="100" y="175" text-anchor="middle">1200mm SLAB</text>
-                    </g>
-                    <g class="b2">
-                        <rect class="block" x="35" y="70" width="15" height="80" />
-                        <rect class="block" x="150" y="70" width="15" height="80" />
-                        <line class="guide" x1="42.5" y1="75" x2="42.5" y2="145" />
-                        <line class="guide" x1="157.5" y1="75" x2="157.5" y2="145" />
-                    </g>
-                    <g class="b3">
-                        <rect class="block" x="50" y="100" width="100" height="10" />
-                        <path class="block" d="M 85 150 L 85 110 L 115 110 L 115 150" fill="none" />
-                        <rect class="block" x="125" y="120" width="15" height="15" />
-                        <line class="guide" x1="125" y1="127.5" x2="140" y2="127.5" />
-                        <line class="guide" x1="132.5" y1="120" x2="132.5" y2="135" />
-                        <circle cx="110" cy="130" r="1.5" fill="#f8fafc" />
-                    </g>
-                    <g class="b4">
-                        <polygon class="block" points="25,70 100,20 100,70" />
-                        <polygon class="block" points="175,70 100,20 100,70" />
-                        <line x1="25" y1="70" x2="100" y2="20" stroke="#f8fafc" stroke-width="3"
-                            stroke-linecap="round" />
-                        <line x1="175" y1="70" x2="100" y2="20" stroke="#f8fafc" stroke-width="3"
-                            stroke-linecap="round" />
-                        <line class="guide" x1="100" y1="20" x2="100" y2="70" />
-                    </g>
-                    <g class="b5">
-                        <rect class="block" x="135" y="15" width="12" height="35" />
-                        <path class="guide" d="M 141 10 L 141 0 M 137 5 L 137 -2 M 145 5 L 145 -2" /><text
-                            class="text-blueprint" x="100" y="10" text-anchor="middle">ASSEMBLY SEC. 04</text>
-                    </g>
-                </g>
+        class="fixed inset-0 z-[10000] bg-surface flex flex-col items-center justify-center transition-opacity duration-1000 ease-in-out">
+        <div class="relative flex items-center justify-center w-32 h-32 mb-8">
+            <svg class="animate-spin absolute inset-0 w-full h-full text-secondary rounded-full"
+                style="animation-duration: 4s;" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="48" fill="none" class="rounded-full" stroke="currentColor" stroke-width="0.5"
+                    stroke-dasharray="100 200" stroke-linecap="square"></circle>
+                <circle cx="50" cy="50" r="40" fill="none" class="rounded-full opacity-30" stroke="currentColor"
+                    stroke-width="0.2" stroke-dasharray="50 150" stroke-linecap="square"></circle>
+                <circle cx="50" cy="50" r="32" fill="none" class="rounded-full opacity-60" stroke="currentColor"
+                    stroke-width="0.5" stroke-dasharray="150 50" stroke-linecap="square"
+                    style="animation: spin reverse 6s linear infinite;"></circle>
             </svg>
+            <!-- Core Logo inside spinning loader -->
+            <img src="assets/logoingmoretti.png" alt="Caricamento in corso"
+                class="w-16 h-auto transition-transform animate-pulse" />
         </div>
-        <div class="text-white font-headline font-bold text-xs tracking-[0.3em] uppercase flex items-center gap-1">
-            Caricamento in corso<span class="dots"></span>
+        <div class="font-headline text-[9px] tracking-[0.4em] text-on-surface-variant uppercase font-bold text-center">
+            Inizializzazione Asset<br /><span id="loading-progress"
+                class="font-normal tracking-widest mt-2 block">0%</span>
         </div>
-        <!-- Loading Bar -->
-        <div class="w-48 h-1 bg-white/10 rounded-full mt-6 overflow-hidden border border-white/5">
-            <div class="loading-progress-bar h-full bg-accent-blue shadow-[0_0_15px_rgba(147,212,233,0.5)]"></div>
-        </div>
-
     </div>
 
+    <!-- Apple-style Navbar -->
+    <nav class="fixed top-0 w-full z-[10000] bg-white/80 backdrop-blur-xl border-b border-black/5 transition-all duration-500"
+        id="main-nav">
+        <div class="flex justify-between items-center max-w-6xl mx-auto px-6 h-auto py-2 md:py-2.5">
+            <a href="/" onclick="window.location.reload(); return false;"
+                class="flex-shrink-0 transition-opacity duration-300" id="main-logo-link">
+                <!-- Standard Brand Logo -->
+                <img src="assets/logoingmoretti.png" alt="Ing. Davide Moretti" class="h-10 md:h-12 lg:h-14 w-auto" />
+            </a>
 
-    <!-- Desktop Floating Navigation Bar -->
-    <div class="hidden lg:block fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[90%] max-w-7xl">
-        <nav
-            class="glass-effect bg-primary/40 rounded-2xl px-8 py-4 flex justify-between items-center shadow-2xl border border-accent-blue/20 shadow-accent-blue/10">
-
-
-            <div onclick="window.location.href='/'"
-                class="cursor-pointer text-xl font-black tracking-tighter text-white font-headline flex items-center gap-2">
-                <span class="w-3 h-3 bg-secondary rounded-full"></span>
-                ING. DAVIDE MORETTI
+            <div class="hidden md:flex items-center gap-10">
+                <a class="text-[11px] font-headline tracking-widest text-[#1d1d1f] transition-colors uppercase"
+                    href="#chi-sono">Chi sono</a>
+                <a class="text-[11px] font-headline tracking-widest text-[#1d1d1f] transition-colors uppercase"
+                    href="#servizi">Servizi</a>
+                <a class="text-[11px] font-headline tracking-widest text-[#1d1d1f] transition-colors uppercase"
+                    href="#lavori">Portfolio</a>
             </div>
 
-            <div
-                class="hidden lg:flex items-center gap-10 font-headline font-bold text-[11px] tracking-widest uppercase">
-                <a class="text-white/70 hover:text-white transition-colors" href="#metodo">Metodo</a>
-                <a class="text-white/70 hover:text-white transition-colors" href="#servizi">Servizi</a>
-                <a class="text-white/70 hover:text-white transition-colors" href="#progetti">Progetti</a>
-                <a class="text-white/70 hover:text-white transition-colors" href="#chi-sono">Chi sono</a>
-                <a class="text-white/70 hover:text-white transition-colors" href="#contatti">Contatti</a>
-            </div>
-            <div class="flex items-center gap-4">
-                <button
-                    class="hidden lg:block bg-white text-primary px-7 py-2.5 rounded-xl font-headline font-bold text-[11px] uppercase tracking-widest hover:bg-accent-blue transition-colors shadow-lg"
-                    onclick="window.location.href='#contatti'">
-                    Richiedi Consulto
-                </button>
-            </div>
+            <a href="#contatti"
+                class="hidden md:block text-[10px] uppercase tracking-widest font-bold bg-black text-white px-5 py-2 transition-colors opacity-90 hover:opacity-100 btn-contact-hover">
+                Contatti
+            </a>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="hamburger-btn" class="hamburger md:hidden focus:outline-none" onclick="toggleMobileMenu()" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Fullscreen Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
+        <div class="menu-label font-headline">Menu</div>
+        <nav>
+            <a class="menu-link font-headline" href="#chi-sono" onclick="toggleMobileMenu()">Chi sono</a>
+            <a class="menu-link font-headline" href="#servizi" onclick="toggleMobileMenu()">Servizi</a>
+            <a class="menu-link font-headline" href="#lavori" onclick="toggleMobileMenu()">Portfolio</a>
+            <a class="menu-link font-headline" href="#contatti" onclick="toggleMobileMenu()">Contatti</a>
         </nav>
+        <a class="menu-cta font-headline" href="#contatti" onclick="toggleMobileMenu()">Richiedi Consulto</a>
     </div>
 
-    <div onclick="window.location.href='/'" class="lg:hidden cursor-pointer fixed top-6 left-8 z-[100]">
-        <div
-            class="bg-primary/40 backdrop-blur-xl rounded-xl px-4 h-16 border border-accent-blue/20 shadow-2xl flex items-center gap-2">
-            <span class="w-2.5 h-2.5 bg-secondary rounded-full"></span>
-            <span
-                class="text-[10px] sm:text-sm font-black tracking-tighter text-white font-headline uppercase leading-none">Ing.
-                Davide Moretti</span>
-        </div>
-    </div>
-
-    <button id="menu-toggle"
-        class="lg:hidden bg-primary/40 backdrop-blur-xl rounded-xl h-16 w-16 border border-accent-blue/20 shadow-2xl flex items-center justify-center fixed top-6 right-8 z-[100]">
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </button>
-
-
-
-
-
-    <!-- Mobile Navigation Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 z-[140] hidden bg-primary/40 opacity-0">
-        <div class="absolute right-0 top-0 h-full w-[80%] max-w-sm glass-effect border-l border-white/10 p-10 flex flex-col translate-x-full transition-transform duration-500 ease-out"
-            id="menu-content">
-
-
-            <div class="flex justify-between items-center mb-16">
-                <div class="text-xl font-black tracking-tighter text-white font-headline">MENU</div>
-                <!-- Handled by the same toggle button in the navbar for "X" effect -->
+    <!-- Hero Section -->
+    <section class="stacked-section h-screen w-full relative z-[10] bg-black" id="hero">
+        <div class="pin-inner w-full h-full flex items-center justify-center overflow-hidden">
+            <!-- Background Video -->
+            <div class="absolute inset-0 z-0 opacity-90 overflow-hidden">
+                <div class="absolute inset-0 video-overlay z-10"></div>
+                <video autoplay loop muted playsinline onended="this.play()" class="w-full h-full object-cover scale-[1.25] origin-center">
+                    <source src="assets/lavori - Davide Moretti (1080p, h264, youtube).mp4" type="video/mp4" />
+                </video>
             </div>
-            <nav class="flex flex-col gap-8 font-headline font-bold text-2xl tracking-tight text-white">
-                <a class="hover:text-accent-blue transition-colors" href="#servizi" onclick="closeMenu()">Servizi</a>
-                <a class="hover:text-accent-blue transition-colors" href="#progetti" onclick="closeMenu()">Portfolio</a>
-                <a class="hover:text-accent-blue transition-colors" href="#chi-sono" onclick="closeMenu()">Chi sono</a>
-                <a class="hover:text-accent-blue transition-colors" href="#metodo" onclick="closeMenu()">Metodo</a>
-                <a class="hover:text-accent-blue transition-colors" href="#contatti" onclick="closeMenu()">Contatti</a>
-            </nav>
-            <div class="mt-auto">
-                <button
-                    class="w-full bg-white text-primary px-8 py-5 rounded-2xl font-headline font-black text-sm uppercase tracking-widest"
-                    onclick="window.location.href='#contatti'; closeMenu()">
-                    Richiedi Consulto
-                </button>
+            <div class="relative z-20 text-center px-6 mt-14 max-w-5xl mx-auto">
+                <span class="inline-block text-white/50 tracking-[0.4em] uppercase text-[10px] mb-8 font-bold gsap-hero-reveal">Progettazione Integrata</span>
+                <h1 class="text-white font-headline font-semibold text-5xl md:text-7xl lg:text-[6rem] tracking-tighter mb-10 leading-[1.05] gsap-hero-reveal">Ingegneria.<br />Progettata per l'eccellenza.</h1>
+                <p class="text-white/50 text-xs md:text-sm tracking-[0.5em] uppercase font-bold opacity-0 gsap-hero-subtext">|| Ingegneria Civile • Strutturale • Sismica ||</p>
             </div>
-        </div>
-    </div>
-
-
-    <!-- Simplified Floating Mobile CTA -->
-    <div id="floating-cta"
-        class="fixed bottom-6 right-6 z-[90] lg:hidden transition-all duration-500 bg-primary/40 rounded-full shadow-2xl border border-white/20 backdrop-blur-xl"
-        style="backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
-        <button id="floating-cta-button"
-            class="text-white w-14 h-14 rounded-full flex items-center justify-center hover:bg-secondary/20 active:scale-95 transition-all"
-            onclick="window.location.href='#contatti'">
-            <span class="material-symbols-outlined text-2xl">mail</span>
-        </button>
-    </div>
-
-
-
-
-    <!-- Hero Section with Full-Screen Video Background -->
-    <header class="relative min-h-screen flex flex-col justify-center overflow-hidden bg-primary">
-        <!-- Video Background Container -->
-        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            <video autoplay muted loop playsinline webkit-playsinline preload="auto"
-                class="w-full h-full object-cover scale-[1.2] origin-top">
-
-                <source src="assets/lavori - Davide Moretti (1080p, h264, youtube).mp4" type="video/mp4">
-            </video>
-            <!-- Dark Overlay -->
-            <div class="absolute inset-0 hero-overlay"></div>
-        </div>
-
-        <div class="container mx-auto px-8 relative z-20 text-white">
-            <div class="max-w-4xl">
-                <div
-                    class="inline-flex items-center gap-3 mb-4 md:mb-8 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
-                    <span class="relative flex h-2 w-2">
-                        <span
-                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-blue opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-blue"></span>
-                    </span>
-                    <span class="text-[10px] font-black uppercase tracking-widest text-white/90">In Corso: Progetto
-                        Placeholder</span>
-                </div>
-                <h1
-                    class="text-5xl md:text-8xl lg:text-[10rem] font-headline font-black tracking-tighter leading-[0.9] lg:leading-[0.8] mb-6 md:mb-12">
-                    Precisione<br />Architettata.
-                </h1>
-                <p class="text-xl md:text-2xl text-white/80 max-w-2xl leading-relaxed mb-8 md:mb-12 font-medium">
-                    Sintetizziamo rigore fisico e visione avanguardista per definire le infrastrutture del futuro
-                    attraverso una consulenza tecnica specializzata e umana.
-                </p>
-                <div class="flex flex-wrap gap-6">
-                    <button
-                        class="bg-white text-primary px-12 py-6 rounded-2xl font-headline font-black text-sm uppercase tracking-widest hover:bg-accent-blue transition-all shadow-2xl"
-                        onclick="window.location.href='#contatti'">
-                        Inizia Progetto
-                    </button>
-                    <button
-                        class="glass-effect text-white px-12 py-6 rounded-2xl font-headline font-black text-sm uppercase tracking-widest hover:bg-white/10 transition-all border border-white/30"
-                        onclick="window.location.href='#progetti'">
-                        Portfolio Progetti
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Scrolling Ticker Bottom -->
-        <div
-            class="absolute bottom-6 md:bottom-12 w-full border-y border-white/10 py-3 overflow-hidden whitespace-nowrap z-10 glass-effect">
-            <div class="animate-ticker flex gap-20 items-center">
-                <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/50">Ingegneria Strutturale
-                    2026</span>
-                <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/50">Recupero Edilizio
-                    Sismico</span>
-                <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/50">Modellazione FEM
-                    Avanzata</span>
-                <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/50">Sicurezza in
-                    Cantiere</span>
-                <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/50">Direzione Lavori
-                    Tecnica</span>
-            </div>
-        </div>
-    </header>
-
-    <!-- Stats Section -->
-    <section class="py-24 bg-primary relative overflow-hidden border-t border-white/10">
-        <div class="container mx-auto px-8 relative z-10">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
-                <div>
-                    <div class="text-4xl md:text-7xl font-headline font-black text-white mb-2">+150</div>
-                    <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Progetti
-                        Completati</div>
-                </div>
-                <div>
-                    <div class="text-4xl md:text-7xl font-headline font-black text-white mb-2">10</div>
-                    <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Anni di Esperienza
-                    </div>
-                </div>
-                <div>
-                    <div class="text-4xl md:text-7xl font-headline font-black text-white mb-2">0</div>
-                    <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Errori Strutturali
-                    </div>
-                </div>
-                <div>
-                    <div class="text-4xl md:text-7xl font-headline font-black text-white mb-2">100%</div>
-                    <div class="text-[10px] font-black uppercase tracking-widest text-accent-blue/60">Rigore Tecnico
-                    </div>
-                </div>
+            <div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-4 opacity-70">
+                <div class="w-px h-16 bg-gradient-to-b from-white/0 via-white/50 to-white/0"></div>
+                <span class="text-[9px] uppercase tracking-[0.3em] font-bold text-white/40">Scroll</span>
             </div>
         </div>
     </section>
 
-    <!-- Processo Operativo Section -->
-    <section class="py-32 bg-white relative moving-grid" id="metodo">
-        <div class="container mx-auto px-8 relative z-10">
-            <div class="grid lg:grid-cols-3 gap-8 items-stretch">
-                <!-- Step 01 -->
-                <div
-                    class="glass-effect bg-white border border-primary/5 p-12 rounded-[2.5rem] shadow-xl reveal flex flex-col justify-between group hover:translate-y-[-10px] transition-transform duration-500">
-                    <div
-                        class="text-5xl font-black mb-10 opacity-10 group-hover:opacity-20 transition-opacity text-primary">
-                        01</div>
-                    <div>
-                        <div class="text-[10px] font-black uppercase tracking-widest mb-4 text-secondary">Il Metodo
-                            Moretti</div>
-                        <h3
-                            class="text-3xl md:text-4xl font-headline font-black text-primary tracking-tighter leading-tight mb-8">
-                            Processo Operativo Certificato</h3>
-                        <p class="text-primary/70 text-lg leading-relaxed">Un protocollo rigoroso di analisi,
-                            simulazione
-                            e verifica per l'eccellenza strutturale e normativa.</p>
-                    </div>
-                </div>
-
-                <!-- Step 02 -->
-                <div
-                    class="bg-primary p-12 rounded-[2.5rem] text-white shadow-2xl reveal delay-200 flex flex-col justify-between group hover:translate-y-[-10px] transition-transform duration-500">
-                    <div class="text-5xl font-black mb-10 opacity-20 group-hover:opacity-40 transition-opacity">02</div>
-                    <div>
-                        <div class="text-[10px] font-black uppercase tracking-widest mb-4 text-accent-blue">Analisi e
-                            Sviluppo</div>
-                        <h4 class="text-2xl md:text-3xl font-headline font-black mb-4">Analisi Gestione Computazionale
-                        </h4>
-                        <p class="text-white/60 text-lg leading-relaxed">Modellazione FEM avanzata per l'ottimizzazione
-                            strutturale e calcolo delle sollecitazioni critiche.</p>
-                    </div>
-                </div>
-
-                <!-- Step 03 -->
-                <div
-                    class="bg-secondary p-12 rounded-[2.5rem] text-white shadow-2xl reveal delay-400 flex flex-col justify-between group hover:translate-y-[-10px] transition-transform duration-500">
-                    <div class="text-5xl font-black mb-10 opacity-20 group-hover:opacity-40 transition-opacity">03</div>
-                    <div>
-                        <div class="text-[10px] font-black uppercase tracking-widest mb-4 text-white/50">Cantiere e
-                            Verifica</div>
-                        <h4 class="text-2xl md:text-3xl font-headline font-black mb-4">Esecuzione e Direzione Lavori
-                        </h4>
-                        <p class="text-white/80 text-lg leading-relaxed">Supervisione tecnica costante in cantiere per
-                            garantire la massima fedeltà al progetto esecutivo.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="py-32 bg-white relative moving-grid" id="servizi">
-        <div class="container mx-auto px-8 relative z-10">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
-                <div class="max-w-2xl">
-                    <h2 class="text-[10px] font-black text-secondary uppercase tracking-[0.5em] mb-4">Competenze Core
-                    </h2>
-                    <h3 class="text-4xl md:text-7xl font-headline font-black text-primary tracking-tighter">Ingegneria
-                        di Frontiera</h3>
-                </div>
-                <p class="text-primary/50 font-medium max-w-sm text-right">Specializzazioni tecniche per interventi
-                    strutturali complessi e miglioramento sismico.</p>
-            </div>
-            <div class="grid md:grid-cols-6 lg:grid-cols-12 gap-6">
-                <div
-                    class="md:col-span-6 lg:col-span-8 group relative bg-primary rounded-[2.5rem] p-12 md:p-20 overflow-hidden flex flex-col justify-end min-h-[550px] shadow-2xl reveal">
-                    <div class="relative z-10">
-                        <div
-                            class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-white backdrop-blur-md mb-8">
-                            <span class="material-symbols-outlined text-4xl">foundation</span>
+    <!-- Biography Section (Chi sono) -->
+    <section class="stacked-section relative bg-white text-on-surface z-[20] border-b border-outline-variant/30" id="chi-sono" style="min-height: 100svh;">
+        <div class="pin-inner w-full h-full flex items-start md:items-center">
+            <div class="absolute inset-0 blueprint-grid opacity-20 pointer-events-none"></div>
+            <div class="max-w-6xl mx-auto px-6 relative py-24 md:py-32 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                    <!-- Left Column: Bio Card -->
+                    <div class="relative gsap-fade-up">
+                        <div class="bg-white p-4 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] rounded-[2.5rem] relative z-10">
+                            <img class="w-full aspect-square md:aspect-[4/5] object-cover rounded-[2rem]" alt="Ing. Davide Moretti Portrait" src="assets/ingmoretti.webp" />
                         </div>
-                        <span
-                            class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-white/50 text-[10px] font-black uppercase tracking-widest mb-6">Ingegneria
-                            Civile</span>
-                        <h4 class="text-3xl md:text-6xl font-headline font-black text-white mb-8 leading-tight">
-                            Progettazione Strutturale <br class="hidden md:block" />BIM Livello 3</h4>
-                        <p class="text-white/70 text-xl mb-12 max-w-2xl">Implementazione modelli parametrici avanzati
-                            per l'ottimizzazione dell'efficienza strutturale durante l'intero ciclo vita dell'opera.</p>
-                        <button
-                            class="flex items-center gap-4 text-white font-black text-xs uppercase tracking-[0.2em] group-hover:gap-8 transition-all whitespace-nowrap"
-                            onclick="window.location.href='#contatti'">
-                            Scopri il processo <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                        </button>
-
+                        <!-- Decorative back layer -->
+                        <div class="absolute -bottom-6 -right-6 w-full h-full bg-[#f5f5f7] rounded-[2.5rem] -z-0 opacity-50"></div>
                     </div>
-                </div>
-                <div
-                    class="md:col-span-6 lg:col-span-4 group bg-white rounded-[2.5rem] p-12 hover:shadow-2xl transition-all border border-primary/5 flex flex-col justify-between reveal delay-200">
-                    <div>
-                        <div class="flex items-start justify-between mb-10">
-                            <div
-                                class="w-16 h-16 bg-accent-blue/10 rounded-2xl flex items-center justify-center text-primary">
-                                <span class="material-symbols-outlined text-3xl">vibration</span>
+
+                    <!-- Right Column: Content -->
+                    <div class="gsap-fade-up">
+                        <span class="text-[#60a5fa] tracking-[0.4em] uppercase text-[9px] mb-4 block font-bold">|| CHI SONO ||</span>
+                        <h2 class="font-headline font-bold text-5xl md:text-6xl tracking-tight text-[#001f3f] mb-8 leading-tight">Ing. Davide Moretti</h2>
+                        <div class="space-y-8 text-[#1d1d1f] text-base md:text-lg leading-relaxed font-light">
+                            <p>Laureato con lode in Ingegneria Civile presso l'Università degli Studi di Trento, <strong>Davide Moretti</strong> opera a Gonzaga (MN) specializzandosi nella sintesi tra rigore strutturale e architettura funzionale.</p>
+                            <div class="border-l-4 border-[#60a5fa] pl-6 py-2 my-10 italic font-medium text-[#001f3f] text-xl">"L'ingegneria non è solo calcolo; è l'arte tecnica di rendere l'impossibile strutturalmente solido."</div>
+                            <p>Focus primario sul recupero edilizio e sul miglioramento sismico, fornendo consulenze tecniche e perizie per privati, aziende ed enti pubblici.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-4 mt-12 pb-2">
+                            <a href="mailto:info@ingmoretti.com" class="flex items-center gap-3 bg-[#001f3f] text-white px-8 py-4 rounded-2xl font-bold text-[11px] uppercase tracking-widest hover:bg-[#60a5fa] transition-all shadow-lg hover:shadow-[#001f3f]/20 focus:outline-none grow md:grow-0 justify-center md:justify-start">
+                                <span class="material-symbols-outlined text-lg">mail</span>
+                                <div class="text-left flex flex-col items-start leading-tight">
+                                    <span class="text-[8px] opacity-60 uppercase">Contattaci</span>
+                                    <span>Email Professionale</span>
+                                </div>
+                            </a>
+                            <div class="flex gap-4 grow md:grow-0 justify-center md:justify-start">
+                                <a href="https://linkedin.com" target="_blank" class="w-14 h-14 bg-[#f5f5f7] text-[#0077b5] flex items-center justify-center rounded-2xl transition-all duration-300 hover:bg-[#0077b5] hover:text-white focus:outline-none" title="LinkedIn"><i class="fa-brands fa-linkedin text-2xl"></i></a>
+                                <a href="https://instagram.com" target="_blank" class="w-14 h-14 bg-[#f5f5f7] text-[#e4405f] flex items-center justify-center rounded-2xl transition-all duration-300 hover:bg-[#e4405f] hover:text-white focus:outline-none" title="Instagram"><i class="fa-brands fa-instagram text-2xl"></i></a>
                             </div>
-                            <span class="text-[10px] font-black text-secondary uppercase tracking-widest">Sismica
-                                4.0</span>
                         </div>
-                        <h4 class="text-3xl font-headline font-black text-primary mb-6">Adeguamento Sismico</h4>
-                        <p class="text-primary/60 text-lg leading-relaxed mb-10">Analisi dinamiche lineari e non lineari
-                            per edifici esistenti in cemento armato, muratura o legno.</p>
                     </div>
-                    <ul class="space-y-4">
-                        <li class="flex items-center gap-3 text-sm font-bold text-primary uppercase tracking-tight">
-                            <span class="w-2 h-2 rounded-full bg-secondary"></span> Vulnerabilità Sismica
-                        </li>
-                        <li class="flex items-center gap-3 text-sm font-bold text-primary uppercase tracking-tight">
-                            <span class="w-2 h-2 rounded-full bg-secondary"></span> Rinforzi Strutturali
-                        </li>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services (Servizi) -->
+    <section class="stacked-section relative min-h-screen bg-[#001f3f] text-white z-[30]" id="servizi" style="min-height: 100svh;">
+        <div class="pin-inner w-full h-full flex items-start md:items-center">
+            <div class="absolute inset-0 pointer-events-none opacity-10">
+                <div class="absolute top-0 left-0 w-full h-full blueprint-grid grayscale invert"></div>
+            </div>
+            <div class="max-w-6xl mx-auto px-6 relative py-24 md:py-32 w-full">
+                <div class="flex flex-col lg:flex-row gap-20 items-start">
+                    <div class="lg:w-1/3 gsap-fade-up">
+                        <span class="text-[#60a5fa] tracking-[0.3em] uppercase text-[10px] mb-6 block font-bold">|| COMPETENZE ||</span>
+                        <h2 class="font-headline font-bold text-4xl md:text-6xl tracking-tight mb-8 leading-tight">Rigore e<br />Visione.</h2>
+                        <p class="text-white/60 text-lg leading-relaxed font-light">Offriamo un set di servizi integrati per la progettazione civile, sismica ed ecosostenibile, garantendo la massima aderenza agli standard qualitativi vigenti.</p>
+                    </div>
+
+                    <div class="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6 gsap-fade-right">
+                        <div class="bg-white/5 border border-white/10 p-6 md:p-10 hover:bg-[#60a5fa]/20 transition-all group">
+                            <span class="material-symbols-outlined text-4xl text-[#60a5fa] mb-6 group-hover:scale-110 transition-transform">architecture</span>
+                            <h4 class="text-xl font-bold mb-4">Progettazione Integrata</h4>
+                            <p class="text-white/50 text-sm leading-relaxed">Dal concept architettonico al calcolo strutturale esecutivo, gestiamo l'intero ciclo di vita dell'opera con precisione millimetrica.</p>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 p-6 md:p-10 hover:bg-[#60a5fa]/20 transition-all group">
+                            <span class="material-symbols-outlined text-4xl text-[#60a5fa] mb-6 group-hover:scale-110 transition-transform">foundation</span>
+                            <h4 class="text-xl font-bold mb-4">Miglioramento Sismico</h4>
+                            <p class="text-white/50 text-sm leading-relaxed">Specializzati nell'adeguamento di edifici esistenti attraverso analisi vulnerabilità e soluzioni di rinforzo strutturale innovative.</p>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 p-6 md:p-10 hover:bg-[#60a5fa]/20 transition-all group">
+                            <span class="material-symbols-outlined text-4xl text-[#60a5fa] mb-6 group-hover:scale-110 transition-transform">home_repair_service</span>
+                            <h4 class="text-xl font-bold mb-4">Recupero Edilizio</h4>
+                            <p class="text-white/50 text-sm leading-relaxed">Valorizziamo il patrimonio esistente con interventi di risanamento conservativo e riqualificazione funzionale ad alta efficienza.</p>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 p-6 md:p-10 hover:bg-[#60a5fa]/20 transition-all group">
+                            <span class="material-symbols-outlined text-4xl text-[#60a5fa] mb-6 group-hover:scale-110 transition-transform">assignment</span>
+                            <h4 class="text-xl font-bold mb-4">Consulenze Tecniche</h4>
+                            <p class="text-white/50 text-sm leading-relaxed">Perizie, stime, due diligence immobiliari e assistenza tecnica come CTU e CTP per procedimenti giudiziari complessi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Portfolio (Apple Style Slider) -->
+    <section class="stacked-section relative min-h-screen bg-surface-container-low z-[40] pb-16 md:pb-40" id="lavori" style="min-height: 100svh;">
+        <div class="pin-inner w-full h-full flex flex-col justify-center">
+            <div class="max-w-6xl mx-auto px-6 py-24 md:py-32 w-full">
+                <div class="text-center mb-16 gsap-fade-up">
+                    <span class="text-[#60a5fa] tracking-[0.3em] uppercase text-[10px] mb-6 block font-bold">|| PORTFOLIO 2024 ||</span>
+                    <h2 class="text-[#001f3f] font-headline font-bold text-4xl md:text-5xl tracking-tight leading-tight">Progetti Selezionati.</h2>
+                </div>
+
+                <!-- Swiper Container -->
+                <div class="swiper portfolio-swiper pb-10 md:pb-20">
+                    <div class="swiper-wrapper">
+                        <!-- Project 1 -->
+                        <div class="swiper-slide project-card cursor-pointer group" onclick="openPortfolioModal('pr-1')">
+                            <div class="px-0 md:px-4">
+                                <div class="relative w-full aspect-[4/3] overflow-hidden mb-6 bg-surface hover-glow rounded-3xl md:rounded-none">
+                                    <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-grayscale duration-500 scale-105 group-hover:scale-100 ease-out"
+                                        alt="Polo Logistico Nexus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBIy9oAWvSORsXLB0IPurjhTMjKXVHTUJNDGjeQ-d248HjsHVkZshSvACbIFH8tQOYB7JREP4zg3JkiwYIdurjk1P230Ie4bXXK6zv1ylBRAYyp6y0D1QMClDUwNeAyVkofMJ8aVXQP5hbILYDuQ1rEullHuI3hH-J-3xvk37CeFhvMuc79xiTXGRMnHyits-_d6jfYlHu64tJ7VScIyURuTLCXjHcosiyq3f-h7fm3OZDCftSnkX06VhnTwWPCZRIRk6IFxVX5hCb" />
+                                    <div class="absolute inset-0 border border-black/10 pointer-events-none"></div>
+                                </div>
+                                <div class="flex justify-between items-end">
+                                    <div>
+                                        <span class="text-[10px] uppercase font-bold tracking-widest text-[#86868b] mb-2 block">Ingegneria Sismica</span>
+                                        <h3 class="font-headline font-semibold text-2xl text-on-surface">Polo Logistico Nexus</h3>
+                                    </div>
+                                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#60a5fa] transition-colors">arrow_forward</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="swiper-slide project-card cursor-pointer group" onclick="openPortfolioModal('pr-2')">
+                            <div class="px-0 md:px-4">
+                                <div class="relative w-full aspect-[4/3] overflow-hidden mb-6 bg-surface hover-glow rounded-3xl md:rounded-none">
+                                    <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-grayscale duration-500 scale-105 group-hover:scale-100 ease-out"
+                                        alt="Corporate Headquarters" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1NI0IAzXGvRExBSCQEmuMiQrPUa5UToOlNRx9dkVMSO8FWDXXWOhOf8rAVkjDBpwIubiu1XN-CclQyOneI1zxBQG67Dd-bs843sFUX0_oVUSSGu0CmHE-QQtONZjjyx0P4fRMAxATH1jPdJmwYuboqEbakM_frCLtHA18EFUx7fmeaK8klckNgg8gDNC_yRvo8kUNn41YXTY6pZIvPbbMGWfCSfLeX5G76EVxHIDoQEqT2X85-69e61hkKBB6wXcONds37dvXYBG4" />
+                                    <div class="absolute inset-0 border border-black/10 pointer-events-none"></div>
+                                </div>
+                                <div class="flex justify-between items-end">
+                                    <div>
+                                        <span class="text-[10px] uppercase font-bold tracking-widest text-[#86868b] mb-2 block">Architettura Tecnica</span>
+                                        <h3 class="font-headline font-semibold text-2xl text-on-surface">Corporate Headquarters Verona</h3>
+                                    </div>
+                                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#60a5fa] transition-colors">arrow_forward</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 3 -->
+                        <div class="swiper-slide project-card cursor-pointer group" onclick="openPortfolioModal('pr-3')">
+                            <div class="px-0 md:px-4">
+                                <div class="relative w-full aspect-[4/3] overflow-hidden mb-6 bg-surface hover-glow rounded-3xl md:rounded-none">
+                                    <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-grayscale duration-500 scale-105 group-hover:scale-100 ease-out"
+                                        alt="Centro Sportivo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGpczzIWrZ0mg8hD_ON4hgtMw_efxpl-IFmzsOCW6LVr-yPwxQzg7Nc4i228g0lLLmcVXTbOwFoT11pxMXy9YOnROvuEucCpAMcmuWE07eBBmFe5-cdhm9ISyG9N7G__ajoNg7o4KddmvUn4jxW9nWSVp4mW3nt4FjaLrDm2xk3Lgg-gfK7U43z1bR38qFo8AwmSfShGvtuz984Qs0EFoAwsxKwoCZhP06ceny2oO-GJ8IqYj02f5OHU40kPhgxDXASRhsH8B1YN1z" />
+                                    <div class="absolute inset-0 border border-black/10 pointer-events-none"></div>
+                                </div>
+                                <div class="flex justify-between items-end">
+                                    <div>
+                                        <span class="text-[10px] uppercase font-bold tracking-widest text-[#86868b] mb-2 block">Consulenza Direzione Lavori</span>
+                                        <h3 class="font-headline font-semibold text-2xl text-on-surface">Polo Impiantistico Polivalente</h3>
+                                    </div>
+                                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#60a5fa] transition-colors">arrow_forward</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 4 -->
+                        <div class="swiper-slide project-card cursor-pointer group" onclick="openPortfolioModal('pr-4')">
+                            <div class="px-0 md:px-4">
+                                <div class="relative w-full aspect-[4/3] overflow-hidden mb-6 bg-surface hover-glow rounded-3xl md:rounded-none">
+                                    <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-grayscale duration-500 scale-105 group-hover:scale-100 ease-out"
+                                        alt="Messa in sicurezza" src="assets/ingmoretti.webp" />
+                                    <div class="absolute inset-0 border border-black/10 pointer-events-none"></div>
+                                </div>
+                                <div class="flex justify-between items-end">
+                                    <div>
+                                        <span class="text-[10px] uppercase font-bold tracking-widest text-[#86868b] mb-2 block">Recupero Edilizio</span>
+                                        <h3 class="font-headline font-semibold text-2xl text-on-surface">Intervento Messa in Sicurezza</h3>
+                                    </div>
+                                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#60a5fa] transition-colors">arrow_forward</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slider Navigation -->
+                    <div class="flex justify-center gap-6 mt-10 md:mt-16">
+                        <button class="swiper-prev bg-white border border-black/10 text-black p-3 md:p-4 hover:bg-[#60a5fa] hover:text-white transition-all shadow-sm">
+                            <span class="material-symbols-outlined">west</span>
+                        </button>
+                        <button class="swiper-next bg-white border border-black/10 text-black p-3 md:p-4 hover:bg-[#60a5fa] hover:text-white transition-all shadow-sm">
+                            <span class="material-symbols-outlined">east</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Reveal Overlay (Section Stacking Support) -->
+    <section class="stacked-section relative min-h-screen bg-[#001f3f] text-white z-[50] flex flex-col justify-center" id="contatti" style="min-height: 100svh;">
+        <div class="pin-inner w-full h-full flex flex-col justify-start md:justify-center">
+            <div class="absolute inset-0 pointer-events-none opacity-20 blueprint-grid grayscale invert"></div>
+            <div class="max-w-6xl mx-auto px-6 relative z-10 w-full py-24 md:py-32">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                    <div class="gsap-fade-up">
+                        <span class="text-[#60a5fa] tracking-[0.4em] uppercase text-[10px] mb-8 block font-bold">|| CONTATTI ||</span>
+                        <h2 class="font-headline font-bold text-5xl md:text-7xl tracking-tighter mb-12">Costruiamo il tuo<br /><span class="text-white/40">prossimo progetto.</span></h2>
+                        
+                        <div class="space-y-10 mt-16">
+                            <div class="flex items-start gap-6 group">
+                                <span class="material-symbols-outlined text-[#60a5fa] text-3xl group-hover:scale-110 transition-transform">location_on</span>
+                                <div class="space-y-2">
+                                    <h4 class="text-[#60a5fa] uppercase text-[9px] tracking-widest font-bold">Sede Operativa</h4>
+                                    <p class="text-xl font-light">Via Matteotti, 46<br />46023 Gonzaga (MN)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-6 group">
+                                <span class="material-symbols-outlined text-[#60a5fa] text-3xl group-hover:scale-110 transition-transform">contact_phone</span>
+                                <div class="space-y-2">
+                                    <h4 class="text-[#60a5fa] uppercase text-[9px] tracking-widest font-bold">Contatti Diretti</h4>
+                                    <a href="tel:+393478854345" class="block text-xl font-light hover:text-[#60a5fa] transition-colors">+39 347 885 4345</a>
+                                    <a href="mailto:info@ingmoretti.com" class="block text-xl font-light hover:text-[#60a5fa] transition-colors">info@ingmoretti.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-10 md:p-12 shadow-2xl gsap-fade-up">
+                        <h3 class="font-headline font-bold text-2xl mb-8 text-[#001f3f]">Invia un Messaggio</h3>
+                        <form class="space-y-6" onsubmit="event.preventDefault(); alert('Messaggio inviato con successo!');">
+                            <div class="grid grid-cols-1 gap-6">
+                                <div class="space-y-1">
+                                    <label class="text-[10px] uppercase tracking-widest font-bold text-[#86868b]">Nome Completo</label>
+                                    <input type="text" required class="w-full border-b border-black/10 py-3 focus:ring-0 focus:border-[#60a5fa] outline-none text-black bg-transparent" placeholder="Inserisci il tuo nome" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] uppercase tracking-widest font-bold text-[#86868b]">Indirizzo Email</label>
+                                    <input type="email" required class="w-full border-b border-black/10 py-3 focus:ring-0 focus:border-[#60a5fa] outline-none text-black bg-transparent" placeholder="email@esempio.com" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] uppercase tracking-widest font-bold text-[#86868b]">Messaggio</label>
+                                    <textarea required rows="4" class="w-full border-b border-black/10 py-3 focus:ring-0 focus:border-[#60a5fa] outline-none text-black bg-transparent resize-none" placeholder="Descrivi brevemente la tua richiesta..."></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="w-full bg-[#001f3f] text-white py-4 font-bold uppercase tracking-widest hover:bg-[#60a5fa] hover:text-[#001f3f] transition-all transform active:scale-95">
+                                Invia Richiesta
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Apple Inspired Style) -->
+    <footer class="relative bg-surface text-on-surface z-[60] pt-20 pb-12 border-t border-black/5">
+        <div class="max-w-6xl mx-auto px-6">
+            <!-- Top Footer: Columns -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 pb-16">
+                <!-- Column 1: Brand Showcase -->
+                <div class="space-y-6 md:col-span-1">
+                    <img src="assets/logoestesoingmoretti.png" alt="Ing. Davide Moretti" class="h-20 w-auto opacity-100 mb-2" />
+                    <p class="text-[11px] text-[#424245] leading-relaxed max-w-[240px]">
+                        Studio di ingegneria civile e architettonica specializzato in progettazione strutturale, miglioramento sismico e recupero del patrimonio edilizio esistente.
+                    </p>
+                </div>
+                <!-- Column 2: Navigazione (Matching Navbar) -->
+                <div class="space-y-4">
+                    <h4 class="text-[11px] font-bold uppercase tracking-widest text-[#1d1d1f]">Navigazione</h4>
+                    <ul class="space-y-2 text-[11px] text-[#424245]">
+                        <li><a href="#chi-sono" class="hover:underline hover:text-[#001f3f] transition-all">Chi sono</a></li>
+                        <li><a href="#servizi" class="hover:underline hover:text-[#001f3f] transition-all">Servizi</a></li>
+                        <li><a href="#lavori" class="hover:underline hover:text-[#001f3f] transition-all">Portfolio</a></li>
+                        <li><a href="#contatti" class="hover:underline hover:text-[#001f3f] transition-all">Contatti</a></li>
                     </ul>
                 </div>
-                <div
-                    class="md:col-span-3 lg:col-span-3 group bg-white rounded-3xl p-10 hover:shadow-2xl transition-all border border-primary/5 reveal delay-100">
-                    <span class="material-symbols-outlined text-secondary text-3xl mb-8">engineering</span>
-                    <h4 class="text-2xl font-headline font-black text-primary mb-4">Green Structures</h4>
-                    <p class="text-sm text-primary/70 leading-relaxed mb-6">Progettazione sostenibile con materiali a
-                        basso
-                        impatto e certificati.</p>
-                </div>
-                <div
-                    class="md:col-span-3 lg:col-span-3 group bg-white rounded-3xl p-10 hover:shadow-2xl transition-all border border-primary/5 reveal delay-300">
-                    <span class="material-symbols-outlined text-secondary text-3xl mb-8">rule</span>
-                    <h4 class="text-2xl font-headline font-black text-primary mb-4">Audit Tecnico</h4>
-                    <p class="text-sm text-primary/70 leading-relaxed mb-6">Verifiche di conformità e perizie tecniche
-                        per
-                        due-diligence immobiliari.</p>
-                </div>
-                <div
-                    class="md:col-span-6 lg:col-span-6 group bg-white rounded-3xl p-10 flex items-center justify-between border border-primary/5 hover:shadow-xl transition-all">
-                    <div class="max-w-sm">
-                        <h4 class="text-2xl font-headline font-black text-primary mb-4">Consulenza Direzione Lavori</h4>
-                        <p class="text-sm text-primary/60">Supervisione specialistica per grandi cantieri e opere
-                            pubbliche complesse.</p>
+                <!-- Column 3: Network & Social -->
+                <div class="space-y-4 md:pl-6">
+                    <h4 class="text-[11px] font-bold uppercase tracking-widest text-[#1d1d1f]">Connect</h4>
+                    <div class="flex gap-4">
+                        <a href="https://linkedin.com" target="_blank" class="text-xl text-[#86868b] hover:text-[#0077b5] transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://instagram.com" target="_blank" class="text-xl text-[#86868b] hover:text-[#e4405f] transition-colors"><i class="fa-brands fa-instagram"></i></a>
                     </div>
-                    <div
-                        class="w-16 h-16 rounded-full border border-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
-                        <span class="material-symbols-outlined">analytics</span>
+                    <div class="pt-4 space-y-1 text-[10px] text-[#86868b] uppercase tracking-wider">
+                        <p class="font-bold text-[#1d1d1f]">PEC</p>
+                        <p class="lowercase">davide.moretti1@ingpec.eu</p>
+                    </div>
+                </div>
+                <!-- Column 4: Studio Info -->
+                <div class="space-y-4">
+                    <h4 class="text-[11px] font-bold uppercase tracking-widest text-[#1d1d1f]">Studio</h4>
+                    <div class="text-[10px] text-[#86868b] leading-relaxed uppercase tracking-wider space-y-3">
+                        <p><strong>Sede:</strong> Via Principe Santo 5/B<br/>46023 Gonzaga (MN)</p>
+                        <p><strong>P.IVA:</strong> 02661130209<br/><strong>C.F.:</strong> MRTDVD95C22L020O</p>
+                        <p><strong>Ordine:</strong> Mantova n. 1800/A</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Progetti Iconici Section -->
-    <section class="py-32 bg-primary relative overflow-hidden" id="progetti">
-        <div class="absolute inset-0 opacity-5">
-            <svg height="100%" width="100%">
-                <pattern height="60" id="dark-grid" patternunits="userSpaceOnUse" width="60">
-                    <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" stroke-width="0.3"></path>
-                </pattern>
-                <rect fill="url(#dark-grid)" height="100%" width="100%"></rect>
-            </svg>
-        </div>
-        <div class="container mx-auto px-8 relative z-10">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-                <div>
-                    <h2 class="text-5xl md:text-7xl font-headline font-black text-white tracking-tighter">I nostri
-                        progetti</h2>
-                    <p class="text-white/40 mt-4 max-w-md">Una selezione di opere che hanno ridefinito i limiti
-                        dell'ingegneria contemporanea nel 2025-2026.</p>
+            <!-- Bottom Footer Section: Apple Style -->
+            <div class="border-t border-black/10 pt-6">
+                <div class="text-[11px] text-[#86868b] mb-4 leading-relaxed">
+                    Per approfondimenti tecnici o richieste di collaborazione, contatta <span class="text-[#001f3f] font-semibold">Ingegnere Davide Moretti</span>. 
+                    Tutti i dati e le comunicazioni PEC sono legalmente certificati.
                 </div>
-                <button
-                    class="bg-white/10 hover:bg-white text-white hover:text-primary px-8 py-4 rounded-xl font-headline font-black text-xs uppercase tracking-widest transition-all">
-                    Archivio Completo
-                </button>
-            </div>
-            <div class="grid lg:grid-cols-12 gap-10">
-                <!-- Large Featured Project Card -->
-                <div class="lg:col-span-7 group relative aspect-[4/3] rounded-[3rem] overflow-hidden reveal">
-                    <img alt="Progetto Placeholder"
-                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq_-QjJ46M-GBR_49b3jgsOccBaD5wK8-AI7Zqu6uVqmq9PA9wQpobc2dmZ2wF5MhEsoD2pTgc6MDmH7mlqX2wD1EW2uQrBe4nv-CQJTHcXG7pjNwrFzQ_p5Y8lSQ0Xu5QxCrc4wHuh9GJZUnp3xURWQhsRxRUi-0Xl0YZEUaoGnYEgFUMbh1HFp_9nMMvK3YPnXGJqdeY5fiXx2Zmn7IGIj3PrT0WaHMj5osCEIKL28zJFq5yP_zP6ZgGshjyp5sdydKljndMuERf" />
-                    <div class="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/20 to-transparent"></div>
-                    <div class="absolute bottom-12 left-12 right-12">
-                        <div class="text-[10px] font-black text-accent-blue uppercase tracking-widest mb-3">Residenziale
-                            // Progetto Placeholder</div>
-                        <h4 class="text-2xl md:text-4xl font-headline font-black text-white mb-2">PROGETTO PLACEHOLDER
-                        </h4>
-                        <div class="flex items-center gap-4 text-white/50 text-[10px] font-bold uppercase">
-                            <span>45 Livelli</span>
-                            <span class="w-1 h-1 bg-white/20 rounded-full"></span>
-                            <span>Struttura Acciaio-C.A.</span>
+                
+                <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
+                    <div class="flex-1">
+                        <p class="text-[11px] text-[#86868b] mb-1">Copyright © 2024 - 2026 Ing. Davide Moretti. Tutti i diritti riservati.</p>
+                        <div class="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-[#424245]">
+                            <button onclick="openLegalModal('privacy')" class="hover:underline focus:outline-none">Privacy Policy</button>
+                            <span class="text-black/10">|</span>
+                            <button onclick="openLegalModal('cookie')" class="hover:underline focus:outline-none">Utilizzo dei cookie</button>
+                            <span class="text-black/10">|</span>
+                            <button onclick="openLegalModal('terms')" class="hover:underline focus:outline-none">Note legali</button>
+                            <span class="text-black/10">|</span>
+                            <span class="hover:text-black cursor-default transition-colors">Italia</span>
                         </div>
                     </div>
-                </div>
-                <!-- Secondary Projects Stack -->
-                <div class="lg:col-span-5 flex flex-col gap-8">
-                    <div
-                        class="group relative flex-1 bg-white/5 rounded-[2.5rem] overflow-hidden border border-white/10 flex flex-col reveal delay-200">
-                        <div class="h-48 overflow-hidden">
-                            <img alt="Hub Logistico Placeholder"
-                                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq_-QjJ46M-GBR_49b3jgsOccBaD5wK8-AI7Zqu6uVqmq9PA9wQpobc2dmZ2wF5MhEsoD2pTgc6MDmH7mlqX2wD1EW2uQrBe4nv-CQJTHcXG7pjNwrFzQ_p5Y8lSQ0Xu5QxCrc4wHuh9GJZUnp3xURWQhsRxRUi-0Xl0YZEUaoGnYEgFUMbh1HFp_9nMMvK3YPnXGJqdeY5fiXx2Zmn7IGIj3PrT0WaHMj5osCEIKL28zJFq5yP_zP6ZgGshjyp5sdydKljndMuERf" />
-                        </div>
-                        <div class="p-8">
-                            <h5 class="text-xl font-headline font-bold text-white mb-2">HUB LOGISTICO PLACEHOLDER</h5>
-                            <p class="text-white/40 text-xs uppercase tracking-widest mb-6">Infrastruttura Industriale
-                            </p>
-                            <button
-                                class="text-accent-blue text-[10px] font-black uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all"
-                                onclick="window.location.href='#contatti'">
-                                Dettagli <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                            </button>
-
-                        </div>
+                    <div class="text-[9px] font-bold text-[#ceced2] uppercase tracking-[0.3em] hidden md:block">
+                        Progettazione & Strutture
                     </div>
-                    <div
-                        class="group relative flex-1 bg-white/5 rounded-[2.5rem] overflow-hidden border border-white/10 flex flex-col reveal delay-400">
-                        <div class="h-48 overflow-hidden">
-                            <img alt="Progetto Placeholder"
-                                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq_-QjJ46M-GBR_49b3jgsOccBaD5wK8-AI7Zqu6uVqmq9PA9wQpobc2dmZ2wF5MhEsoD2pTgc6MDmH7mlqX2wD1EW2uQrBe4nv-CQJTHcXG7pjNwrFzQ_p5Y8lSQ0Xu5QxCrc4wHuh9GJZUnp3xURWQhsRxRUi-0Xl0YZEUaoGnYEgFUMbh1HFp_9nMMvK3YPnXGJqdeY5fiXx2Zmn7IGIj3PrT0WaHMj5osCEIKL28zJFq5yP_zP6ZgGshjyp5sdydKljndMuERf" />
-                        </div>
-                        <div class="p-8">
-                            <h5 class="text-xl font-headline font-bold text-white mb-2">SERE TECH PLACEHOLDER</h5>
-                            <p class="text-white/40 text-xs uppercase tracking-widest mb-6">Ingegneria d'Interni</p>
-                            <button
-                                class="text-accent-blue text-[10px] font-black uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all"
-                                onclick="window.location.href='#contatti'">
-                                Dettagli <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                            </button>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Profile Section -->
-    <section id="chi-sono" class="py-32 bg-white relative moving-grid">
-        <div class="container mx-auto px-8 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-20 items-center">
-                <div class="relative reveal">
-                    <div class="absolute -top-10 -left-10 w-60 h-60 bg-accent-blue/10 rounded-full blur-[100px]"></div>
-                    <div
-                        class="relative z-10 rounded-[3rem] overflow-hidden aspect-[4/5] blue-glow border-8 border-white shadow-2xl">
-                        <img alt="Ing. Davide Moretti" class="w-full h-full object-cover"
-                            src="assets/ingmoretti.webp" />
-                    </div>
-                    <div
-                        class="absolute -bottom-8 -right-8 glass-effect p-10 rounded-3xl shadow-2xl border border-primary/10 bg-white/80">
-
-                        <div class="text-5xl font-black text-primary mb-1">1800/A</div>
-                        <div class="text-[10px] font-black uppercase tracking-widest text-secondary">Ordine Ingegneri
-                            Mantova</div>
-                    </div>
-                </div>
-                <div class="reveal delay-300">
-                    <h2 class="text-[10px] font-black text-secondary uppercase tracking-[0.5em] mb-4">Il Titolare</h2>
-                    <h3
-                        class="text-4xl md:text-7xl font-headline font-black text-primary tracking-tighter mb-10 leading-[0.9]">
-                        Ing. Davide Moretti</h3>
-                    <div class="space-y-6 text-primary/70 text-lg font-medium leading-relaxed">
-                        <p>Laureato con lode in Ingegneria Civile presso l'Università degli Studi di Trento, Davide
-                            Moretti opera a Gonzaga (MN) specializzandosi nella sintesi tra rigore strutturale e
-                            architettura funzionale.</p>
-                        <p class="text-primary italic font-black text-2xl border-l-4 border-secondary pl-6">
-                            "L'ingegneria non è solo calcolo; è l'arte tecnica di rendere l'impossibile strutturalmente
-                            solido."</p>
-                        <p>Focus primario sul recupero edilizio e sul miglioramento sismico, fornendo consulenze
-                            tecniche e perizie per privati, aziende ed enti pubblici.</p>
-                    </div>
-                    <div class="mt-12 flex flex-wrap gap-8">
-                        <a class="group flex items-center gap-4 bg-primary text-white border border-primary/10 hover:bg-secondary px-8 py-4 rounded-2xl transition-all shadow-xl"
-                            href="mailto:ing.davide.moretti@gmail.com">
-                            <span class="material-symbols-outlined">mail</span>
-                            <div class="text-left">
-                                <span class="block text-[10px] font-black uppercase tracking-widest opacity-60">Scrivimi
-                                    direttamente</span>
-                                <span class="block font-bold">Email Professionale</span>
-                            </div>
-                        </a>
-                        <a class="group flex items-center gap-4 bg-primary/5 hover:bg-primary hover:text-white px-8 py-4 rounded-2xl transition-all"
-                            href="https://www.linkedin.com" target="_blank">
-                            <span class="material-symbols-outlined text-secondary group-hover:text-white">share</span>
-                            <span class="text-[10px] font-black uppercase tracking-widest">LinkedIn</span>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Form Section -->
-    <section class="py-32 bg-white relative moving-grid" id="contatti">
-        <div class="container mx-auto px-8 max-w-7xl">
-            <div class="grid lg:grid-cols-12 gap-16 items-start">
-                <div class="lg:col-span-5 reveal">
-                    <h2 class="text-[10px] font-black text-secondary uppercase tracking-[0.5em] mb-4">Contatti</h2>
-                    <h3
-                        class="text-4xl md:text-7xl font-headline font-black text-primary tracking-tighter mb-8 leading-[0.9]">
-                        Hai un progetto ambizioso?</h3>
-                    <p class="text-primary/60 text-xl mb-12 font-medium">
-                        Compila il form per richiedere una consulenza tecnica specializzata. Analizzeremo la fattibilità
-                        della tua visione con rigore ingegneristico.
-                    </p>
-                    <div class="space-y-8">
-                        <div class="flex items-center gap-6">
-                            <div
-                                class="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary">
-                                <span class="material-symbols-outlined text-2xl">mail</span>
-                            </div>
-                            <div>
-                                <div class="text-[10px] font-black uppercase text-primary/40 mb-1">Email</div>
-                                <div class="font-bold text-primary text-base md:text-lg break-all">
-                                    ing.davide.moretti@gmail.com</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-6">
-                            <div
-                                class="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary">
-                                <span class="material-symbols-outlined text-2xl">phone</span>
-                            </div>
-                            <div>
-                                <div class="text-[10px] font-black uppercase text-primary/40 mb-1">Telefono</div>
-                                <div class="font-bold text-primary text-lg">+39 346 617 65 39</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-6">
-                            <div
-                                class="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary">
-                                <span class="material-symbols-outlined text-2xl">location_on</span>
-                            </div>
-                            <div>
-                                <div class="text-[10px] font-black uppercase text-primary/40 mb-1">Sede</div>
-                                <div class="font-bold text-primary text-lg">Via Principe Santo 5/B, Gonzaga (MN)</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="lg:col-span-7 bg-surface p-12 rounded-[3rem] border border-primary/5 shadow-2xl reveal delay-300">
-                    <form class="space-y-8" onsubmit="event.preventDefault(); alert('Grazie per averci contattato!');">
-                        <div class="grid md:grid-cols-2 gap-8">
-                            <div>
-                                <label
-                                    class="block text-[11px] font-black uppercase tracking-widest text-primary/60 mb-3">Nome
-                                    Completo</label>
-                                <input
-                                    class="w-full bg-white border border-primary/10 rounded-2xl px-6 py-5 text-sm focus:ring-2 focus:ring-secondary outline-none transition-all"
-                                    placeholder="Inserisci il tuo nome" type="text" required />
-                            </div>
-                            <div>
-                                <label
-                                    class="block text-[11px] font-black uppercase tracking-widest text-primary/60 mb-3">Email</label>
-                                <input
-                                    class="w-full bg-white border border-primary/10 rounded-2xl px-6 py-5 text-sm focus:ring-2 focus:ring-secondary outline-none transition-all"
-                                    placeholder="nome@esempio.it" type="email" required />
-                            </div>
-                        </div>
-                        <div>
-                            <label
-                                class="block text-[11px] font-black uppercase tracking-widest text-primary/60 mb-3">Oggetto</label>
-                            <input
-                                class="w-full bg-white border border-primary/10 rounded-2xl px-6 py-5 text-sm focus:ring-2 focus:ring-secondary outline-none transition-all"
-                                placeholder="Qual è l'argomento?" type="text" required />
-                        </div>
-                        <div>
-                            <label
-                                class="block text-[11px] font-black uppercase tracking-widest text-primary/60 mb-3">Messaggio</label>
-                            <textarea
-                                class="w-full bg-white border border-primary/10 rounded-2xl px-6 py-5 text-sm focus:ring-2 focus:ring-secondary outline-none resize-none transition-all"
-                                placeholder="Descrivi brevemente il tuo progetto..." rows="6" required></textarea>
-                        </div>
-                        <button
-                            class="w-full bg-primary text-white font-headline font-black text-xs md:text-sm uppercase tracking-widest py-6 rounded-2xl hover:bg-secondary transition-all shadow-xl shadow-primary/20"
-                            type="submit">
-                            Invia Richiesta di Consulto
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-white pt-32 pb-16 border-t border-primary/5">
-        <div class="container mx-auto px-8 max-w-7xl">
-            <div class="flex flex-col lg:flex-row justify-between items-start gap-20 mb-24">
-                <div class="max-w-md">
-                    <div class="text-3xl font-black text-primary font-headline tracking-tighter mb-8">ING. DAVIDE
-                        MORETTI</div>
-                    <p class="text-primary/50 text-base leading-relaxed mb-10">Specialista in integrità strutturale e
-                        miglioramento sismico. Precisione ingegneristica al servizio del patrimonio costruito attraverso
-                        tecnologie d'avanguardia.</p>
-                    <div class="flex gap-6">
-                        <a class="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary/40 hover:text-primary hover:bg-primary/10 transition-all"
-                            href="https://linkedin.com">
-                            <svg class="w-5 h-5 fill-current" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
-                                </path>
-                            </svg>
-                        </a>
-                        <a class="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary/40 hover:text-primary hover:bg-primary/10 transition-all"
-                            href="https://instagram.com">
-                            <svg class="w-5 h-5 fill-current" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
-                                </path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-20">
-                    <div>
-                        <h6 class="text-[11px] font-black uppercase tracking-widest text-secondary mb-10">Studio</h6>
-                        <ul class="space-y-5 text-sm font-bold text-primary/60">
-                            <li><a class="hover:text-primary transition-colors" href="#servizi">Servizi Tecnici</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="#progetti">Progetti</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="#metodo">Metodo Operativo</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="#contatti">Contatti</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h6 class="text-[11px] font-black uppercase tracking-widest text-secondary mb-10">Info Legali
-                        </h6>
-                        <ul class="space-y-5 text-sm font-bold text-primary/60">
-                            <li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="#">Termini e Condizioni</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-span-2 md:col-span-1">
-                        <h6 class="text-[11px] font-black uppercase tracking-widest text-secondary mb-10">Sede
-                            Principale</h6>
-                        <address class="not-italic text-sm font-bold text-primary/60 space-y-3">
-                            <p class="text-primary font-black">Gonzaga (MN), Italia</p>
-                            <p>Via Principe Santo 5/B</p>
-                            <p>46023 Gonzaga (MN)</p>
-                            <p class="pt-6 text-primary text-lg">+39 346 617 65 39</p>
-                        </address>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-primary/5 pt-16 flex flex-col md:flex-row justify-between items-center gap-12">
-                <div class="text-[11px] font-black text-primary/30 uppercase tracking-[0.2em]">
-                    © 2026 Ing. Davide Moretti. P.IVA 01234567890. Iscrizione Albo MN n. 1800/A.
-                </div>
-                <div
-                    class="font-headline font-black text-5xl md:text-9xl text-primary/5 tracking-tighter select-none pointer-events-none">
-                    INGEGNERIA
                 </div>
             </div>
         </div>
     </footer>
-    <!-- (Moved to Top for better control) -->
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner"
+        class="fixed bottom-4 left-1/2 -translate-x-1/2 md:left-auto md:right-8 md:translate-x-0 w-[calc(100vw-1rem)] md:w-96 bg-white border border-black/10 z-[30000] p-6 shadow-[0_10px_40px_rgba(0,0,0,0.1)] translate-y-[200%] transition-transform duration-700 ease-in-out overflow-hidden">
+        
+        <!-- Main View -->
+        <div id="cookie-main-view" class="flex flex-col gap-6">
+            <div class="text-[11px] text-[#86868b] leading-relaxed font-headline">
+                Questo sito utilizza cookie tecnici strettamente necessari per il funzionamento e, previo consenso,
+                cookie analitici e di profilazione per migliorare l'esperienza. Puoi gestire le preferenze tramite i
+                pulsanti qui sotto o cliccando su "Personalizza". Leggi l'informativa completa nella <span
+                    onclick="openLegalModal('cookie')" class="text-black underline cursor-pointer font-bold">Cookie
+                    Policy</span>.
+            </div>
+            <div class="flex flex-col gap-2">
+                <button onclick="handleCookies('accept')"
+                    class="bg-black text-white px-5 py-3 text-[9px] tracking-[0.2em] uppercase font-bold hover:bg-[#1d1d1f] transition-colors">Accetta
+                    Tutti</button>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="handleCookies('reject')"
+                        class="border border-black/20 text-black px-3 py-3 text-[9px] tracking-[0.2em] uppercase font-bold hover:bg-surface transition-colors">Rifiuta</button>
+                    <button onclick="handleCookies('customize')"
+                        class="border border-black/20 text-[#86868b] px-3 py-3 text-[9px] tracking-[0.2em] uppercase font-bold hover:text-black transition-colors">Personalizza</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom View (Initially Hidden) -->
+        <div id="cookie-custom-view" class="hidden opacity-0 flex flex-col gap-6">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleCookieView('main')" class="text-[#86868b] hover:text-black transition-colors p-1">
+                    <i class="fa-solid fa-arrow-left text-[10px]"></i>
+                </button>
+                <h3 class="text-[9px] uppercase tracking-[0.2em] font-bold text-black">Personalizza Cookie</h3>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Technical -->
+                <div class="flex items-center justify-between pb-4 border-b border-black/5">
+                    <div class="max-w-[70%]">
+                        <h4 class="font-bold text-black text-[9px] uppercase tracking-widest mb-0.5">Tecnici</h4>
+                        <p class="text-[10px] text-[#86868b] leading-tight">Necessari al funzionamento.</p>
+                    </div>
+                    <div class="relative w-8 h-4 bg-black/10 opacity-40">
+                        <div class="absolute right-0.5 top-0.5 bg-white w-3 h-3"></div>
+                    </div>
+                </div>
+                
+                <!-- Analytical -->
+                <div class="flex items-center justify-between pb-4 border-b border-black/5">
+                    <div class="max-w-[70%]">
+                        <h4 class="font-bold text-black text-[9px] uppercase tracking-widest mb-0.5">Analitici</h4>
+                        <p class="text-[10px] text-[#86868b] leading-tight">Statistiche sull'utilizzo.</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="banner-analytics" class="sr-only peer" checked>
+                        <div class="w-8 h-4 bg-black/10 peer-checked:bg-[#60a5fa] transition-colors"></div>
+                        <div class="absolute left-0.5 top-0.5 bg-white w-3 h-3 transition-transform peer-checked:translate-x-4 shadow-sm border border-black/5"></div>
+                    </label>
+                </div>
+                
+                <!-- Profiling -->
+                <div class="flex items-center justify-between">
+                    <div class="max-w-[70%]">
+                        <h4 class="font-bold text-black text-[9px] uppercase tracking-widest mb-0.5">Profilazione</h4>
+                        <p class="text-[10px] text-[#86868b] leading-tight">Esperienza su misura.</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="banner-profiling" class="sr-only peer">
+                        <div class="w-8 h-4 bg-black/10 peer-checked:bg-[#60a5fa] transition-colors"></div>
+                        <div class="absolute left-0.5 top-0.5 bg-white w-3 h-3 transition-transform peer-checked:translate-x-4 shadow-sm border border-black/5"></div>
+                    </label>
+                </div>
+            </div>
+
+            <button onclick="saveCustomCookies()"
+                class="bg-black text-white px-5 py-3 text-[9px] tracking-[0.2em] uppercase font-bold hover:bg-[#1d1d1f] transition-all active:scale-95">Salva Preferenze</button>
+        </div>
+    </div>
+
+    <!-- GSAP & Swiper Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 
     <script>
-
-
-        // Lock scroll during loading
-        document.body.style.overflow = 'hidden';
-        window.scrollTo(0, 0);
-
-        // Loading Screen Management with Real Progress Simulation
-        const startTime = Date.now();
-        const progressBar = document.querySelector('.loading-progress-bar');
-        let currentProgress = 0;
-
-        const progressInterval = setInterval(() => {
-            if (currentProgress < 92) {
-                currentProgress += Math.random() * 4;
-                if (currentProgress > 92) currentProgress = 92;
-                if (progressBar) progressBar.style.width = currentProgress + '%';
-            }
-        }, 180);
-
-        window.addEventListener('load', () => {
-            clearInterval(progressInterval);
-            if (progressBar) progressBar.style.width = '100%';
-
-            const loader = document.getElementById('loading-screen');
-            if (loader) {
-                const currentTime = Date.now();
-                const elapsedTime = currentTime - startTime;
-                const minDuration = 2500; // 2.5 seconds
-
-                const hideLoader = () => {
-                    window.scrollTo(0, 0);
-                    document.body.style.overflow = '';
-                    loader.style.transition = 'opacity 1s ease-in-out, transform 1s ease-in-out';
-                    loader.classList.add('opacity-0', 'pointer-events-none');
-                    loader.style.transform = 'translateY(-20px)';
-                    setTimeout(() => loader.remove(), 1000);
-                };
-
-                if (elapsedTime < minDuration) {
-                    setTimeout(hideLoader, minDuration - elapsedTime);
-                } else {
-                    hideLoader();
-                }
-            }
-        });
-
-
-
-        const menuToggle = document.getElementById('menu-toggle');
-
-        const hamburger = document.querySelector('.hamburger');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuContent = document.getElementById('menu-content');
-        let isMenuOpen = false;
-
-        function toggleMenu() {
-            if (!isMenuOpen) {
-                openMenu();
-            } else {
-                closeMenu();
-            }
-        }
-
-        function openMenu() {
-            isMenuOpen = true;
-            mobileMenu.classList.remove('hidden');
-            hamburger.classList.add('open');
-            menuToggle.classList.add('open');
-            setTimeout(() => {
-                mobileMenu.classList.add('active');
-                mobileMenu.classList.remove('opacity-0');
-                menuContent.classList.remove('translate-x-full');
-            }, 10);
-            document.body.classList.add('overflow-hidden');
-        }
-
-        function closeMenu() {
-            isMenuOpen = false;
-            mobileMenu.classList.remove('active');
-            mobileMenu.classList.add('opacity-0');
-            menuContent.classList.add('translate-x-full');
-            hamburger.classList.remove('open');
-            menuToggle.classList.remove('open');
-            setTimeout(() => {
-                mobileMenu.classList.add('hidden');
-            }, 500);
-            document.body.classList.remove('overflow-hidden');
-        }
-
-
-        menuToggle.addEventListener('click', toggleMenu);
-        mobileMenu.addEventListener('click', (e) => {
-            if (e.target === mobileMenu) closeMenu();
-        });
-
-        // Floating CTA Scroll Logic (Optimized Performance)
-        const floatingCta = document.getElementById('floating-cta');
-        const floatingCtaButton = document.getElementById('floating-cta-button');
-        const contactSection = document.getElementById('contatti');
-        let isTicking = false;
-
-        window.addEventListener('scroll', () => {
-            if (!isTicking) {
-                window.requestAnimationFrame(() => {
-                    // Hide logic only
-                    const contactRect = contactSection.getBoundingClientRect();
-                    if (contactRect.top < window.innerHeight - 100) {
-                        floatingCta.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
-                    } else {
-                        floatingCta.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
-                    }
-
-                    isTicking = false;
-                });
-                isTicking = true;
-            }
-        });
-
-        // Dynamic Reveal Observer
-        const revealObserverOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
+        // Data for Portfolio
+        const portfolioData = {
+            'pr-1': { title: 'Polo Logistico Nexus', category: 'Ingegneria Sismica', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCBIy9oAWvSORsXLB0IPurjhTMjKXVHTUJNDGjeQ-d248HjsHVkZshSvACbIFH8tQOYB7JREP4zg3JkiwYIdurjk1P230Ie4bXXK6zv1ylBRAYyp6y0D1QMClDUwNeAyVkofMJ8aVXQP5hbILYDuQ1rEullHuI3hH-J-3xvk37CeFhvMuc79xiTXGRMnHyits-_d6jfYlHu64tJ7VScIyURuTLCXjHcosiyq3f-h7fm3OZDCftSnkX06VhnTwWPCZRIRk6IFxVX5hCb', desc: 'Progettazione strutturale esecutiva per un hub logistico ad alta capacità nel mantovano. L\'intervento comprende analisi FEM complesse per ottimizzare la maglia strutturale e garantire ampi spazi di manovra interna senza colonne intermedie ingombranti.' },
+            'pr-2': { title: 'Corporate Headquarters Verona', category: 'Architettura Tecnica', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA1NI0IAzXGvRExBSCQEmuMiQrPUa5UToOlNRx9dkVMSO8FWDXXWOhOf8rAVkjDBpwIubiu1XN-CclQyOneI1zxBQG67Dd-bs843sFUX0_oVUSSGu0CmHE-QQtONZjjyx0P4fRMAxATH1jPdJmwYuboqEbakM_frCLtHA18EFUx7fmeaK8klckNgg8gDNC_yRvo8kUNn41YXTY6pZIvPbbMGWfCSfLeX5G76EVxHIDoQEqT2X85-69e61hkKBB6wXcONds37dvXYBG4', desc: 'Rifacimento integrale degli spazi aziendali e recupero della facciata di un Headquarters moderno in Veneto. L\'integrazione di sistemi a cappotto innovativi uniti a pratiche edilizie complete ha garantito l\'efficienza temporale in ambito cantiere.' },
+            'pr-3': { title: 'Polo Impiantistico Polivalente', category: 'Consulenza Direzione Lavori', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAGpczzIWrZ0mg8hD_ON4hgtMw_efxpl-IFmzsOCW6LVr-yPwxQzg7Nc4i228g0lLLmcVXTbOwFoT11pxMXy9YOnROvuEucCpAMcmuWE07eBBmFe5-cdhm9ISyG9N7G__ajoNg7o4KddmvUn4jxW9nWSVp4mW3nt4FjaLrDm2xk3Lgg-gfK7U43z1bR38qFo8AwmSfShGvtuz984Qs0EFoAwsxKwoCZhP06ceny2oO-GJ8IqYj02f5OHU40kPhgxDXASRhsH8B1YN1z', desc: 'Sviluppo strutturale e consulenza integrata per un nuovo centro polisportivo. Il progetto prevedeva ampie luci libere da ostacoli verticali strutturali, risolte mediante macro-coperture ingegnerizzate in acciaio.' },
+            'pr-4': { title: 'Intervento Messa in Sicurezza', category: 'Recupero Edilizio', img: 'assets/ingmoretti.webp', desc: 'Complesso intervento di messa in sicurezza su un edificio storico con criticità statiche. Intervento in chiave sostenibile e rispetto delle matrici architettoniche originali.' }
         };
 
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    // Once animated, no need to observe anymore
-                    revealObserver.unobserve(entry.target);
+        const legalData = {
+            'privacy': { 
+                title: 'Privacy Policy', 
+                content: `
+                    <div class="space-y-6">
+                        <p><strong>Informativa sul Trattamento dei Dati Personali (Art. 13 GDPR 2016/679)</strong></p>
+                        <p>Gentile Utente, ai sensi del Regolamento UE 2016/679 (GDPR), informiamo che i dati personali forniti attraverso questo sito saranno trattati con la massima riservatezza e professionalità.</p>
+                        
+                        <div>
+                            <h4 class="font-bold text-[#001f3f] mb-2 uppercase text-[11px] tracking-widest">1. Titolare del Trattamento</h4>
+                            <p>Il Titolare del trattamento è l'<strong>Ing. Davide Moretti</strong>, con sede operativa in Via Matteotti 46, 46023 Gonzaga (MN). Email: info@ingmoretti.com</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-[#001f3f] mb-2 uppercase text-[11px] tracking-widest">2. Finalità del Trattamento</h4>
+                            <p>I dati forniti sono utilizzati esclusivamente per:</p>
+                            <ul class="list-disc pl-5 mt-2 space-y-1">
+                                <li>Fornire i servizi di ingegneria e consulenza richiesti.</li>
+                                <li>Rispondere a quesiti e richieste di preventivo tramite il form di contatto.</li>
+                                <li>Adempiere ad obblighi di legge, contabili e fiscali.</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-[#001f3f] mb-2 uppercase text-[11px] tracking-widest">3. Base Giuridica</h4>
+                            <p>Il trattamento si basa sulla necessità di esecuzione di un contratto o di misure precontrattuali (Art. 6b GDPR) e sull'eventuale consenso esplicito per comunicazioni informative.</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-[#001f3f] mb-2 uppercase text-[11px] tracking-widest">4. Diritti dell'Interessato</h4>
+                            <p>L'utente ha il diritto di chiedere l'accesso ai propri dati, la rettifica, la cancellazione o la limitazione del trattamento. Le richieste vanno inviate via email al Titolare.</p>
+                        </div>
+                    </div>
+                ` 
+            },
+            'cookie': { 
+                title: 'Cookie Policy', 
+                content: `
+                    <div class="space-y-6">
+                        <p><strong>Informativa Estesa sui Cookie</strong></p>
+                        <p>Questo sito utilizza i cookie per migliorare l'esperienza utente e garantire il corretto funzionamento dei servizi offerti.</p>
+                        
+                        <div>
+                            <h4 class="font-bold text-[#001f3f] mb-2 uppercase text-[11px] tracking-widest">1. Cosa sono i Cookie?</h4>
+                            <p>I cookie sono piccoli file di testo che i siti visitati inviano al terminale dell'utente, dove vengono memorizzati per essere poi ritrasmessi agli stessi siti alla visita successiva.</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-[#001f3f] mb-2 uppercase text-[11px] tracking-widest">2. Tipologie di Cookie utilizzati</h4>
+                            <ul class="list-disc pl-5 mt-2 space-y-2">
+                                <li><strong>Cookie Tecnici:</strong> Necessari per la navigazione. Senza di essi il sito potrebbe non funzionare correttamente.</li>
+                                <li><strong>Cookie Analitici:</strong> Utilizzati per raccogliere informazioni in forma aggregata sul numero degli utenti e su come questi visitano il sito.</li>
+                                <li><strong>Cookie di Profilazione:</strong> Utilizzati per tracciare la navigazione e creare profili sulle preferenze dell'utente (attivi solo previo consenso).</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-[#001f3f] mb-2 uppercase text-[11px] tracking-widest">3. Gestione dei Consensi</h4>
+                            <p>È possibile modificare le preferenze sui cookie in ogni momento attraverso il banner presente sul sito o tramite le impostazioni del proprio browser.</p>
+                        </div>
+                    </div>
+                ` 
+            },
+            'terms': { 
+                title: 'Termini e Condizioni', 
+                content: `
+                    <div class="space-y-6">
+                        <p><strong>Condizioni Generali di Utilizzo</strong></p>
+                        <p>L'accesso e la navigazione su questo sito implicano l'accettazione delle presenti condizioni.</p>
+                        
+                        <div>
+                            <h4 class="font-bold text-[#001f3f] mb-2 uppercase text-[11px] tracking-widest">1. Proprietà Intellettuale</h4>
+                            <p>Tutti i contenuti (testi, immagini, progetti, loghi) sono di proprietà esclusiva dell'Ing. Davide Moretti o dei suoi licenziatari e sono protetti dalle leggi sul copyright. Ne è vietata la riproduzione non autorizzata.</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-[#001f3f] mb-2 uppercase text-[11px] tracking-widest">2. Responsabilità Professionale</h4>
+                            <p>Le informazioni fornite in questo sito hanno scopo puramente informativo e non costituiscono una consulenza professionale. L'attività professionale dell'Ing. Moretti è regolata dalle norme deontologiche dell'Albo degli Ingegneri.</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-[#001f3f] mb-2 uppercase text-[11px] tracking-widest">3. Legge Applicabile</h4>
+                            <p>Le presenti condizioni sono regolate dalla legge italiana. Ogni controversia relativa all'utilizzo del sito è soggetta alla competenza esclusiva del Foro di Mantova.</p>
+                        </div>
+                    </div>
+                ` 
+            },
+            'cookie-settings': {
+                title: 'Personalizza Cookie',
+                content: `
+                    <div class="space-y-8">
+                        <p class="text-sm text-[#86868b]">Gestisci le tue preferenze per i cookie qui sotto. I cookie tecnici sono necessari per il funzionamento di base del sito.</p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between pb-6 border-b border-black/5">
+                                <div>
+                                    <h4 class="font-bold text-[#001f3f] text-xs uppercase tracking-widest mb-1">Cookie Tecnici</h4>
+                                    <p class="text-[11px] text-[#86868b]">Sempre attivi per garantire la sicurezza e la navigazione.</p>
+                                </div>
+                                <div class="relative inline-block w-10 h-5 bg-[#001f3f] opacity-50 cursor-not-allowed">
+                                    <div class="absolute right-1 top-1 bg-white w-3 h-3"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between pb-6 border-b border-black/5">
+                                <div>
+                                    <h4 class="font-bold text-[#001f3f] text-xs uppercase tracking-widest mb-1">Cookie Analitici</h4>
+                                    <p class="text-[11px] text-[#86868b]">Ci aiutano a capire come gli utenti interagiscono con il sito.</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="cookie-analytics" class="sr-only peer" checked>
+                                    <div class="w-10 h-5 bg-[#ceced2] peer-checked:bg-[#60a5fa] transition-colors relative">
+                                        <div class="absolute left-1 top-1 bg-white w-3 h-3 transition-transform peer-checked:translate-x-5"></div>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-bold text-[#001f3f] text-xs uppercase tracking-widest mb-1">Cookie di Profilazione</h4>
+                                    <p class="text-[11px] text-[#86868b]">Utilizzati per mostrare contenuti e pubblicità pertinenti.</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="cookie-profiling" class="sr-only peer">
+                                    <div class="w-10 h-5 bg-[#ceced2] peer-checked:bg-[#60a5fa] transition-colors relative">
+                                        <div class="absolute left-1 top-1 bg-white w-3 h-3 transition-transform peer-checked:translate-x-5"></div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pt-8">
+                            <button id="save-cookie-settings" class="w-full bg-[#001f3f] text-white py-4 font-bold uppercase tracking-widest hover:bg-[#60a5fa] transition-all active:scale-95">Salva Preferenze</button>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // UI Handlers
+        function toggleMobileMenu() {
+            const overlay = document.getElementById('mobile-menu-overlay');
+            const btn = document.getElementById('hamburger-btn');
+            const nav = document.getElementById('main-nav');
+            const isOpen = overlay.classList.contains('is-visible');
+            if (isOpen) {
+                overlay.classList.remove('is-visible');
+                btn.classList.remove('is-open');
+                nav.classList.remove('bg-transparent', 'border-transparent', 'nav-menu-open');
+                nav.classList.add('bg-white/80', 'border-black/5', 'backdrop-blur-xl');
+                document.body.classList.remove('no-scroll');
+                document.documentElement.classList.remove('no-scroll');
+            } else {
+                overlay.classList.add('is-visible');
+                btn.classList.add('is-open');
+                nav.classList.remove('bg-white/80', 'border-black/5', 'backdrop-blur-xl');
+                nav.classList.add('bg-transparent', 'border-transparent', 'nav-menu-open');
+                document.body.classList.add('no-scroll');
+                document.documentElement.classList.add('no-scroll');
+            }
+        }
+
+        function openPortfolioModal(id) {
+            const data = portfolioData[id];
+            if (!data) return;
+            document.getElementById('modal-title').innerText = data.title;
+            document.getElementById('modal-category').innerText = data.category;
+            document.getElementById('modal-main-img').src = data.img;
+            document.getElementById('modal-desc').innerHTML = data.desc;
+            const modal = document.getElementById('portfolio-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => modal.style.opacity = '1', 10);
+            document.body.classList.add('modal-open');
+        }
+
+        function closePortfolioModal() {
+            const modal = document.getElementById('portfolio-modal');
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 500);
+            document.body.classList.remove('modal-open');
+        }
+
+        function openContactModal() {
+            const modal = document.getElementById('contact-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => modal.style.opacity = '1', 10);
+            document.body.classList.add('modal-open');
+        }
+
+        function closeContactModal() {
+            const modal = document.getElementById('contact-modal');
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 500);
+            document.body.classList.remove('modal-open');
+        }
+
+        function openLegalModal(type) {
+            const data = legalData[type];
+            if (!data) return;
+            document.getElementById('legal-modal-title').innerHTML = data.title;
+            document.getElementById('legal-modal-content').innerHTML = data.content;
+            const modal = document.getElementById('legal-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => modal.style.opacity = '1', 10);
+            document.body.classList.add('modal-open');
+
+            // Handle functional settings for cookies
+            if (type === 'cookie-settings') {
+                const saveBtn = document.getElementById('save-cookie-settings');
+                if (saveBtn) {
+                    saveBtn.onclick = () => {
+                        const prefs = {
+                            technical: true,
+                            analytics: document.getElementById('cookie-analytics').checked,
+                            marketing: document.getElementById('cookie-profiling').checked,
+                            timestamp: new Date().toISOString()
+                        };
+                        localStorage.setItem('ingmoretti_cookies', 'customized');
+                        localStorage.setItem('ingmoretti_cookie_prefs', JSON.stringify(prefs));
+                        closeLegalModal();
+                        document.getElementById('cookie-banner').classList.add('translate-y-[200%]');
+                    };
+                }
+            }
+        }
+
+        function closeLegalModal() {
+            const modal = document.getElementById('legal-modal');
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 500);
+            document.body.classList.remove('modal-open');
+        }
+
+        function toggleCookieView(view) {
+            const banner = document.getElementById('cookie-banner');
+            const mainView = document.getElementById('cookie-main-view');
+            const customView = document.getElementById('cookie-custom-view');
+
+            const startHeight = banner.offsetHeight;
+            const fadeOut = (view === 'custom') ? mainView : customView;
+            const fadeIn = (view === 'custom') ? customView : mainView;
+
+            gsap.to(fadeOut, { opacity: 0, duration: 0.2, onComplete: () => {
+                fadeOut.classList.add('hidden');
+                fadeIn.classList.remove('hidden');
+                fadeIn.style.opacity = "0";
+                
+                const endHeight = banner.scrollHeight;
+                
+                gsap.fromTo(banner, 
+                    { height: startHeight }, 
+                    { 
+                        height: endHeight, 
+                        duration: 0.5, 
+                        ease: "power3.inOut",
+                        onComplete: () => {
+                            banner.style.height = "auto";
+                            gsap.to(fadeIn, { opacity: 1, duration: 0.3 });
+                        }
+                    }
+                );
+            }});
+        }
+
+        function saveCustomCookies() {
+            const prefs = {
+                technical: true,
+                analytics: document.getElementById('banner-analytics').checked,
+                marketing: document.getElementById('banner-profiling').checked,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('ingmoretti_cookies', 'customized');
+            localStorage.setItem('ingmoretti_cookie_prefs', JSON.stringify(prefs));
+            
+            const banner = document.getElementById('cookie-banner');
+            banner.classList.add('translate-y-[200%]');
+
+            initCookieDependentScripts(prefs);
+        }
+
+        function initCookieDependentScripts(prefs) {
+            if (prefs.analytics) {
+                console.log("Cookie Logic: Inizializzazione Google Analytics (Analitici)...");
+                // Qui verrebbe inserito lo script di GA4
+            }
+            if (prefs.marketing) {
+                console.log("Cookie Logic: Inizializzazione Pixel/Marketing (Profilazione)...");
+                // Qui verrebbe inserito lo script di Marketing
+            }
+        }
+
+        function handleCookies(action) {
+            if (action === 'customize') {
+                toggleCookieView('custom');
+                return;
+            }
+            
+            const prefs = {
+                technical: true,
+                analytics: action === 'accept',
+                marketing: action === 'accept',
+                timestamp: new Date().toISOString()
+            };
+            
+            localStorage.setItem('ingmoretti_cookies', action);
+            localStorage.setItem('ingmoretti_cookie_prefs', JSON.stringify(prefs));
+            
+            const banner = document.getElementById('cookie-banner');
+            banner.classList.add('translate-y-[200%]');
+            
+            initCookieDependentScripts(prefs);
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            let progress = 0;
+            const progressTarget = document.getElementById('loading-progress');
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 20);
+                if (progress > 100) progress = 100;
+                progressTarget.innerText = progress + "%";
+                if (progress === 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        document.getElementById('loading-screen').classList.add('opacity-0');
+                        setTimeout(() => {
+                            document.getElementById('loading-screen').style.display = 'none';
+                            document.body.classList.remove('overflow-hidden');
+                            document.documentElement.classList.remove('overflow-hidden');
+                        }, 1000);
+                        initGSAP();
+                    }, 500);
+                }
+            }, 100);
+
+            if (!localStorage.getItem('ingmoretti_cookies')) {
+                setTimeout(() => document.getElementById('cookie-banner').classList.remove('translate-y-[200%]'), 2000);
+            }
+        });
+
+        function initGSAP() {
+            gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+            // Buro Milan Stacking Effect — Smart Responsive
+            const sections = gsap.utils.toArray('.stacked-section');
+            
+            sections.forEach((section, i) => {
+                const isLast = (i === sections.length - 1);
+                ScrollTrigger.create({
+                    trigger: section,
+                    start: () => section.offsetHeight > window.innerHeight ? "bottom bottom" : "top top",
+                    pin: true,
+                    pinSpacing: isLast,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
+                    onRefresh: self => {
+                        section.style.zIndex = (i + 1) * 10;
+                    }
+                });
+            });
+
+            // Hero Animations
+            gsap.from(".gsap-hero-reveal", {
+                y: 60,
+                opacity: 0,
+                duration: 1.5,
+                stagger: 0.2,
+                ease: "power4.out"
+            });
+            gsap.fromTo(".gsap-hero-subtext", { opacity: 0 }, { opacity: 1, duration: 2, delay: 1 });
+
+            // Fade animations on scroll
+            gsap.utils.toArray('.gsap-fade-up').forEach(el => {
+                gsap.from(el, {
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 90%",
+                    },
+                    y: 40,
+                    opacity: 0,
+                    duration: 1,
+                    ease: "power2.out"
+                });
+            });
+
+            // Swiper Initialization (All Devices)
+            new Swiper('.portfolio-swiper', {
+                slidesPerView: 1.1,
+                spaceBetween: 20,
+                centeredSlides: false,
+                grabCursor: true,
+                touchStartPreventDefault: false,
+                observer: true,
+                observeParents: true,
+                navigation: {
+                    nextEl: '.swiper-next',
+                    prevEl: '.swiper-prev',
+                },
+                breakpoints: {
+                    640:  { slidesPerView: 1.3, spaceBetween: 30 },
+                    768:  { slidesPerView: 1.5, spaceBetween: 40 },
+                    1024: { slidesPerView: 2,   spaceBetween: 50 },
+                    1440: { slidesPerView: 2.5, spaceBetween: 60 }
                 }
             });
-        }, revealObserverOptions);
 
-        document.querySelectorAll('.reveal').forEach(el => {
-            revealObserver.observe(el);
-        });
+            // Precision Smooth Scrolling (Pin-Aware)
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#' || targetId === '') return;
+                    e.preventDefault();
+
+                    // Refresh positions to account for any lifecycle shifts
+                    ScrollTrigger.refresh();
+                    const targetEl = document.querySelector(targetId);
+                    if (!targetEl) return;
+
+                    // Calculate target position based on pinning logic
+                    const trigger = ScrollTrigger.getAll().find(st => st.trigger === targetEl);
+                    let targetPos = trigger ? trigger.start : targetEl.offsetTop;
+
+                    // Header Offset for fixed navbar
+                    const headerOffset = window.innerWidth >= 768 ? 64 : 44;
+                    
+                    gsap.to(window, {
+                        duration: 0.6,
+                        scrollTo: targetPos - headerOffset,
+                        ease: "power3.inOut"
+                    });
+
+                    // Mobile menu support
+                    if (window.innerWidth < 768 && typeof toggleMobileMenu === 'function') {
+                        const mobileMenu = document.getElementById('mobile-menu');
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                            toggleMobileMenu();
+                        }
+                    }
+                });
+            });
+
+            // Navbar shadow on scroll
+            ScrollTrigger.create({
+                start: "top -50",
+                onUpdate: self => {
+                    const nav = document.getElementById('main-nav');
+                    if (self.direction === 1) nav.classList.add('shadow-md');
+                    else if (self.scroll() < 50) nav.classList.remove('shadow-md');
+                }
+            });
+        }
     </script>
-
-
 </body>
 
 </html>
