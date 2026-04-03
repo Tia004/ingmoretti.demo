@@ -1,4 +1,4 @@
-<html lang="it" class="scroll-smooth no-scroll">
+<html lang="it" class="scroll-smooth">
 
 <head>
     <meta charset="utf-8" />
@@ -64,8 +64,9 @@
             border-radius: 9999px !important;
         }
 
-        body.modal-open {
+        body.no-scroll {
             overflow: hidden !important;
+            touch-action: none !important;
         }
 
         .blueprint-grid {
@@ -109,11 +110,7 @@
             background-color: #f5f5f7;
         }
 
-        body.no-scroll, html.no-scroll {
-            overflow: hidden !important;
-            touch-action: none !important;
-            height: 100% !important;
-        }
+
         
         .nav-menu-open #main-logo-link {
             opacity: 0 !important;
@@ -126,26 +123,26 @@
             position: relative;
         }
 
-        body.modal-open {
-            overflow: hidden;
-        }
 
-        /* Apple-style smooth scrollbar with dark blue accents */
+
+        /* Premium Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 12px !important;
+            display: block !important;
         }
 
         ::-webkit-scrollbar-track {
-            background: #1e1e1e;
+            background: #ffffff !important;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #60a5fa;
-            border: 2px solid #1e1e1e;
+            background: #60a5fa !important;
+            border-radius: 10px !important;
+            border: 3px solid #ffffff !important;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #003f91;
+            background: #4b91e2 !important;
         }
 
         /* Hamburger Animation (Matched to Vercel site) */
@@ -262,30 +259,43 @@
     </style>
 </head>
 
-<body class="bg-surface font-body text-on-surface selection:bg-black selection:text-white antialiased no-scroll">
+<body class="bg-surface font-body text-on-surface selection:bg-black selection:text-white antialiased">
 
     <!-- Portfolio Modal -->
-    <div id="portfolio-modal" class="fixed inset-0 z-[10000] bg-white hidden flex-col h-screen overflow-hidden transition-all duration-500">
-        <div class="h-16 border-b border-black/10 flex items-center justify-between px-6 shrink-0 bg-white">
+    <div id="portfolio-modal" class="fixed inset-0 z-[25000] bg-white hidden flex-col h-screen overflow-hidden transition-all duration-500 opacity-0 pointer-events-none">
+        <!-- Floating Close Button (Top Right) -->
+        <button onclick="closePortfolioModal()" 
+            class="fixed top-6 right-6 md:top-8 md:right-8 z-[25001] w-12 h-12 bg-black text-white flex items-center justify-center rounded-full backdrop-blur-md transition-all group focus:outline-none shadow-xl border border-white/20"
+            aria-label="Chiudi progetto">
+            <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">close</span>
+        </button>
+
+        <div class="h-20 border-b border-black/5 flex items-center justify-between px-8 shrink-0 bg-white/80 backdrop-blur-xl sticky top-0 z-50">
             <div class="font-headline text-[10px] uppercase tracking-widest font-bold text-[#86868b]" id="modal-category">Categoria</div>
-            <button onclick="closePortfolioModal()" class="text-black hover:text-red-600 transition-colors flex items-center gap-2 focus:outline-none">
-                <span class="text-[10px] tracking-widest uppercase font-bold">Chiudi</span>
-                <span class="material-symbols-outlined text-xl">close</span>
-            </button>
+            <div class="hidden md:block text-[10px] uppercase tracking-widest font-bold text-[#001f3f] opacity-30">Dettaglio Progetto</div>
+            <!-- Spacer for floating button on mobile -->
+            <div class="w-12 h-12 md:hidden"></div>
         </div>
-        <div class="flex-grow overflow-y-auto">
-            <div class="max-w-7xl mx-auto px-6 py-20">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
-                    <div class="space-y-12">
-                        <img id="modal-main-img" src="" class="w-full aspect-[4/3] object-cover" />
+        <div class="flex-grow overflow-y-auto w-full">
+            <div class="max-w-6xl mx-auto px-8 py-16 md:py-24">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                    <div class="relative group">
+                        <img id="modal-main-img" src="" class="w-full h-auto max-h-[60vh] object-cover rounded-3xl md:rounded-none shadow-2xl" />
+                        <div class="absolute inset-0 border border-black/5 rounded-3xl md:rounded-none pointer-events-none"></div>
                     </div>
-                    <div class="space-y-12">
-                        <h2 id="modal-title" class="font-headline text-5xl md:text-7xl font-bold leading-tight text-[#001f3f]">Titolo Progetto</h2>
-                        <div id="modal-desc" class="font-body text-lg leading-relaxed text-[#1d1d1f] space-y-4">
+                    <div class="space-y-10">
+                        <div>
+                            <h2 id="modal-title" class="font-headline text-4xl md:text-6xl font-bold leading-tight text-[#001f3f] mb-6">Titolo Progetto</h2>
+                            <div class="w-20 h-1 bg-[#60a5fa] mb-10"></div>
+                        </div>
+                        <div id="modal-desc" class="font-body text-lg leading-relaxed text-[#1d1d1f] space-y-4 font-light">
                             <!-- Descrizione -->
                         </div>
-                        <div class="pt-12 border-t border-black/10">
-                            <button onclick="closePortfolioModal()" class="bg-[#001f3f] text-white px-10 py-4 font-bold uppercase tracking-widest hover:bg-[#60a5fa] transition-colors">Torna ai Progetti</button>
+                        <div class="pt-10 flex flex-wrap gap-6 items-center">
+                            <button onclick="closePortfolioModal()" class="bg-[#001f3f] text-white px-10 py-5 font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-[#60a5fa] hover:text-[#001f3f] transition-all transform active:scale-95 shadow-xl">
+                                Torna al Portfolio
+                            </button>
+                            <span class="text-[10px] uppercase tracking-widest font-bold text-[#86868b] hidden md:block">Davide Moretti &copy; 2024</span>
                         </div>
                     </div>
                 </div>
@@ -420,7 +430,7 @@
 
     <!-- Biography Section (Chi sono) -->
     <section class="stacked-section relative bg-white text-on-surface z-[20] border-b border-outline-variant/30" id="chi-sono" style="min-height: 100svh;">
-        <div class="pin-inner w-full h-full flex items-start md:items-center">
+        <div class="pin-inner w-full h-auto min-h-full flex items-start md:items-center">
             <div class="absolute inset-0 blueprint-grid opacity-20 pointer-events-none"></div>
             <div class="max-w-6xl mx-auto px-6 relative py-24 md:py-32 w-full">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -463,7 +473,7 @@
 
     <!-- Services (Servizi) -->
     <section class="stacked-section relative min-h-screen bg-[#001f3f] text-white z-[30]" id="servizi" style="min-height: 100svh;">
-        <div class="pin-inner w-full h-full flex items-start md:items-center">
+        <div class="pin-inner w-full h-auto min-h-full flex items-start md:items-center">
             <div class="absolute inset-0 pointer-events-none opacity-10">
                 <div class="absolute top-0 left-0 w-full h-full blueprint-grid grayscale invert"></div>
             </div>
@@ -504,30 +514,35 @@
 
     <!-- Projects Portfolio (Apple Style Slider) -->
     <section class="stacked-section relative min-h-screen bg-surface-container-low z-[40] pb-16 md:pb-40" id="lavori" style="min-height: 100svh;">
-        <div class="pin-inner w-full h-full flex flex-col justify-center">
+        <div class="pin-inner w-full h-auto min-h-full flex flex-col justify-center">
             <div class="max-w-6xl mx-auto px-6 py-24 md:py-32 w-full">
                 <div class="text-center mb-16 gsap-fade-up">
                     <span class="text-[#60a5fa] tracking-[0.3em] uppercase text-[10px] mb-6 block font-bold">|| PORTFOLIO 2024 ||</span>
                     <h2 class="text-[#001f3f] font-headline font-bold text-4xl md:text-5xl tracking-tight leading-tight">Progetti Selezionati.</h2>
                 </div>
 
-                <!-- Swiper Container -->
-                <div class="swiper portfolio-swiper pb-10 md:pb-20">
-                    <div class="swiper-wrapper">
+                <!-- Swiper Container area (Full-width support) -->
+                <div class="relative -mr-6 md:-mr-[calc((100vw-min(100vw,1152px))/2+1.5rem)]">
+                    <div class="swiper portfolio-swiper pb-10 md:pb-20 relative overflow-visible">
+                        <!-- Gradient Mask (Right Edge of Screen) -->
+                        <div class="absolute top-0 -right-6 md:-right-24 bottom-10 md:bottom-20 w-32 md:w-[25vw] bg-gradient-to-l from-[#f5f5f7] via-[#f5f5f7]/90 to-transparent z-10 pointer-events-none"></div>
+                        <div class="swiper-wrapper">
                         <!-- Project 1 -->
                         <div class="swiper-slide project-card cursor-pointer group" onclick="openPortfolioModal('pr-1')">
                             <div class="px-0 md:px-4">
                                 <div class="relative w-full aspect-[4/3] overflow-hidden mb-6 bg-surface hover-glow rounded-3xl md:rounded-none">
                                     <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-grayscale duration-500 scale-105 group-hover:scale-100 ease-out"
                                         alt="Polo Logistico Nexus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBIy9oAWvSORsXLB0IPurjhTMjKXVHTUJNDGjeQ-d248HjsHVkZshSvACbIFH8tQOYB7JREP4zg3JkiwYIdurjk1P230Ie4bXXK6zv1ylBRAYyp6y0D1QMClDUwNeAyVkofMJ8aVXQP5hbILYDuQ1rEullHuI3hH-J-3xvk37CeFhvMuc79xiTXGRMnHyits-_d6jfYlHu64tJ7VScIyURuTLCXjHcosiyq3f-h7fm3OZDCftSnkX06VhnTwWPCZRIRk6IFxVX5hCb" />
+                                    <div class="absolute bottom-6 right-6 w-10 h-10 bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center rounded-full text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-3 group-hover:translate-y-0 z-20 shadow-lg">
+                                        <span class="material-symbols-outlined text-xl">arrow_forward</span>
+                                    </div>
                                     <div class="absolute inset-0 border border-black/10 pointer-events-none"></div>
                                 </div>
                                 <div class="flex justify-between items-end">
                                     <div>
-                                        <span class="text-[10px] uppercase font-bold tracking-widest text-[#86868b] mb-2 block">Ingegneria Sismica</span>
-                                        <h3 class="font-headline font-semibold text-2xl text-on-surface">Polo Logistico Nexus</h3>
+                                        <span class="text-[10px] uppercase font-bold tracking-widest text-[#86868b] mb-2 block">PROJECT CATEGORY</span>
+                                        <h3 class="font-headline font-semibold text-2xl text-on-surface">PROJECT TITLE</h3>
                                     </div>
-                                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#60a5fa] transition-colors">arrow_forward</span>
                                 </div>
                             </div>
                         </div>
@@ -545,7 +560,7 @@
                                         <span class="text-[10px] uppercase font-bold tracking-widest text-[#86868b] mb-2 block">Architettura Tecnica</span>
                                         <h3 class="font-headline font-semibold text-2xl text-on-surface">Corporate Headquarters Verona</h3>
                                     </div>
-                                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#60a5fa] transition-colors">arrow_forward</span>
+                                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#60a5fa] transition-colors relative z-20">arrow_forward</span>
                                 </div>
                             </div>
                         </div>
@@ -563,7 +578,7 @@
                                         <span class="text-[10px] uppercase font-bold tracking-widest text-[#86868b] mb-2 block">Consulenza Direzione Lavori</span>
                                         <h3 class="font-headline font-semibold text-2xl text-on-surface">Polo Impiantistico Polivalente</h3>
                                     </div>
-                                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#60a5fa] transition-colors">arrow_forward</span>
+                                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#60a5fa] transition-colors relative z-20">arrow_forward</span>
                                 </div>
                             </div>
                         </div>
@@ -581,7 +596,7 @@
                                         <span class="text-[10px] uppercase font-bold tracking-widest text-[#86868b] mb-2 block">Recupero Edilizio</span>
                                         <h3 class="font-headline font-semibold text-2xl text-on-surface">Intervento Messa in Sicurezza</h3>
                                     </div>
-                                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#60a5fa] transition-colors">arrow_forward</span>
+                                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#60a5fa] transition-colors relative z-20">arrow_forward</span>
                                 </div>
                             </div>
                         </div>
@@ -603,7 +618,7 @@
 
     <!-- Projects Reveal Overlay (Section Stacking Support) -->
     <section class="stacked-section relative min-h-screen bg-[#001f3f] text-white z-[50] flex flex-col justify-center" id="contatti" style="min-height: 100svh;">
-        <div class="pin-inner w-full h-full flex flex-col justify-start md:justify-center">
+        <div class="pin-inner w-full h-auto min-h-full flex flex-col justify-start md:justify-center">
             <div class="absolute inset-0 pointer-events-none opacity-20 blueprint-grid grayscale invert"></div>
             <div class="max-w-6xl mx-auto px-6 relative z-10 w-full py-24 md:py-32">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -969,20 +984,19 @@
             const btn = document.getElementById('hamburger-btn');
             const nav = document.getElementById('main-nav');
             const isOpen = overlay.classList.contains('is-visible');
+            
             if (isOpen) {
                 overlay.classList.remove('is-visible');
                 btn.classList.remove('is-open');
                 nav.classList.remove('bg-transparent', 'border-transparent', 'nav-menu-open');
                 nav.classList.add('bg-white/80', 'border-black/5', 'backdrop-blur-xl');
                 document.body.classList.remove('no-scroll');
-                document.documentElement.classList.remove('no-scroll');
             } else {
                 overlay.classList.add('is-visible');
                 btn.classList.add('is-open');
                 nav.classList.remove('bg-white/80', 'border-black/5', 'backdrop-blur-xl');
                 nav.classList.add('bg-transparent', 'border-transparent', 'nav-menu-open');
                 document.body.classList.add('no-scroll');
-                document.documentElement.classList.add('no-scroll');
             }
         }
 
@@ -994,20 +1008,41 @@
             document.getElementById('modal-main-img').src = data.img;
             document.getElementById('modal-desc').innerHTML = data.desc;
             const modal = document.getElementById('portfolio-modal');
+            const nav = document.getElementById('main-nav');
+            
             modal.classList.remove('hidden');
             modal.classList.add('flex');
+            modal.style.pointerEvents = 'all';
             setTimeout(() => modal.style.opacity = '1', 10);
-            document.body.classList.add('modal-open');
+            
+            // Hide Navbar to resolve z-index conflict
+            if (nav) {
+                nav.classList.add('opacity-0', 'pointer-events-none');
+            }
+            
+            // Comprehensive scroll locking
+            document.body.classList.add('no-scroll');
         }
 
         function closePortfolioModal() {
             const modal = document.getElementById('portfolio-modal');
+            const nav = document.getElementById('main-nav');
+            
             modal.style.opacity = '0';
+            modal.style.pointerEvents = 'none';
+            
+            // Restore Navbar
+            if (nav) {
+                nav.classList.remove('opacity-0', 'pointer-events-none');
+            }
+            
             setTimeout(() => {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
             }, 500);
-            document.body.classList.remove('modal-open');
+            
+            // Unlock scrolling
+            document.body.classList.remove('no-scroll');
         }
 
         function openContactModal() {
@@ -1015,7 +1050,7 @@
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             setTimeout(() => modal.style.opacity = '1', 10);
-            document.body.classList.add('modal-open');
+            document.body.classList.add('no-scroll');
         }
 
         function closeContactModal() {
@@ -1025,7 +1060,7 @@
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
             }, 500);
-            document.body.classList.remove('modal-open');
+            document.body.classList.remove('no-scroll');
         }
 
         function openLegalModal(type) {
@@ -1037,7 +1072,7 @@
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             setTimeout(() => modal.style.opacity = '1', 10);
-            document.body.classList.add('modal-open');
+            document.body.classList.add('no-scroll');
 
             // Handle functional settings for cookies
             if (type === 'cookie-settings') {
@@ -1066,7 +1101,7 @@
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
             }, 500);
-            document.body.classList.remove('modal-open');
+            document.body.classList.remove('no-scroll');
         }
 
         function toggleCookieView(view) {
@@ -1165,7 +1200,6 @@
                         setTimeout(() => {
                             document.getElementById('loading-screen').style.display = 'none';
                             document.body.classList.remove('no-scroll');
-                            document.documentElement.classList.remove('no-scroll');
                         }, 1000);
                         initGSAP();
                     }, 500);
@@ -1180,20 +1214,25 @@
         function initGSAP() {
             gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-            // Buro Milan Stacking Effect — Smart Responsive
+            // Optimized Stacking Logic for All Devices
             const sections = gsap.utils.toArray('.stacked-section');
-            
             sections.forEach((section, i) => {
                 const isLast = (i === sections.length - 1);
+                
+                // Smart Pinning: If section is taller than screen, pin at 'bottom bottom'
+                // to allow scrolling to the bottom. Otherwise pin at 'top top'.
                 ScrollTrigger.create({
                     trigger: section,
                     start: () => section.offsetHeight > window.innerHeight ? "bottom bottom" : "top top",
                     pin: true,
-                    pinSpacing: isLast,
+                    pinSpacing: isLast, 
                     anticipatePin: 1,
                     invalidateOnRefresh: true,
                     onRefresh: self => {
-                        section.style.zIndex = (i + 1) * 10;
+                        section.style.zIndex = (i + 1) * 50; 
+                    },
+                    onEnter: () => {
+                        section.style.zIndex = (i + 1) * 50;
                     }
                 });
             });
@@ -1283,8 +1322,10 @@
                 start: "top -50",
                 onUpdate: self => {
                     const nav = document.getElementById('main-nav');
-                    if (self.direction === 1) nav.classList.add('shadow-md');
-                    else if (self.scroll() < 50) nav.classList.remove('shadow-md');
+                    if (nav) {
+                        if (self.direction === 1) nav.classList.add('shadow-md');
+                        else if (self.scroll() < 50) nav.classList.remove('shadow-md');
+                    }
                 }
             });
         }
