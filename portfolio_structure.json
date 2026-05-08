@@ -1,0 +1,190 @@
+{
+    "ANALISI_DELLA_VULNERABILITA_SISMICA": {
+        "ASILO_NIDO_COMUNE_DI_PEGOGNAGA": [
+            "0.webp",
+            "1.webp",
+            "2.webp",
+            "3.webp",
+            "4.webp"
+        ]
+    },
+    "PRODUTTIVO": {
+        "RINNOVO_SALATOIO_CASEIFICIO_F&B_PARMA": [
+            "1.webp",
+            "2.webp",
+            "3.webp",
+            "4.webp",
+            "5.webp",
+            "6.webp",
+            "7.webp",
+            "8.webp"
+        ]
+    },
+    "RESIDENZIALE-RECUPERO": {
+        "SOPRAELEVAZIONE_IN_LEGNO_A_MONTECHIARUGOLO_(PR)": [
+            "1.webp",
+            "10.webp",
+            "11.webp",
+            "12.webp",
+            "13.webp",
+            "14.webp",
+            "15.webp",
+            "16.webp",
+            "17.webp",
+            "18.webp",
+            "19.webp",
+            "2.webp",
+            "20.webp",
+            "21.webp",
+            "3.webp",
+            "4.webp",
+            "5.webp",
+            "6.webp",
+            "7.webp",
+            "8.webp",
+            "9.webp"
+        ],
+        "RECUPERO_SOTTOTETTO_VILLA_VNC_A_ROLO_(RE)": [
+            "1.webp",
+            "2.webp",
+            "3.webp"
+        ],
+        "RISTRUTTURAZIONE_UV_A_MOGLIA_(MN)": [
+            "1.webp",
+            "2.webp",
+            "3.webp",
+            "4.webp",
+            "5.webp",
+            "6.webp",
+            "7.webp",
+            "8.webp"
+        ],
+        "RISTRUTTURAZIONE_IC_A_SAN_MARTINO_IN_RIO_(RE)": [
+            "1.webp",
+            "2.webp",
+            "3.webp"
+        ],
+        "RISTRUTTURAZIONE_RN_A_SAN_BENEDETTO_PO_(MN)": [
+            "1.webp",
+            "2.webp",
+            "3.webp",
+            "4.webp",
+            "5.webp"
+        ],
+        "RISTRUTTURAZIONE_CONDOMINIO_GB_A_REGGIO_EMILIA": [
+            "1.webp",
+            "2.webp",
+            "3.webp",
+            "4.webp"
+        ],
+        "RISTRUTTURAZIONE_ES_A_MOGLIA_(MN)": [
+            "0.webp",
+            "1.webp",
+            "2.webp",
+            "3.webp",
+            "4.webp"
+        ],
+        "RISTRUTTURAZIONE_B&B_A_SUZZARA_(MN)": [
+            "1.webp",
+            "2.webp",
+            "3.webp",
+            "4.webp",
+            "5.webp",
+            "6.webp",
+            "7.webp"
+        ],
+        "CERCHIATURE_PER_APERTURE_SU_MURI_PORTANTI": [
+            "1.webp",
+            "2.webp",
+            "3.webp",
+            "4.webp",
+            "5.webp"
+        ],
+        "RISTRUTTURAZIONE_GM_A_MOGLIA_(MN)": [
+            "1.webp",
+            "2.webp",
+            "3.webp",
+            "4.webp",
+            "5.webp",
+            "6.webp"
+        ],
+        "ADEGUAMENTO_SISMICO_CASA_COLONICA_A_GONZAGA_(MN)": [
+            "0.webp",
+            "1.webp",
+            "2.webp",
+            "3.webp",
+            "4.webp",
+            "5.webp"
+        ],
+        "RISTRUTTURAZIONE_BL_A_GONZAGA_(MN)": [
+            "0.webp",
+            "1.webp"
+        ]
+    },
+    "COMMERCIALE": {
+        "NUOVO_SHOWROOM_RAMA_GONZAGA_(MN)": [
+            "1.webp",
+            "2.webp"
+        ]
+    },
+    "CONSULENZA_SPECIALISTICA": {
+        "INDAGINI_SUI_MATERIALI": [
+            "1.webp",
+            "2.webp",
+            "3.webp",
+            "4.webp"
+        ],
+        "ALLESTIMENTI_PUBBLICO_SPETTACOLO": [],
+        "PENSILINA_IN_ACCIAIO_A_SAN_MARTINO_IN_RIO_(RE)": [
+            "1.webp",
+            "2.webp",
+            "3.webp"
+        ],
+        "RESISTENZA_AL_FUOCO": [
+            "TEGOLO.webp",
+            "TRAVE.webp"
+        ]
+    },
+    "RESIDENZIALE-NUOVO": {
+        "VILLETTA_AA_A_LUZZARA_(RE)": [
+            "1.webp",
+            "2.webp"
+        ],
+        "RESIDENCE_LE_CORTI_A_SUZZARA_(MN)": [
+            "1.webp",
+            "2.webp"
+        ],
+        "VILLETTA_LP_A_GONZAGA_(MN)": [
+            "1.webp"
+        ],
+        "RESIDENZA_LYS_A_SAN_MARTINO_IN_RIO_(RE)": [
+            "1.webp",
+            "2.webp"
+        ],
+        "VILLETTA_BB_A_GONZAGA_(MN)": [
+            "1.webp",
+            "2.webp",
+            "3.webp",
+            "4.webp",
+            "5.webp",
+            "6.webp",
+            "7.webp"
+        ],
+        "AMPLIAMENTO_IN_LEGNO_A_REGGIO_EMILIA_(RE)": [
+            "1.webp",
+            "2.webp",
+            "3.webp",
+            "4.webp",
+            "5.webp",
+            "6.webp"
+        ]
+    },
+    "SPERIMENTAZIONE-BREVETTI": {
+        "PIATTAFORMA_GALLEGGIANTE_A_GONZAGA_(MN)": [
+            "1.webp"
+        ],
+        "CARPORT_FOTOVOLTAICO": [
+            "1.webp"
+        ]
+    }
+}

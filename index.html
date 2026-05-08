@@ -91,7 +91,7 @@
         }
 
         .btn-contact-hover:hover {
-            background-color: #60a5fa !important;
+            background-color: #003366 !important;
             color: white !important;
         }
 
@@ -102,6 +102,24 @@
         .hover-glow:hover {
             box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.1);
             transform: translateY(-4px);
+        }
+
+        /* Portfolio Pagination Bullets */
+        .portfolio-bullet {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #d1d5db;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .portfolio-bullet:hover {
+            background: #9ca3af;
+        }
+        .portfolio-bullet-active {
+            background: #001f3f !important;
+            transform: scale(1.25);
         }
 
         .stacked-section {
@@ -262,52 +280,133 @@
             background: #60a5fa;
             color: white;
         }
+
+        /* Bento Grid Animation (Desktop solo) */
+        /* ===== MOBILE bento cards (< lg) ===== */
+        @media (max-width: 1023px) {
+            .bento-card {
+                overflow: hidden;
+                position: relative;
+            }
+            /* Hide CTA by default on mobile */
+            .bento-card .bento-cta-mobile {
+                max-height: 0;
+                opacity: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease, opacity 0.4s ease 0.1s;
+            }
+            .bento-card.mobile-active .bento-cta-mobile {
+                max-height: 250px;
+                opacity: 1;
+                pointer-events: auto;
+            }
+            /* Particles canvas: z-index between text (z-10) and CTA (z-20) */
+            .bento-card canvas {
+                opacity: 0;
+                transition: opacity 0.6s ease;
+                z-index: 15 !important;
+            }
+            .bento-card.mobile-active canvas {
+                opacity: 1;
+            }
+            /* Text mask fades on mobile, removed when active */
+            .bento-text-mask {
+                -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+                mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+            }
+            .bento-card.mobile-active .bento-text-mask {
+                -webkit-mask-image: none;
+                mask-image: none;
+            }
+            /* Tap hint: visible by default, hidden when active */
+            .bento-tap-hint {
+                opacity: 0.7;
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+            .bento-card.mobile-active .bento-tap-hint {
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(4px);
+            }
+            /* Chevron bounce animation */
+            @keyframes bounceDown {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(3px); }
+            }
+            .bento-tap-hint .chevron-bounce {
+                animation: bounceDown 1.5s ease-in-out infinite;
+            }
+        }
+
+        /* ===== DESKTOP bento cards (lg+) ===== */
+        @media (min-width: 1024px) {
+            .bento-container {
+                position: relative;
+                width: 100%;
+                aspect-ratio: 1 / 1;
+                max-height: 650px;
+            }
+            .bento-card {
+                position: absolute;
+                width: calc(50% - 12px);
+                height: calc(50% - 12px);
+                transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+                z-index: 10;
+                overflow: hidden;
+            }
+            
+            /* Posizioni di default */
+            .bento-c1 { top: 0; left: 0; }
+            .bento-c2 { top: 0; right: 0; }
+            .bento-c3 { bottom: 0; left: 0; }
+            .bento-c4 { bottom: 0; right: 0; }
+
+            /* Espansione (width e height) */
+            .bento-container:has(.bento-c1:hover) .bento-c1 { width: 100%; height: 100%; z-index: 50; }
+            .bento-container:has(.bento-c2:hover) .bento-c2 { width: 100%; height: 100%; z-index: 50; }
+            .bento-container:has(.bento-c3:hover) .bento-c3 { width: 100%; height: 100%; z-index: 50; }
+            .bento-container:has(.bento-c4:hover) .bento-c4 { width: 100%; height: 100%; z-index: 50; }
+
+            /* Logica di allontanamento di TUTTE le altre card */
+            .bento-container:has(.bento-c1:hover) .bento-c2 { transform: translateX(110%); opacity: 0; }
+            .bento-container:has(.bento-c1:hover) .bento-c3 { transform: translateY(110%); opacity: 0; }
+            .bento-container:has(.bento-c1:hover) .bento-c4 { transform: translate(110%, 110%); opacity: 0; }
+
+            .bento-container:has(.bento-c2:hover) .bento-c1 { transform: translateX(-110%); opacity: 0; }
+            .bento-container:has(.bento-c2:hover) .bento-c4 { transform: translateY(110%); opacity: 0; }
+            .bento-container:has(.bento-c2:hover) .bento-c3 { transform: translate(-110%, 110%); opacity: 0; }
+
+            .bento-container:has(.bento-c3:hover) .bento-c1 { transform: translateY(-110%); opacity: 0; }
+            .bento-container:has(.bento-c3:hover) .bento-c4 { transform: translateX(110%); opacity: 0; }
+            .bento-container:has(.bento-c3:hover) .bento-c2 { transform: translate(110%, -110%); opacity: 0; }
+
+            .bento-container:has(.bento-c4:hover) .bento-c3 { transform: translateX(-110%); opacity: 0; }
+            .bento-container:has(.bento-c4:hover) .bento-c2 { transform: translateY(-110%); opacity: 0; }
+            .bento-container:has(.bento-c4:hover) .bento-c1 { transform: translate(-110%, -110%); opacity: 0; }
+
+            /* Controllo visibilità testo */
+            .bento-text-mask {
+                -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+                mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            }
+            .bento-card:hover .bento-text-mask {
+                -webkit-mask-image: none;
+                mask-image: none;
+            }
+            /* Canvas particelle: visibile solo all'hover */
+            .bento-card canvas {
+                opacity: 0;
+                transition: opacity 0.7s ease;
+            }
+            .bento-card:hover canvas {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
 <body class="bg-surface font-body text-on-surface selection:bg-black selection:text-white antialiased">
 
-    <!-- Portfolio Modal -->
-    <div id="portfolio-modal" class="fixed inset-0 z-[25000] bg-white hidden flex-col h-screen overflow-hidden transition-all duration-500 opacity-0 pointer-events-none">
-        <!-- Floating Close Button (Top Right) -->
-        <button onclick="closePortfolioModal()" 
-            class="fixed top-6 right-6 md:top-8 md:right-8 z-[25001] w-12 h-12 bg-black text-white flex items-center justify-center rounded-full backdrop-blur-md transition-all group focus:outline-none shadow-xl border border-white/20"
-            aria-label="Chiudi progetto">
-            <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">close</span>
-        </button>
-
-        <div class="h-20 border-b border-black/5 flex items-center justify-between px-8 shrink-0 bg-white/80 backdrop-blur-xl sticky top-0 z-50">
-            <div class="font-headline text-[10px] uppercase tracking-widest font-bold text-[#86868b]" id="modal-category">Categoria</div>
-            <div class="hidden md:block text-[10px] uppercase tracking-widest font-bold text-[#001f3f] opacity-30">Dettaglio Progetto</div>
-            <!-- Spacer for floating button on mobile -->
-            <div class="w-12 h-12 md:hidden"></div>
-        </div>
-        <div class="flex-grow overflow-y-auto w-full">
-            <div class="max-w-6xl mx-auto px-8 py-16 md:py-24">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-                    <div class="relative group">
-                        <img id="modal-main-img" src="" class="w-full h-auto max-h-[60vh] object-cover rounded-3xl md:rounded-none shadow-2xl" />
-                        <div class="absolute inset-0 border border-black/5 rounded-3xl md:rounded-none pointer-events-none"></div>
-                    </div>
-                    <div class="space-y-10">
-                        <div>
-                            <h2 id="modal-title" class="font-headline text-4xl md:text-6xl font-bold leading-tight text-[#001f3f] mb-6">Titolo Progetto</h2>
-                            <div class="w-20 h-1 bg-[#60a5fa] mb-10"></div>
-                        </div>
-                        <div id="modal-desc" class="font-body text-lg leading-relaxed text-[#1d1d1f] space-y-4 font-light">
-                            <!-- Descrizione -->
-                        </div>
-                        <div class="pt-10 flex flex-wrap gap-6 items-center">
-                            <button onclick="closePortfolioModal()" class="bg-[#001f3f] text-white px-10 py-5 font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-[#60a5fa] hover:text-[#001f3f] transition-all transform active:scale-95 shadow-xl">
-                                Torna al Portfolio
-                            </button>
-                            <span class="text-[10px] uppercase tracking-widest font-bold text-[#86868b] hidden md:block">Davide Moretti &copy; 2024</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Contact Modal -->
     <div id="contact-modal" class="fixed inset-0 z-[20000] bg-black/40 backdrop-blur-xl hidden items-center justify-center p-6 transition-all duration-500">
@@ -370,14 +469,16 @@
     <!-- Apple-style Navbar -->
     <nav class="fixed top-0 w-full z-[10000] bg-white/80 backdrop-blur-xl border-b border-black/5 opacity-0 pointer-events-none transition-all duration-500"
         id="main-nav">
-        <div class="flex justify-between items-center max-w-6xl mx-auto px-6 h-auto py-2 md:py-2.5">
-            <a href="/" onclick="window.location.reload(); return false;"
-                class="flex-shrink-0 transition-opacity duration-300" id="main-logo-link">
-                <!-- Standard Brand Logo -->
-                <img src="assets/logoingmoretti.png" alt="Ing. Davide Moretti" class="h-10 md:h-12 lg:h-14 w-auto" />
-            </a>
+        <div class="grid grid-cols-2 md:grid-cols-3 items-center max-w-6xl mx-auto px-6 h-auto py-3 md:py-4">
+            <div class="flex justify-start">
+                <a href="/" onclick="window.location.reload(); return false;"
+                    class="transition-opacity duration-300" id="main-logo-link">
+                    <!-- Standard Brand Logo -->
+                    <img src="assets/logoestesoingmoretti.png" alt="Ing. Davide Moretti" class="h-6 md:h-7 lg:h-9 w-auto object-contain" />
+                </a>
+            </div>
 
-            <div class="hidden md:flex items-center gap-10">
+            <div class="hidden md:flex justify-center items-center gap-10">
                 <a class="text-[11px] font-headline tracking-widest text-[#1d1d1f] transition-colors uppercase"
                     href="#chi-sono">Chi sono</a>
                 <a class="text-[11px] font-headline tracking-widest text-[#1d1d1f] transition-colors uppercase"
@@ -386,17 +487,19 @@
                     href="#lavori">Portfolio</a>
             </div>
 
-            <a href="#contatti"
-                class="hidden md:block text-[10px] uppercase tracking-widest font-bold bg-black text-white px-5 py-2 transition-colors opacity-90 hover:opacity-100 btn-contact-hover">
-                Contatti
-            </a>
+            <div class="flex justify-end items-center">
+                <a href="#contatti"
+                    class="hidden md:block text-[10px] uppercase tracking-widest font-bold bg-[#001f3f] text-white px-5 py-2 transition-colors opacity-90 hover:opacity-100 btn-contact-hover">
+                    Contatti
+                </a>
 
-            <!-- Mobile Menu Toggle -->
-            <button id="hamburger-btn" class="hamburger md:hidden focus:outline-none" onclick="toggleMobileMenu()" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+                <!-- Mobile Menu Toggle -->
+                <button id="hamburger-btn" class="hamburger md:hidden focus:outline-none" onclick="toggleMobileMenu()" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -424,8 +527,8 @@
             </div>
             <div class="relative z-20 text-center px-6 mt-14 max-w-5xl mx-auto">
                 <span class="inline-block text-white/50 tracking-[0.4em] uppercase text-[10px] mb-8 font-bold gsap-hero-reveal">Progettazione Integrata</span>
-                <h1 class="text-white font-headline font-semibold text-5xl md:text-7xl lg:text-[6rem] tracking-tighter mb-10 leading-[1.05] gsap-hero-reveal">Ingegneria.<br />Progettata per l'eccellenza.</h1>
-                <p class="text-white/50 text-xs md:text-sm tracking-[0.5em] uppercase font-bold opacity-0 gsap-hero-subtext">|| Ingegneria Civile • Strutturale • Sismica ||</p>
+                <h1 class="text-white font-headline font-semibold text-5xl md:text-7xl lg:text-[6rem] tracking-tighter mb-10 leading-[1.05] gsap-hero-reveal">Studio Ingegneria<br />Davide Moretti</h1>
+                <p class="text-white/50 text-xs md:text-sm tracking-[0.5em] uppercase font-bold opacity-0 gsap-hero-subtext">|| Strutture - Architettura - Sicurezza ||</p>
             </div>
             <div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-4 opacity-70">
                 <div class="w-px h-16 bg-gradient-to-b from-white/0 via-white/50 to-white/0"></div>
@@ -443,7 +546,7 @@
                     <!-- Left Column: Bio Card -->
                     <div class="relative gsap-fade-up">
                         <div class="bg-white p-4 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] rounded-[2.5rem] relative z-10">
-                            <img class="w-full aspect-square md:aspect-[4/5] object-cover rounded-[2rem]" alt="Ing. Davide Moretti Portrait" src="assets/ingmoretti.webp" />
+                            <img class="w-full aspect-square md:aspect-[4/5] object-cover rounded-[2rem] grayscale" alt="Ing. Davide Moretti Portrait" src="assets/ingmoretti.webp" />
                         </div>
                         <!-- Decorative back layer -->
                         <div class="absolute -bottom-6 -right-6 w-full h-full bg-[#f5f5f7] rounded-[2.5rem] -z-0 opacity-50"></div>
@@ -454,12 +557,12 @@
                         <span class="text-[#60a5fa] tracking-[0.4em] uppercase text-[9px] mb-4 block font-bold">|| CHI SONO ||</span>
                         <h2 class="font-headline font-bold text-5xl md:text-6xl tracking-tight text-[#001f3f] mb-8 leading-tight">Ing. Davide Moretti</h2>
                         <div class="space-y-8 text-[#1d1d1f] text-base md:text-lg leading-relaxed font-light">
-                            <p>Laureato con lode in Ingegneria Civile presso l'Università degli Studi di Trento, <strong>Davide Moretti</strong> opera a Gonzaga (MN) specializzandosi nella sintesi tra rigore strutturale e architettura funzionale.</p>
-                            <div class="border-l-4 border-[#60a5fa] pl-6 py-2 my-10 italic font-medium text-[#001f3f] text-xl">"L'ingegneria non è solo calcolo; è l'arte tecnica di rendere l'impossibile strutturalmente solido."</div>
-                            <p>Focus primario sul recupero edilizio e sul miglioramento sismico, fornendo consulenze tecniche e perizie per privati, aziende ed enti pubblici.</p>
+                            <p>Ingegnere Strutturista con base a Gonzaga (MN), trasformo le esigenze architettoniche in realtà solide e sicure. Offro ai miei clienti il vantaggio di un unico referente, integrando in un solo flusso di lavoro la progettazione strutturale, lo sviluppo architettonico e la gestione della sicurezza in cantiere.</p>
+                            <div class="border-l-4 border-[#60a5fa] pl-6 py-2 my-10 italic font-medium text-[#001f3f] text-xl">"Un buon edificio deve possedere tre qualità: solidità, utilità e bellezza."<br><span class="text-sm not-italic mt-2 block">(Marco Vitruvio Pollione)</span></div>
+                            <p>Il mio approccio è guidato da un occhio attento alla sostenibilità ambientale e al risparmio energetico, con l'obiettivo costante di garantire l'efficienza economica del progetto attraverso l'ottimizzazione di risorse e materiali.</p>
                         </div>
                         <div class="flex flex-wrap gap-4 mt-12 pb-2">
-                            <a href="mailto:info@ingmoretti.com" class="flex items-center gap-3 bg-[#001f3f] text-white px-8 py-4 rounded-2xl font-bold text-[11px] uppercase tracking-widest hover:bg-[#60a5fa] transition-all shadow-lg hover:shadow-[#001f3f]/20 focus:outline-none grow md:grow-0 justify-center md:justify-start">
+                            <a href="mailto:info@ingmoretti.com" class="flex items-center gap-3 bg-[#001f3f] text-white px-8 py-4 rounded-2xl font-bold text-[11px] uppercase tracking-widest hover:bg-[#003366] transition-all shadow-lg hover:shadow-[#001f3f]/20 focus:outline-none grow md:grow-0 justify-center md:justify-start">
                                 <span class="material-symbols-outlined text-lg">mail</span>
                                 <div class="text-left flex flex-col items-start leading-tight">
                                     <span class="text-[8px] opacity-60 uppercase">Contattaci</span>
@@ -485,34 +588,125 @@
             </div>
             <div class="max-w-6xl mx-auto px-6 relative py-24 md:py-32 w-full">
                 <div class="flex flex-col lg:flex-row gap-20 items-start">
-                    <div class="lg:w-1/3 gsap-fade-up">
-                        <span class="text-[#60a5fa] tracking-[0.3em] uppercase text-[10px] mb-6 block font-bold">|| COMPETENZE ||</span>
-                        <h2 class="font-headline font-bold text-4xl md:text-6xl tracking-tight mb-8 leading-tight">Rigore e<br />Visione.</h2>
-                        <p class="text-white/60 text-lg leading-relaxed font-light">Offriamo un set di servizi integrati per la progettazione civile, sismica ed ecosostenibile, garantendo la massima aderenza agli standard qualitativi vigenti.</p>
+                    <!-- Text Side with Gradient Overlay for sliding cards -->
+                    <div class="lg:w-1/3 gsap-fade-up relative z-30">
+                        <!-- Gradient fade to transparent to right to cover cards sliding left -->
+                        <div class="hidden lg:block absolute inset-y-0 -right-20 w-40 bg-gradient-to-r from-[#001f3f] via-[#001f3f]/90 to-transparent pointer-events-none -z-10"></div>
+                        <div class="bg-[#001f3f] absolute inset-0 -z-20 w-[150%] -left-1/2 hidden lg:block"></div>
+                        
+                        <div class="relative z-10 pr-4">
+                            <span class="text-[#60a5fa] tracking-[0.3em] uppercase text-[10px] mb-6 block font-bold">|| COMPETENZE E SERVIZI ||</span>
+                            <h2 class="font-headline font-bold text-4xl md:text-6xl tracking-tight mb-8 leading-tight">Progettazione<br />Integrata.</h2>
+                            <p class="text-white/60 text-lg leading-relaxed font-light">Una gestione completa e multidisciplinare del tuo progetto edilizio. Come unico referente, coordino ingegneria strutturale, architettura, sicurezza e consulenza tecnica per offrirti un controllo totale sui tempi e sui costi dell'opera. Unisco la solidità della tecnica a un'attenta visione sostenibile, per garantirti un investimento sicuro e duraturo.</p>
+                        </div>
                     </div>
 
-                    <div class="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6 gsap-fade-right">
-                        <div class="bg-white/5 border border-white/10 p-6 md:p-10 hover:bg-[#60a5fa]/20 transition-all group">
-                            <span class="material-symbols-outlined text-4xl text-[#60a5fa] mb-6 group-hover:scale-110 transition-transform">architecture</span>
-                            <h4 class="text-xl font-bold mb-4">Progettazione Integrata</h4>
-                            <p class="text-white/50 text-sm leading-relaxed">Dal concept architettonico al calcolo strutturale esecutivo, gestiamo l'intero ciclo di vita dell'opera con precisione millimetrica.</p>
+                    <div class="lg:w-2/3 relative z-10 gsap-fade-right">
+                        <!-- Right side gradient to cover cards sliding right -->
+                        <div class="hidden lg:block absolute inset-y-0 -right-20 w-32 bg-gradient-to-l from-[#001f3f] to-transparent z-40 pointer-events-none"></div>
+                        
+                        <!-- Mobile Grid (Stack) vs Desktop Bento (Absolute) -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:block bento-container">
+                            <!-- Box 1 -->
+                            <div class="bg-white/5 border border-white/10 p-6 md:p-10 hover:bg-[#60a5fa]/20 transition-all duration-500 group cursor-pointer flex flex-col bento-card bento-c1">
+                                <div class="flex items-center justify-between mb-6 shrink-0">
+                                    <span class="material-symbols-outlined text-4xl text-[#60a5fa] group-hover:scale-110 transition-transform">architecture</span>
+
+                                </div>
+                                <h4 class="text-xl font-bold mb-4 shrink-0">Progettazione Strutturale e Antisismica</h4>
+                                <div class="relative flex-grow overflow-hidden transition-all duration-700 ease-in-out bento-text-mask flex flex-col">
+                                    <p class="text-white/50 text-sm md:text-base leading-relaxed pr-2 relative z-10">È il nucleo centrale dello studio. Mi occupo del calcolo e del dimensionamento sia per le nuove costruzioni che per gli interventi di recupero e miglioramento sismico del patrimonio esistente. Affronto ogni progetto selezionando i materiali più idonei — dal legno all'acciaio, dal cemento armato alla muratura — e applicando, dove necessario, le tecnologie di rinforzo più innovative e performanti, come i compositi in fibra di carbonio, la fibra di vetro e le malte fibrorinforzate.</p>
+                                    
+                                    <div class="bento-cta-mobile mt-auto mb-12 pt-8 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 delay-300 relative z-20 flex flex-col items-center text-center gap-4 pointer-events-none group-hover:pointer-events-auto">
+                                        <p class="text-white/80 font-medium text-lg">Hai un progetto strutturale da sviluppare?</p>
+                                        <a href="#contatti" class="bg-[#60a5fa] text-[#001f3f] px-6 py-4 font-bold uppercase tracking-widest text-xs hover:bg-white transition-colors flex items-center justify-center gap-2">
+                                            Studiamo insieme la tua idea
+                                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Mobile tap hint -->
+                                <div class="bento-tap-hint lg:hidden flex items-center justify-center gap-2 mt-4 text-white/40 text-xs uppercase tracking-widest font-medium">
+                                    <span>Tocca per scoprire di più</span>
+                                    <span class="material-symbols-outlined text-sm chevron-bounce">expand_more</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Box 2 -->
+                            <div class="bg-white/5 border border-white/10 p-6 md:p-10 hover:bg-[#60a5fa]/20 transition-all duration-500 group cursor-pointer flex flex-col bento-card bento-c2">
+                                <div class="flex items-center justify-between mb-6 shrink-0">
+                                    <span class="material-symbols-outlined text-4xl text-[#60a5fa] group-hover:scale-110 transition-transform">foundation</span>
+
+                                </div>
+                                <h4 class="text-xl font-bold mb-4 shrink-0">Progettazione Architettonica Sostenibile</h4>
+                                <div class="relative flex-grow overflow-hidden transition-all duration-700 ease-in-out bento-text-mask flex flex-col">
+                                    <p class="text-white/50 text-sm md:text-base leading-relaxed pr-2 relative z-10">Credo che la solidità strutturale debba sempre essere al servizio di spazi da vivere. Per questo affianco al calcolo un'attenta progettazione architettonica, dove l'estetica e la funzionalità si fondono senza compromessi. Ogni mia scelta è guidata da un approccio orientato alla sostenibilità ambientale e al risparmio energetico. Ingegnerizzare un progetto fin dalle prime bozze significa ottimizzare i materiali e le risorse, garantendo alla committenza un'elevata efficienza economica e un reale controllo sui costi di realizzazione.</p>
+                                    
+                                    <div class="bento-cta-mobile mt-auto mb-12 pt-8 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 delay-300 relative z-20 flex flex-col items-center text-center gap-4 pointer-events-none group-hover:pointer-events-auto">
+                                        <p class="text-white/80 font-medium text-lg">Hai in mente una nuova costruzione sostenibile?</p>
+                                        <a href="#contatti" class="bg-[#60a5fa] text-[#001f3f] px-6 py-4 font-bold uppercase tracking-widest text-xs hover:bg-white transition-colors flex items-center justify-center gap-2">
+                                            Progettiamo insieme i tuoi spazi
+                                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Mobile tap hint -->
+                                <div class="bento-tap-hint lg:hidden flex items-center justify-center gap-2 mt-4 text-white/40 text-xs uppercase tracking-widest font-medium">
+                                    <span>Tocca per scoprire di più</span>
+                                    <span class="material-symbols-outlined text-sm chevron-bounce">expand_more</span>
+                                </div>
+                            </div>
+
+                            <!-- Box 3 -->
+                            <div class="bg-white/5 border border-white/10 p-6 md:p-10 hover:bg-[#60a5fa]/20 transition-all duration-500 group cursor-pointer flex flex-col bento-card bento-c3">
+                                <div class="flex items-center justify-between mb-6 shrink-0">
+                                    <span class="material-symbols-outlined text-4xl text-[#60a5fa] group-hover:scale-110 transition-transform">home_repair_service</span>
+
+                                </div>
+                                <h4 class="text-xl font-bold mb-4 shrink-0">Sicurezza, Direzione Lavori e Gestione del Rischio</h4>
+                                <div class="relative flex-grow overflow-hidden transition-all duration-700 ease-in-out bento-text-mask flex flex-col">
+                                    <p class="text-white/50 text-sm md:text-base leading-relaxed pr-2 relative z-10">La qualità pensata su carta deve essere tutelata sul campo. Attraverso la Direzione Lavori e il Coordinamento della Sicurezza (CSP/CSE), assicuro una gestione del cantiere rigorosa e organizzata, minimizzando i rischi e garantendo esecuzioni a regola d'arte. Le mie competenze in ambito di prevenzione si estendono alla progettazione di sistemi anticaduta e linee vita permanenti per le coperture, e alla redazione di piani di Safety & Security per eventi pubblici, tutelando la pubblica incolumità durante le manifestazioni.</p>
+                                    
+                                    <div class="bento-cta-mobile mt-auto mb-12 pt-8 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 delay-300 relative z-20 flex flex-col items-center text-center gap-4 pointer-events-none group-hover:pointer-events-auto">
+                                        <p class="text-white/80 font-medium text-lg">Cerchi una gestione sicura per il tuo cantiere?</p>
+                                        <a href="#contatti" class="bg-[#60a5fa] text-[#001f3f] px-6 py-4 font-bold uppercase tracking-widest text-xs hover:bg-white transition-colors flex items-center justify-center gap-2">
+                                            Affidaci la sicurezza
+                                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Mobile tap hint -->
+                                <div class="bento-tap-hint lg:hidden flex items-center justify-center gap-2 mt-4 text-white/40 text-xs uppercase tracking-widest font-medium">
+                                    <span>Tocca per scoprire di più</span>
+                                    <span class="material-symbols-outlined text-sm chevron-bounce">expand_more</span>
+                                </div>
+                            </div>
+
+                            <!-- Box 4 -->
+                            <div class="bg-white/5 border border-white/10 p-6 md:p-10 hover:bg-[#60a5fa]/20 transition-all duration-500 group cursor-pointer flex flex-col bento-card bento-c4">
+                                <div class="flex items-center justify-between mb-6 shrink-0">
+                                    <span class="material-symbols-outlined text-4xl text-[#60a5fa] group-hover:scale-110 transition-transform">assignment</span>
+
+                                </div>
+                                <h4 class="text-xl font-bold mb-4 shrink-0">Consulenza Specialistica e Investimenti Immobiliari</h4>
+                                <div class="relative flex-grow overflow-hidden transition-all duration-700 ease-in-out bento-text-mask flex flex-col">
+                                    <p class="text-white/50 text-sm md:text-base leading-relaxed pr-2 relative z-10">Supporto privati, imprese e amministrazioni con un solido bagaglio di consulenze tecniche. Accompagno i clienti nella pianificazione di investimenti immobiliari attraverso perizie, stime e due diligence. Verificando con precisione l'accertamento di conformità edilizia e urbanistica. Gestisco inoltre tematiche specialistiche fondamentali per l'ottenimento dei permessi, come la verifica della resistenza al fuoco delle strutture e i calcoli per l'invarianza idraulica. Infine, curo la gestione tecnica per l'accesso ai bonus edilizi, redigendo le asseverazioni necessarie per massimizzare i vantaggi fiscali del committente.</p>
+                                    
+                                    <div class="bento-cta-mobile mt-auto mb-12 pt-8 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 delay-300 relative z-20 flex flex-col items-center text-center gap-4 pointer-events-none group-hover:pointer-events-auto">
+                                        <p class="text-white/80 font-medium text-lg">Hai un investimento da pianificare?</p>
+                                        <a href="#contatti" class="bg-[#60a5fa] text-[#001f3f] px-6 py-4 font-bold uppercase tracking-widest text-xs hover:bg-white transition-colors flex items-center justify-center gap-2">
+                                            Richiedi una perizia
+                                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Mobile tap hint -->
+                                <div class="bento-tap-hint lg:hidden flex items-center justify-center gap-2 mt-4 text-white/40 text-xs uppercase tracking-widest font-medium">
+                                    <span>Tocca per scoprire di più</span>
+                                    <span class="material-symbols-outlined text-sm chevron-bounce">expand_more</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="bg-white/5 border border-white/10 p-6 md:p-10 hover:bg-[#60a5fa]/20 transition-all group">
-                            <span class="material-symbols-outlined text-4xl text-[#60a5fa] mb-6 group-hover:scale-110 transition-transform">foundation</span>
-                            <h4 class="text-xl font-bold mb-4">Miglioramento Sismico</h4>
-                            <p class="text-white/50 text-sm leading-relaxed">Specializzati nell'adeguamento di edifici esistenti attraverso analisi vulnerabilità e soluzioni di rinforzo strutturale innovative.</p>
-                        </div>
-                        <div class="bg-white/5 border border-white/10 p-6 md:p-10 hover:bg-[#60a5fa]/20 transition-all group">
-                            <span class="material-symbols-outlined text-4xl text-[#60a5fa] mb-6 group-hover:scale-110 transition-transform">home_repair_service</span>
-                            <h4 class="text-xl font-bold mb-4">Recupero Edilizio</h4>
-                            <p class="text-white/50 text-sm leading-relaxed">Valorizziamo il patrimonio esistente con interventi di risanamento conservativo e riqualificazione funzionale ad alta efficienza.</p>
-                        </div>
-                        <div class="bg-white/5 border border-white/10 p-6 md:p-10 hover:bg-[#60a5fa]/20 transition-all group">
-                            <span class="material-symbols-outlined text-4xl text-[#60a5fa] mb-6 group-hover:scale-110 transition-transform">assignment</span>
-                            <h4 class="text-xl font-bold mb-4">Consulenze Tecniche</h4>
-                            <p class="text-white/50 text-sm leading-relaxed">Perizie, stime, due diligence immobiliari e assistenza tecnica come CTU e CTP per procedimenti giudiziari complessi.</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -523,100 +717,40 @@
         <div class="pin-inner w-full h-auto min-h-full flex flex-col justify-center">
             <div class="max-w-6xl mx-auto px-6 py-24 md:py-32 w-full">
                 <div class="text-center mb-16 gsap-fade-up">
-                    <span class="text-[#60a5fa] tracking-[0.3em] uppercase text-[10px] mb-6 block font-bold">|| PORTFOLIO 2024 ||</span>
+                    <span class="text-[#60a5fa] tracking-[0.3em] uppercase text-[10px] mb-6 block font-bold">|| PORTFOLIO ||</span>
                     <h2 class="text-[#001f3f] font-headline font-bold text-4xl md:text-5xl tracking-tight leading-tight">Progetti Selezionati.</h2>
                 </div>
+            </div> <!-- close max-w-6xl -->
 
-                <!-- Swiper Container area (Full-width support) -->
-                <div class="relative -mr-6 md:-mr-[calc((100vw-min(100vw,1152px))/2+1.5rem)]">
-                    <div class="swiper portfolio-swiper pb-10 md:pb-20 relative overflow-visible">
-                        <!-- Gradient Mask (Right Edge of Screen) -->
-                        <div class="absolute top-0 -right-6 md:-right-24 bottom-10 md:bottom-20 w-32 md:w-[25vw] bg-gradient-to-l from-[#f5f5f7] via-[#f5f5f7]/90 to-transparent z-10 pointer-events-none"></div>
-                        <div class="swiper-wrapper">
-                        <!-- Project 1 -->
-                        <div class="swiper-slide project-card cursor-pointer group" onclick="openPortfolioModal('pr-1')">
-                            <div class="px-0 md:px-4">
-                                <div class="relative w-full aspect-[4/3] overflow-hidden mb-6 bg-surface hover-glow rounded-3xl md:rounded-none">
-                                    <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-grayscale duration-500 scale-105 group-hover:scale-100 ease-out"
-                                        alt="Polo Logistico Nexus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBIy9oAWvSORsXLB0IPurjhTMjKXVHTUJNDGjeQ-d248HjsHVkZshSvACbIFH8tQOYB7JREP4zg3JkiwYIdurjk1P230Ie4bXXK6zv1ylBRAYyp6y0D1QMClDUwNeAyVkofMJ8aVXQP5hbILYDuQ1rEullHuI3hH-J-3xvk37CeFhvMuc79xiTXGRMnHyits-_d6jfYlHu64tJ7VScIyURuTLCXjHcosiyq3f-h7fm3OZDCftSnkX06VhnTwWPCZRIRk6IFxVX5hCb" />
-                                    <div class="absolute bottom-6 right-6 w-10 h-10 bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center rounded-full text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-3 group-hover:translate-y-0 z-20 shadow-lg">
-                                        <span class="material-symbols-outlined text-xl">arrow_forward</span>
-                                    </div>
-                                    <div class="absolute inset-0 border border-black/10 pointer-events-none"></div>
-                                </div>
-                                <div class="flex justify-between items-end">
-                                    <div>
-                                        <span class="text-[10px] uppercase font-bold tracking-widest text-[#86868b] mb-2 block">PROJECT CATEGORY</span>
-                                        <h3 class="font-headline font-semibold text-2xl text-on-surface">PROJECT TITLE</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <!-- Swiper Container: viewport-centered, 88vw wide -->
+            <div class="relative w-[92vw] md:w-[88vw] mx-auto mb-16 md:mb-40">
+                <!-- Gradient masks -->
+                <div id="portfolio-gradient-left" class="hidden md:block absolute top-0 bottom-20 w-[8vw] bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none opacity-0 transition-opacity duration-300" style="left: 0;"></div>
+                <div id="portfolio-gradient-right" class="hidden md:block absolute top-0 bottom-20 w-[8vw] bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none transition-opacity duration-300" style="right: 0;"></div>
+                
+                <!-- Desktop Arrows: vertically centered with the card images -->
+                <button class="swiper-prev hidden md:flex absolute -left-14 top-1/3 -translate-y-1/2 z-20 bg-white border border-black/10 text-[#001f3f] p-2.5 hover:bg-[#001f3f] hover:text-white transition-all shadow-sm items-center justify-center">
+                    <span class="material-symbols-outlined text-xl">west</span>
+                </button>
+                <button class="swiper-next hidden md:flex absolute -right-14 top-1/3 -translate-y-1/2 z-20 bg-white border border-black/10 text-[#001f3f] p-2.5 hover:bg-[#001f3f] hover:text-white transition-all shadow-sm items-center justify-center">
+                    <span class="material-symbols-outlined text-xl">east</span>
+                </button>
 
-                        <!-- Project 2 -->
-                        <div class="swiper-slide project-card cursor-pointer group" onclick="openPortfolioModal('pr-2')">
-                            <div class="px-0 md:px-4">
-                                <div class="relative w-full aspect-[4/3] overflow-hidden mb-6 bg-surface hover-glow rounded-3xl md:rounded-none">
-                                    <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-grayscale duration-500 scale-105 group-hover:scale-100 ease-out"
-                                        alt="Corporate Headquarters" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1NI0IAzXGvRExBSCQEmuMiQrPUa5UToOlNRx9dkVMSO8FWDXXWOhOf8rAVkjDBpwIubiu1XN-CclQyOneI1zxBQG67Dd-bs843sFUX0_oVUSSGu0CmHE-QQtONZjjyx0P4fRMAxATH1jPdJmwYuboqEbakM_frCLtHA18EFUx7fmeaK8klckNgg8gDNC_yRvo8kUNn41YXTY6pZIvPbbMGWfCSfLeX5G76EVxHIDoQEqT2X85-69e61hkKBB6wXcONds37dvXYBG4" />
-                                    <div class="absolute inset-0 border border-black/10 pointer-events-none"></div>
-                                </div>
-                                <div class="flex justify-between items-end">
-                                    <div>
-                                        <span class="text-[10px] uppercase font-bold tracking-widest text-[#86868b] mb-2 block">Architettura Tecnica</span>
-                                        <h3 class="font-headline font-semibold text-2xl text-on-surface">Corporate Headquarters Verona</h3>
-                                    </div>
-                                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#60a5fa] transition-colors relative z-20">arrow_forward</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Project 3 -->
-                        <div class="swiper-slide project-card cursor-pointer group" onclick="openPortfolioModal('pr-3')">
-                            <div class="px-0 md:px-4">
-                                <div class="relative w-full aspect-[4/3] overflow-hidden mb-6 bg-surface hover-glow rounded-3xl md:rounded-none">
-                                    <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-grayscale duration-500 scale-105 group-hover:scale-100 ease-out"
-                                        alt="Centro Sportivo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGpczzIWrZ0mg8hD_ON4hgtMw_efxpl-IFmzsOCW6LVr-yPwxQzg7Nc4i228g0lLLmcVXTbOwFoT11pxMXy9YOnROvuEucCpAMcmuWE07eBBmFe5-cdhm9ISyG9N7G__ajoNg7o4KddmvUn4jxW9nWSVp4mW3nt4FjaLrDm2xk3Lgg-gfK7U43z1bR38qFo8AwmSfShGvtuz984Qs0EFoAwsxKwoCZhP06ceny2oO-GJ8IqYj02f5OHU40kPhgxDXASRhsH8B1YN1z" />
-                                    <div class="absolute inset-0 border border-black/10 pointer-events-none"></div>
-                                </div>
-                                <div class="flex justify-between items-end">
-                                    <div>
-                                        <span class="text-[10px] uppercase font-bold tracking-widest text-[#86868b] mb-2 block">Consulenza Direzione Lavori</span>
-                                        <h3 class="font-headline font-semibold text-2xl text-on-surface">Polo Impiantistico Polivalente</h3>
-                                    </div>
-                                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#60a5fa] transition-colors relative z-20">arrow_forward</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Project 4 -->
-                        <div class="swiper-slide project-card cursor-pointer group" onclick="openPortfolioModal('pr-4')">
-                            <div class="px-0 md:px-4">
-                                <div class="relative w-full aspect-[4/3] overflow-hidden mb-6 bg-surface hover-glow rounded-3xl md:rounded-none">
-                                    <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-grayscale duration-500 scale-105 group-hover:scale-100 ease-out"
-                                        alt="Messa in sicurezza" src="assets/ingmoretti.webp" />
-                                    <div class="absolute inset-0 border border-black/10 pointer-events-none"></div>
-                                </div>
-                                <div class="flex justify-between items-end">
-                                    <div>
-                                        <span class="text-[10px] uppercase font-bold tracking-widest text-[#86868b] mb-2 block">Recupero Edilizio</span>
-                                        <h3 class="font-headline font-semibold text-2xl text-on-surface">Intervento Messa in Sicurezza</h3>
-                                    </div>
-                                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#60a5fa] transition-colors relative z-20">arrow_forward</span>
-                                </div>
-                            </div>
-                        </div>
+                <div class="swiper portfolio-swiper pb-8 md:pb-14 relative overflow-hidden">
+                    <div class="swiper-wrapper" id="portfolio-categories-container">
+                        <!-- Le card delle categorie vengono caricate dinamicamente da portfolio.js -->
                     </div>
+                </div>
 
-                    <!-- Slider Navigation -->
-                    <div class="flex justify-center gap-6 mt-10 md:mt-16">
-                        <button class="swiper-prev bg-white border border-black/10 text-black p-3 md:p-4 hover:bg-[#60a5fa] hover:text-white transition-all shadow-sm">
-                            <span class="material-symbols-outlined">west</span>
-                        </button>
-                        <button class="swiper-next bg-white border border-black/10 text-black p-3 md:p-4 hover:bg-[#60a5fa] hover:text-white transition-all shadow-sm">
-                            <span class="material-symbols-outlined">east</span>
-                        </button>
-                    </div>
+                <!-- Pagination dots + mobile arrows -->
+                <div class="relative flex items-center justify-center gap-4 mt-4 md:mt-6">
+                    <button class="swiper-prev md:hidden bg-white border border-black/10 text-[#001f3f] p-2.5 hover:bg-[#001f3f] hover:text-white transition-all shadow-sm">
+                        <span class="material-symbols-outlined text-xl">west</span>
+                    </button>
+                    <div class="portfolio-pagination flex items-center justify-center gap-2"></div>
+                    <button class="swiper-next md:hidden bg-white border border-black/10 text-[#001f3f] p-2.5 hover:bg-[#001f3f] hover:text-white transition-all shadow-sm">
+                        <span class="material-symbols-outlined text-xl">east</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -624,27 +758,28 @@
 
     <!-- Projects Reveal Overlay (Section Stacking Support) -->
     <section class="stacked-section relative min-h-screen bg-[#001f3f] text-white z-[50] flex flex-col justify-center" id="contatti" style="min-height: 100svh;">
+
         <div class="pin-inner w-full h-auto min-h-full flex flex-col justify-start md:justify-center">
             <div class="absolute inset-0 pointer-events-none opacity-20 blueprint-grid grayscale invert"></div>
             <div class="max-w-6xl mx-auto px-6 relative z-10 w-full py-24 md:py-32">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
                     <div class="gsap-fade-up">
                         <span class="text-[#60a5fa] tracking-[0.4em] uppercase text-[10px] mb-8 block font-bold">|| CONTATTI ||</span>
-                        <h2 class="font-headline font-bold text-5xl md:text-7xl tracking-tighter mb-12">Costruiamo il tuo<br /><span class="text-white/40">prossimo progetto.</span></h2>
+                        <h2 class="font-headline font-bold text-4xl md:text-5xl lg:text-6xl tracking-tighter mb-8 leading-tight max-w-2xl">Costruiamo il tuo <span class="text-white/40">prossimo progetto.</span></h2>
                         
                         <div class="space-y-10 mt-16">
                             <div class="flex items-start gap-6 group">
                                 <span class="material-symbols-outlined text-[#60a5fa] text-3xl group-hover:scale-110 transition-transform">location_on</span>
                                 <div class="space-y-2">
                                     <h4 class="text-[#60a5fa] uppercase text-[9px] tracking-widest font-bold">Sede Operativa</h4>
-                                    <p class="text-xl font-light">Via Matteotti, 46<br />46023 Gonzaga (MN)</p>
+                                    <p class="text-xl font-light">Via Principe Santo, 5B<br />46023 Gonzaga (MN)</p>
                                 </div>
                             </div>
                             <div class="flex items-start gap-6 group">
                                 <span class="material-symbols-outlined text-[#60a5fa] text-3xl group-hover:scale-110 transition-transform">contact_phone</span>
                                 <div class="space-y-2">
                                     <h4 class="text-[#60a5fa] uppercase text-[9px] tracking-widest font-bold">Contatti Diretti</h4>
-                                    <a href="tel:+393478854345" class="block text-xl font-light hover:text-[#60a5fa] transition-colors">+39 347 885 4345</a>
+                                    <a href="tel:+393466176539" class="block text-xl font-light hover:text-[#60a5fa] transition-colors">+39 346 617 6539</a>
                                     <a href="mailto:info@ingmoretti.com" class="block text-xl font-light hover:text-[#60a5fa] transition-colors">info@ingmoretti.com</a>
                                 </div>
                             </div>
@@ -685,7 +820,9 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-12 pb-16">
                 <!-- Column 1: Brand Showcase -->
                 <div class="space-y-6 md:col-span-1">
-                    <img src="assets/logoestesoingmoretti.png" alt="Ing. Davide Moretti" class="h-20 w-auto opacity-100 mb-2" />
+                    <a href="/" onclick="window.location.reload(); return false;" class="inline-block transition-opacity duration-300 hover:opacity-80">
+                        <img src="assets/logoestesoingmoretti.png" alt="Ing. Davide Moretti" class="h-10 md:h-12 w-auto mb-4 object-contain" />
+                    </a>
                     <p class="text-[11px] text-[#424245] leading-relaxed max-w-[240px]">
                         Studio di ingegneria civile e architettonica specializzato in progettazione strutturale, miglioramento sismico e recupero del patrimonio edilizio esistente.
                     </p>
@@ -750,6 +887,7 @@
             </div>
         </div>
     </footer>
+
 
     <!-- Cookie Banner -->
     <div id="cookie-banner"
@@ -837,14 +975,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 
     <script>
-        // Data for Portfolio
-        const portfolioData = {
-            'pr-1': { title: 'Polo Logistico Nexus', category: 'Ingegneria Sismica', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCBIy9oAWvSORsXLB0IPurjhTMjKXVHTUJNDGjeQ-d248HjsHVkZshSvACbIFH8tQOYB7JREP4zg3JkiwYIdurjk1P230Ie4bXXK6zv1ylBRAYyp6y0D1QMClDUwNeAyVkofMJ8aVXQP5hbILYDuQ1rEullHuI3hH-J-3xvk37CeFhvMuc79xiTXGRMnHyits-_d6jfYlHu64tJ7VScIyURuTLCXjHcosiyq3f-h7fm3OZDCftSnkX06VhnTwWPCZRIRk6IFxVX5hCb', desc: 'Progettazione strutturale esecutiva per un hub logistico ad alta capacità nel mantovano. L\'intervento comprende analisi FEM complesse per ottimizzare la maglia strutturale e garantire ampi spazi di manovra interna senza colonne intermedie ingombranti.' },
-            'pr-2': { title: 'Corporate Headquarters Verona', category: 'Architettura Tecnica', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA1NI0IAzXGvRExBSCQEmuMiQrPUa5UToOlNRx9dkVMSO8FWDXXWOhOf8rAVkjDBpwIubiu1XN-CclQyOneI1zxBQG67Dd-bs843sFUX0_oVUSSGu0CmHE-QQtONZjjyx0P4fRMAxATH1jPdJmwYuboqEbakM_frCLtHA18EFUx7fmeaK8klckNgg8gDNC_yRvo8kUNn41YXTY6pZIvPbbMGWfCSfLeX5G76EVxHIDoQEqT2X85-69e61hkKBB6wXcONds37dvXYBG4', desc: 'Rifacimento integrale degli spazi aziendali e recupero della facciata di un Headquarters moderno in Veneto. L\'integrazione di sistemi a cappotto innovativi uniti a pratiche edilizie complete ha garantito l\'efficienza temporale in ambito cantiere.' },
-            'pr-3': { title: 'Polo Impiantistico Polivalente', category: 'Consulenza Direzione Lavori', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAGpczzIWrZ0mg8hD_ON4hgtMw_efxpl-IFmzsOCW6LVr-yPwxQzg7Nc4i228g0lLLmcVXTbOwFoT11pxMXy9YOnROvuEucCpAMcmuWE07eBBmFe5-cdhm9ISyG9N7G__ajoNg7o4KddmvUn4jxW9nWSVp4mW3nt4FjaLrDm2xk3Lgg-gfK7U43z1bR38qFo8AwmSfShGvtuz984Qs0EFoAwsxKwoCZhP06ceny2oO-GJ8IqYj02f5OHU40kPhgxDXASRhsH8B1YN1z', desc: 'Sviluppo strutturale e consulenza integrata per un nuovo centro polisportivo. Il progetto prevedeva ampie luci libere da ostacoli verticali strutturali, risolte mediante macro-coperture ingegnerizzate in acciaio.' },
-            'pr-4': { title: 'Intervento Messa in Sicurezza', category: 'Recupero Edilizio', img: 'assets/ingmoretti.webp', desc: 'Complesso intervento di messa in sicurezza su un edificio storico con criticità statiche. Intervento in chiave sostenibile e rispetto delle matrici architettoniche originali.' }
-        };
-
         const legalData = {
             'privacy': { 
                 title: 'Privacy Policy', 
@@ -1270,26 +1400,6 @@
                 });
             });
 
-            // Swiper Initialization (All Devices)
-            new Swiper('.portfolio-swiper', {
-                slidesPerView: 1.1,
-                spaceBetween: 20,
-                centeredSlides: false,
-                grabCursor: true,
-                touchStartPreventDefault: false,
-                observer: true,
-                observeParents: true,
-                navigation: {
-                    nextEl: '.swiper-next',
-                    prevEl: '.swiper-prev',
-                },
-                breakpoints: {
-                    640:  { slidesPerView: 1.3, spaceBetween: 30 },
-                    768:  { slidesPerView: 1.5, spaceBetween: 40 },
-                    1024: { slidesPerView: 2,   spaceBetween: 50 },
-                    1440: { slidesPerView: 2.5, spaceBetween: 60 }
-                }
-            });
 
             // Precision Smooth Scrolling (Pin-Aware)
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1337,8 +1447,185 @@
                     }
                 }
             });
+
+            // Bento Mobile Tap-to-Toggle
+            if (window.innerWidth < 1024) {
+                const bentoCardsMobile = document.querySelectorAll('.bento-card');
+                bentoCardsMobile.forEach(card => {
+                    card.addEventListener('click', function(e) {
+                        // Don't intercept link clicks
+                        if (e.target.closest('a')) return;
+                        
+                        const isActive = this.classList.contains('mobile-active');
+                        // Close all other cards
+                        bentoCardsMobile.forEach(c => c.classList.remove('mobile-active'));
+                        // Toggle this card
+                        if (!isActive) {
+                            this.classList.add('mobile-active');
+                        }
+                    });
+                });
+            }
+
+            // Bento Particles (Antigravity Style - Permanent Sharp Starfield)
+            const bentoCards = document.querySelectorAll('.bento-card');
+            bentoCards.forEach(card => {
+                const canvas = document.createElement('canvas');
+                // Use inline styles instead of Tailwind classes — the CDN JIT 
+                // doesn't generate group-hover utilities for dynamically-created elements
+                canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;';
+                card.appendChild(canvas);
+                
+                const ctx = canvas.getContext('2d');
+                let particles = [];
+                let w = 0, h = 0, min_y = 0;
+                const dpr = window.devicePixelRatio || 1;
+                
+                // Reference: the description paragraph inside bento-text-mask
+                // Particles fill the area below it down to the bottom of the card
+                const descParagraph = card.querySelector('.bento-text-mask > p');
+                
+                function syncSize() {
+                    const cw = card.offsetWidth;
+                    const ch = card.offsetHeight;
+                    if (cw === w && ch === h) return;
+                    const oldW = w, oldH = h, oldMinY = min_y;
+                    w = cw;
+                    h = ch;
+                    canvas.width = Math.round(w * dpr);
+                    canvas.height = Math.round(h * dpr);
+                    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                    
+                    // Particles start right below the description paragraph
+                    if (descParagraph) {
+                        const pRect = descParagraph.getBoundingClientRect();
+                        const cardRect = card.getBoundingClientRect();
+                        min_y = (pRect.bottom - cardRect.top) + 12;
+                    } else {
+                        min_y = h * 0.5;
+                    }
+                    if (min_y >= h - 20) min_y = h * 0.4;
+                    
+                    // When card resizes (expansion on hover), redistribute particles
+                    // proportionally so they fill the full new width
+                    if (oldW > 0 && oldH > 0 && particles.length > 0) {
+                        const scaleX = w / oldW;
+                        for (let i = 0; i < particles.length; i++) {
+                            particles[i].x *= scaleX;
+                            // Remap y into new zone
+                            const oldRange = Math.max(1, oldH - oldMinY);
+                            const newRange = Math.max(1, h - min_y);
+                            const ratio = (particles[i].y - oldMinY) / oldRange;
+                            particles[i].y = min_y + ratio * newRange;
+                        }
+                    }
+                }
+                
+                syncSize();
+                
+                // Create particles spread across full width, in the bottom zone
+                for (let i = 0; i < 100; i++) {
+                    particles.push({
+                        x: Math.random() * w,
+                        y: min_y + Math.random() * Math.max(1, h - min_y),
+                        vx: (Math.random() - 0.5) * 0.2,
+                        vy: (Math.random() - 0.5) * 0.2,
+                    });
+                }
+                
+                // Opacity is controlled via CSS: .bento-card:hover canvas { opacity: 1 }
+                
+                function animate() {
+                    syncSize();
+                    ctx.clearRect(0, 0, w, h);
+                    ctx.fillStyle = '#60a5fa';
+                    for (let i = 0; i < particles.length; i++) {
+                        const p = particles[i];
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        // Bounce
+                        if (p.x < 0) { p.x = 0; p.vx *= -1; }
+                        if (p.x > w) { p.x = w; p.vx *= -1; }
+                        if (p.y < min_y) { p.y = min_y; p.vy *= -1; }
+                        if (p.y > h) { p.y = h; p.vy *= -1; }
+                        // Draw sharp circle
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    requestAnimationFrame(animate);
+                }
+                animate();
+            });
         }
     </script>
+    <script src="portfolio.js"></script>
+
+    <!-- ============================================ -->
+    <!-- Portfolio Category Modal (Grid on Desktop)   -->
+    <!-- ============================================ -->
+    <div id="portfolio-modal" class="fixed inset-0 z-[10000] hidden flex-col transition-all duration-500 opacity-0 pointer-events-none scale-95 bg-white">
+        <!-- Header -->
+        <div class="h-16 md:h-20 w-full flex items-center justify-between px-6 md:px-12 border-b border-black/8 bg-white z-20 shrink-0">
+            <h2 id="portfolio-modal-title" class="text-lg md:text-2xl font-headline font-bold text-[#001f3f] truncate pr-4">Nome Categoria</h2>
+            <button onclick="closeCategoryModal()" class="w-10 h-10 md:w-11 md:h-11 rounded-none bg-[#f0f0f0] hover:bg-[#e0e0e0] flex items-center justify-center transition-colors text-[#001f3f] shrink-0">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+        
+        <!-- Projects Container - scrollable -->
+        <div class="flex-grow w-full overflow-y-auto bg-white" id="portfolio-modal-scroll">
+            <div class="w-full max-w-6xl mx-auto px-6 md:px-10 py-8 md:py-14">
+                <div id="portfolio-modal-wrapper">
+                    <!-- I progetti vengono iniettati qui dinamicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- Project Detail Lightbox                      -->
+    <!-- ============================================ -->
+    <div id="project-lightbox" class="fixed inset-0 z-[15000] hidden items-center justify-center transition-opacity duration-300 opacity-0 pointer-events-none">
+        <!-- Dark backdrop -->
+        <div class="absolute inset-0 bg-black/85" onclick="closeProjectLightbox()"></div>
+        
+        <!-- Close button - solid background -->
+        <button onclick="closeProjectLightbox()" class="fixed top-4 right-4 md:top-6 md:right-6 z-20 w-10 h-10 md:w-11 md:h-11 rounded-none bg-white hover:bg-gray-100 text-[#001f3f] flex items-center justify-center transition-colors shadow-lg">
+            <span class="material-symbols-outlined text-xl">close</span>
+        </button>
+
+        <!-- Content container -->
+        <div class="relative z-10 w-[96vw] md:w-[94vw] max-w-7xl flex flex-col lg:flex-row items-start justify-center gap-4 md:gap-5 p-4 md:p-0 max-h-[95vh] lg:max-h-none overflow-y-auto lg:overflow-visible">
+            
+            <!-- Image area (main, fills space) -->
+            <div class="relative w-full lg:flex-1 flex items-center justify-center shrink-0">
+                <img id="lightbox-img" src="" alt="" class="w-full h-auto max-h-[55vh] lg:max-h-[88vh] object-contain" />
+                <!-- Image navigation arrows - more visible -->
+                <button onclick="lightboxPrev()" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-black/70 hover:bg-black/90 text-white flex items-center justify-center transition-colors">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+                <button onclick="lightboxNext()" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-black/70 hover:bg-black/90 text-white flex items-center justify-center transition-colors">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+                <!-- Image counter -->
+                <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/60 text-white/80 text-[10px] font-bold tracking-widest uppercase px-3 py-1" id="lightbox-counter">1 / 5</div>
+            </div>
+            
+            <!-- Info panels (right side, two stacked floating cards) -->
+            <div class="w-full lg:w-[280px] xl:w-[320px] flex flex-col gap-4 md:gap-5 shrink-0 lg:self-start lg:sticky lg:top-0">
+                <!-- Title card -->
+                <div class="bg-[#001f3f] p-6 md:p-7">
+                    <h3 id="lightbox-title" class="text-white font-headline font-bold text-lg md:text-xl leading-tight">Titolo Progetto</h3>
+                </div>
+                <!-- Description card -->
+                <div class="bg-[#001f3f] p-6 md:p-7">
+                    <p id="lightbox-desc" class="text-white/60 text-sm leading-relaxed font-light">Descrizione del progetto.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>
